@@ -463,11 +463,23 @@ public class Exercises {
         how many will be left with Marian?
         */
 
+		int croissantsBaked = 59;
+		int numberOfNeighbors = 8;
+		int leftoverCroissants = croissantsBaked % numberOfNeighbors;
+
+		System.out.println("Number of Croissants Left with Marian: " + leftoverCroissants);
+
         /*
         42. Marian also baked oatmeal cookies for her classmates. If she can
         place 12 cookies on a tray at a time, how many trays will she need to
         prepare 276 oatmeal cookies at a time?
         */
+
+		int cookiesPerTray = 12;
+		int cookiesBakedAtOnce = 276;
+		int traysNeededForCookies = cookiesBakedAtOnce / cookiesPerTray;
+
+		System.out.println("Trays needed for cookies: " + traysNeededForCookies);
 
         /*
         43. Marian’s friends were coming over that afternoon so she made 480
@@ -475,11 +487,24 @@ public class Exercises {
         servings of bite-sized pretzels was Marian able to prepare?
         */
 
+		int pretzelsBaked = 480;
+		int pretzelsPerServing = 12;
+		int servingsPrepared = pretzelsBaked / pretzelsPerServing;
+
+		System.out.println("Pretzel Servings Prepared: " + servingsPrepared);
+
         /*
         44. Lastly, she baked 53 lemon cupcakes for the children living in the city
         orphanage. If two lemon cupcakes were left at home, how many
         boxes with 3 lemon cupcakes each were given away?
         */
+
+		int lemonCupcakesBaked = 53;
+		int cupcakesPerBox = 3;
+		int cupcakesAtHome = 2;
+		int boxesGivenToOrphanage = (lemonCupcakesBaked - cupcakesAtHome) / cupcakesPerBox;
+
+		System.out.println("Boxes of Cupcakes Given Away: " + boxesGivenToOrphanage);
 
         /*
         45. Susie's mom prepared 74 carrot sticks for breakfast. If the carrots
@@ -487,17 +512,35 @@ public class Exercises {
         uneaten?
         */
 
+		int carrotSticksPrepared = 74;
+		int peopleEatingCarrotSticks = 12;
+		int leftoverCarrotSticks = carrotSticksPrepared % peopleEatingCarrotSticks;
+
+		System.out.println("Number of Carrot Sticks Leftover: " + leftoverCarrotSticks);
+
         /*
         46. Susie and her sister gathered all 98 of their teddy bears and placed
         them on the shelves in their bedroom. If every shelf can carry a
         maximum of 7 teddy bears, how many shelves will be filled?
         */
 
+		int teddyBearsOwned = 98;
+		int teddyBeardsPerShelf = 7;
+		int filledShelves = teddyBearsOwned / teddyBeardsPerShelf;
+
+		System.out.println("Shelves filled with teddy bears: " + filledShelves);
+
         /*
         47. Susie’s mother collected all family pictures and wanted to place all of
         them in an album. If an album can contain 20 pictures, how many
         albums will she need if there are 480 pictures?
         */
+
+		int picturesPerAlbum = 20;
+		int picturesTotal = 480;
+		int albumsNeeded = picturesTotal / picturesPerAlbum;
+
+		System.out.println("Picture Albums Required: " + albumsNeeded);
 
         /*
         48. Joe, Susie’s brother, collected all 94 trading cards scattered in his
@@ -506,16 +549,37 @@ public class Exercises {
         the unfilled box?
         */
 
+		int tradingCards = 94;
+		int cardsPerBox = 8;
+		int filledBoxes = tradingCards / cardsPerBox;
+		int cardsInUnfilledBox = tradingCards % cardsPerBox;
+
+		System.out.println("Completely filled boxes: " + filledBoxes);
+
+		System.out.println("Cards in partially filled box: " + cardsInUnfilledBox);
+
         /*
         49. Susie’s father repaired the bookshelves in the reading room. If he has
         210 books to be distributed equally on the 10 shelves he repaired,
         how many books will each shelf contain?
         */
 
+		int booksOwned = 210;
+		int shelvesRepaired = 10;
+		int booksPerShelf = booksOwned / shelvesRepaired;
+
+		System.out.println("Books per shelf: " + booksPerShelf);
+
         /*
         50. Cristina baked 17 croissants. If she planned to serve this equally to
         her seven guests, how many will each have?
         */
+
+		int cristinaCroissants = 17;
+		int cristinaGuests = 7;
+		int croissantPerGuest = cristinaCroissants / cristinaGuests;
+
+		System.out.println("Each of Cristina's guests will get " + croissantPerGuest + " croissants.");
 
         /*
             CHALLENGE PROBLEMS
@@ -527,6 +591,18 @@ public class Exercises {
         Hint: Calculate the hourly rate for each painter, combine them, and then divide the total walls in feet by the combined hourly rate of the painters.
         Challenge: How many days will it take the pair to paint 623 rooms assuming they work 8 hours a day?.
         */
+
+		/*
+		double minutesPerHour = 60;
+		double billPaint = (2.15 * minutesPerHour);
+		double jillPaint = (1.90 * minutesPerHour);
+		double averagePaint = (billPaint + jillPaint) /2;
+		double surfaceAreaPainted = 12 * 14 * 5;
+		double timeToPaint = surfaceAreaPainted / averagePaint;
+
+		 */
+
+		// System.out.println(timeToPaint);
 
         /*
         Create and assign variables to hold your first name, last name, and middle initial. Using concatenation,
