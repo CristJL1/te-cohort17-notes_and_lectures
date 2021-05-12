@@ -5,13 +5,25 @@ public class Exercises {
 	/*
 	 1. The parameter weekday is true if it is a weekday, and the parameter vacation is true if we are on
 	 vacation. We sleep in if it is not a weekday or we're on vacation. Return true if we sleep in.
-	 sleepIn(false, false) → true
-	 sleepIn(true, false) → false
-	 sleepIn(false, true) → true
+	 sleepIn(false, false) → true  // if weekday is false and vacation is false - return true
+	 sleepIn(true, false) → false  // if weekday is true and vacation is false - return false
+	 sleepIn(false, true) → true  // if weekday is false and vacation is ture - return true
+
+
+	 Code so examples given produce the expected result
 	 */
 	public boolean sleepIn(boolean weekday, boolean vacation) {
+
+		if (weekday == false) {
+			return true;
+		}
+		if (vacation == true) {
+			return true;
+		}
 		return false;
 	}
+
+
 
 	/*
 	 2. We have two monkeys, a and b, and the parameters aSmile and bSmile indicate if each is smiling.
@@ -22,6 +34,15 @@ public class Exercises {
 	 monkeyTrouble(true, false) → false
 	 */
 	public boolean monkeyTrouble(boolean aSmile, boolean bSmile) {
+
+		if (aSmile == true && bSmile == true) {
+			return true;
+		}
+
+		if (aSmile == false && bSmile == false) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -32,6 +53,15 @@ public class Exercises {
 	 sumDouble(2, 2) → 8
 	 */
 	public int sumDouble(int a, int b) {
+
+		if (a != b) {
+			return (a+b);
+		}
+
+		if ( a == b) {
+			return ((a+b) * 2);
+
+		}
 		return 0;
 	}
 
@@ -45,7 +75,15 @@ public class Exercises {
 	 diff21(-10) → 31
 	 */
 	public int diff21(int n) {
-		return 0;
+
+		if (n > 21) {
+			return (2 * (n-21));
+		}
+		else {
+			return (21-n);
+		}
+
+
 	}
 
 	/*
@@ -57,6 +95,13 @@ public class Exercises {
 	 parrotTrouble(false, 6) → false
 	 */
 	public boolean parrotTrouble(boolean talking, int hour) {
+
+		if (talking == true) {
+			if (hour < 7 || hour > 20){
+				return true;
+			}
+		}
+
 		return false;
 	}
 
@@ -67,7 +112,16 @@ public class Exercises {
 	 makes10(1, 9) → true
 	 */
 	public boolean makes10(int a, int b) {
-		return false;
+
+		if (a == 10 || b == 10) {
+			return true;
+		}
+
+		else if (a+b == 10) {
+			return true;
+		}
+
+		else return false;
 	}
 
 	/*
