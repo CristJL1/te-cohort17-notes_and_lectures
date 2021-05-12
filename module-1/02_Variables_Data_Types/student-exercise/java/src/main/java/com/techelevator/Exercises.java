@@ -603,7 +603,7 @@ public class Exercises {
 		 */
 
 		// System.out.println(timeToPaint);
-		
+
 
         /*
         Create and assign variables to hold your first name, last name, and middle initial. Using concatenation,
