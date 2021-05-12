@@ -132,6 +132,23 @@ public class Exercises {
 	 posNeg(-4, -5, true) → true
 	 */
 	public boolean posNeg(int a, int b, boolean negative) {
+		if (a > 0 && b < 0) {
+			if (negative == false) {
+				return true;
+			}
+		}
+
+		else if ( a < 0 && b > 0) {
+			if (negative == false) {
+				return true;
+			}
+		}
+
+		else if (a < 0 && b < 0) {
+			if (negative == true) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -143,6 +160,10 @@ public class Exercises {
 	 or35(8) → false
 	 */
 	public boolean or35(int n) {
+		if (n%3 == 0 || n%5 == 0) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -153,6 +174,15 @@ public class Exercises {
 	 icyHot(2, 120) → false
 	 */
 	public boolean icyHot(int temp1, int temp2) {
+		if (temp1 > 100 && temp2 < 0) {
+			return true;
+		}
+
+		if (temp1 < 0 && temp2 > 100) {
+			return true;
+		}
+
+
 		return false;
 	}
 
@@ -163,6 +193,15 @@ public class Exercises {
 	 in1020(8, 99) → false
 	 */
 	public boolean in1020(int a, int b) {
+
+		if (a >= 10 && a <= 20) {
+			return true;
+		}
+
+		else if (b >= 10 && b <= 20) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -174,6 +213,20 @@ public class Exercises {
 	 hasTeen(20, 10, 13) → true
 	 */
 	public boolean hasTeen(int a, int b, int c) {
+
+		if (a >= 13 && a <=19) {
+			return true;
+		}
+
+		if (b >= 13 && b <= 19) {
+			return true;
+		}
+
+		if (c >= 13 && c <= 19) {
+			return true;
+		}
+
+
 		return false;
 	}
 
@@ -185,6 +238,19 @@ public class Exercises {
 	 loneTeen(13, 13) → false
 	 */
 	public boolean loneTeen(int a, int b) {
+
+		if (a >= 13 && a <= 19) {
+			if (b < 13 || b > 19) {
+				return true;
+			}
+		}
+
+		if (b >= 13 && b <= 19) {
+			if (a < 13 || a > 19) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 
@@ -195,6 +261,19 @@ public class Exercises {
 	 intMax(3, 2, 1) → 3
 	 */
 	public int intMax(int a, int b, int c) {
+
+		if (a >= b && a >= c) {
+			return a;
+		}
+
+		else if (b >= a && b >= c) {
+			return b;
+		}
+
+		else if (c >= a && c >= b) {
+			return c;
+		}
+
 		return 0;
 	}
 
@@ -206,6 +285,11 @@ public class Exercises {
 	 in3050(40, 50) → true
 	 */
 	public boolean in3050(int a, int b) {
+
+		if (((a >= 30 && a <= 40) && (b >= 30 && b <= 40)) || ((a >= 40 && a <=50) && (b >=40 && b <= 50))) {
+			return true;
+		}
+
 		return false;
 	}
 
