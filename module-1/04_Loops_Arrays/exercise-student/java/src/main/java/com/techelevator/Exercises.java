@@ -10,6 +10,16 @@ public class Exercises {
 	 firstLast6([13, 6, 1, 2, 3]) → false
 	 */
 	public boolean firstLast6(int[] nums) {
+
+		// where is the first element?
+		// where is the last element?
+		// if either are 6, return true
+
+		if ((nums[0] == 6) || nums[nums.length-1] == 6) {
+
+			return true;
+		}
+
 		return false;
 	}
 
@@ -21,6 +31,12 @@ public class Exercises {
 	 sameFirstLast([1, 2, 1]) → true
 	 */
 	public boolean sameFirstLast(int[] nums) {
+
+		if ((nums.length >= 1) && (nums[0] == nums[nums.length-1])) {
+
+			return true;
+		}
+
 		return false;
 	}
 
@@ -29,7 +45,9 @@ public class Exercises {
 	 makePi() → [3, 1, 4]
 	 */
 	public int[] makePi() {
-		return new int[] {};
+
+
+		return new int[] {3, 1, 4};
 	}
 
 	/*
@@ -40,6 +58,12 @@ public class Exercises {
 	 commonEnd([1, 2, 3], [1, 3]) → true
 	 */
 	public boolean commonEnd(int[] a, int[] b) {
+
+		if ((a[0] == b[0]) || (a[a.length-1] == b[b.length-1])) {
+
+			return true;
+		}
+
 		return false;
 	}
 
@@ -50,7 +74,8 @@ public class Exercises {
 	 sum3([7, 0, 0]) → 7
 	 */
 	public int sum3(int[] nums) {
-		return 0;
+
+		return nums[0] + nums[1] + nums[2];
 	}
 
 	/*
@@ -111,6 +136,9 @@ public class Exercises {
 	/*
 	 11. Return the number of even ints in the given array. Note: the % "mod" operator computes the 
 	 remainder, e.g. 5 % 2 is 1.
+
+	 // number % 2 == 0 it's an even number, if it's 1 it's an odd number
+
 	 countEvens([2, 1, 2, 3, 4]) → 3
 	 countEvens([2, 2, 0]) → 3
 	 countEvens([1, 3, 5]) → 0
