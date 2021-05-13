@@ -1,7 +1,7 @@
 package com.techelevator;
 
 public class Exercises {
-	
+
 	/*
 	 1. Given an array of ints, return true if 6 appears as either the first or last element in the array. 
 	 The array will be length 1 or more.
@@ -108,7 +108,10 @@ public class Exercises {
 	 maxEnd3([2, 11, 3]) → [3, 3, 3]
 	 */
 	public int[] maxEnd3(int[] nums) {
-		return new int[] {};
+
+		int largerNumber = Math.max(nums[0],nums[2]);
+
+		return new int[] {largerNumber, largerNumber, largerNumber};
 	}
 
 	/*
@@ -119,8 +122,26 @@ public class Exercises {
 	 sum2([1, 1, 1, 1]) → 2
 	 */
 	public int sum2(int[] nums) {
+		int sum = 0;
+
+		if (nums.length == 1) {
+			return nums[0];
+		}
+
+		else if (nums.length > 0) {
+			for (int i = 0; i <= 1; i++) {
+				 sum = sum + nums[i];
+
+
+			}
+			return sum;
+
+		}
+
+
 		return 0;
 	}
+
 
 	/*
 	 10. Given 2 int arrays, a and b, each length 3, return a new array length 2 containing their middle 
@@ -130,7 +151,7 @@ public class Exercises {
 	 middleWay([5, 2, 9], [1, 4, 5]) → [2, 4]
 	 */
 	public int[] middleWay(int[] a, int[] b) {
-		return new int[] {};
+		return new int[] {a[1], b[1]};
 	}
 
 	/*
