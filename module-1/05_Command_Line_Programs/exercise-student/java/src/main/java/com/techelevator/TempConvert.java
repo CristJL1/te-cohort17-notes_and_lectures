@@ -24,12 +24,12 @@ public class TempConvert {
 
 		// System.out.println("Your Temperature Type: " + tempType);
 
-		if (tempType.equals("F") || tempType.equals("Fahrenheit")) {
+		if (tempType.equals("F") || tempType.equals("Fahrenheit") || tempType.equals("fahrenheit") || tempType.equals("f")) {
 			int tempOutputC = (Integer.parseInt(tempInput) - 32) * 5/9;
 
 			System.out.println(tempInput +"F is " + tempOutputC + "C");
 		}
-		else if (tempType.equals("C") || tempType.equals("Celsius")) {
+		else if (tempType.equals("C") || tempType.equals("Celsius") || tempType.equals("c") || tempType.equals("celsius")) {
 			int tempOutputF = (Integer.parseInt(tempInput) * 9/5) + 32;
 
 			System.out.println(tempInput + "C is " + tempOutputF + "F");
