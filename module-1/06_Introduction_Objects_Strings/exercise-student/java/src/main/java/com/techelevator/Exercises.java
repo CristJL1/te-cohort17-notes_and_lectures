@@ -61,7 +61,7 @@ public class Exercises {
 	 */
 	public String extraEnd(String str) {
 
-		return (str.substring(str.length()-2, str.length()) + str.substring(str.length()-2, str.length()) + str.substring(str.length()-2, str.length()));
+		return (str.substring(str.length()-2) + str.substring(str.length()-2) + str.substring(str.length()-2));
 	}
 
 	/*
@@ -311,7 +311,16 @@ public class Exercises {
 	 countXX("xxxx") →
 	 */
 	public int countXX(String str) {
-		return 0;
+
+		int counterX = 0;
+
+		for (int i = 0; i < str.length()-1; i++) {
+			if (str.substring(i, i+2).equals("xx")) {
+				counterX++;
+			}
+		}
+
+		return counterX;
 	}
 
 	/*
@@ -321,6 +330,18 @@ public class Exercises {
 	 doubleX("xxxxx") → true
 	 */
 	public boolean doubleX(String str) {
+
+		int firstX = str.indexOf("x");
+
+		if (firstX >= 0 && firstX < str.length()-1) {
+			for (int i = 0; i < str.length()-1; i++) {
+				if (str.substring(firstX, firstX+2).equals("xx")) {
+					return true;
+				}
+			}
+		}
+
+
 		return false;
 	}
 
@@ -331,7 +352,14 @@ public class Exercises {
 	 stringBits("Heeololeo") → "Hello"
 	 */
 	public String stringBits(String str) {
-		return null;
+
+		String everyOther = "";
+
+		for (int i = 0; i < str.length(); i = i+2) {
+			everyOther = everyOther + (Character.toString(str.charAt(i)));
+		}
+
+		return everyOther;
 	}
 
 	/*
@@ -341,7 +369,15 @@ public class Exercises {
 	 stringSplosion("ab") → "aab"
 	 */
 	public String stringSplosion(String str) {
-		return null;
+
+		String letterByLetter = "";
+
+		for (int i = 0; i < str.length()+1; i++) {
+			letterByLetter = letterByLetter + str.substring(0,i);
+		}
+
+		return letterByLetter;
+
 	}
 
 	/*
@@ -363,7 +399,32 @@ public class Exercises {
 	 stringX("xabxxxcdx") → "xabcdx"
 	 */
 	public String stringX(String str) {
-		return null;
+
+		//int firstX = str.indexOf("x");
+		//int lastX = str.lastIndexOf("x");
+
+		//String[] noXs = str.split("x");
+
+		//String xsAreGone = "";
+
+	//	for (int i = 0; i < noXs.length-1; i++) {
+	//		xsAreGone = xsAreGone + (Character.toString(str.charAt(i)));
+	//	}
+
+	//	if (firstX == 0 && lastX == 0) {
+	//		return ("x" + xsAreGone + "x");
+	//	}
+	//	else if (firstX == 0) {
+	//		return ("x" + xsAreGone);
+	//	}
+
+	//	else if (lastX == 0) {
+	//		return (xsAreGone + "x");
+	//	}
+	//	else return xsAreGone;
+
+return null;
+
 	}
 
 	/*
@@ -373,7 +434,10 @@ public class Exercises {
 	 altPairs("CodingHorror") → "Congrr"
 	 */
 	public String altPairs(String str) {
+
 		return null;
+
+
 	}
 
 	/*
@@ -384,7 +448,17 @@ public class Exercises {
 	 stringYak("yak123ya") → "123ya"
 	 */
 	public String stringYak(String str) {
-		return null;
+
+		String[] noYak = str.split("yak");
+
+		String yaksAreGone = "";
+
+		for (int i = 0; i < noYak.length ; i ++) {
+
+			yaksAreGone = yaksAreGone + noYak[i];
+
+		}
+		return yaksAreGone;
 	}
 
 }
