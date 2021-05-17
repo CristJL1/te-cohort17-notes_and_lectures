@@ -113,8 +113,12 @@ public class Exercises {
 	 comboString("aaa", "b") → "baaab"
 	 */
 	public String comboString(String a, String b) {
+		if (a.length() > b.length()) {
+			return (b+a+b);
+		}
+		else return (a+b+a);
 
-	return null;
+
 	}
 
 	/*
@@ -125,7 +129,7 @@ public class Exercises {
 	 nonStart("shotl", "java") → "hotlava"
 	 */
 	public String nonStart(String a, String b) {
-		return null;
+		return a.substring(1) + b.substring(1);
 	}
 
 	/*
@@ -136,7 +140,7 @@ public class Exercises {
 	 left2("Hi") → "Hi"
 	 */
 	public String left2(String str) {
-		return null;
+		return str.substring(2) + str.substring(0,2);
 	}
 
 	/*
@@ -147,7 +151,7 @@ public class Exercises {
 	 right2("Hi") → "Hi"
 	 */
 	public String right2(String str) {
-		return null;
+		return (str.substring(str.length()-2) + str.substring(0,(str.length()-2)));
 	}
 
 	/*
@@ -158,7 +162,11 @@ public class Exercises {
 	 theEnd("oh", true) → "o"
 	 */
 	public String theEnd(String str, boolean front) {
-		return null;
+		if (front) {
+			return str.substring(0,1);
+		}
+		else return str.substring(str.length()-1);
+
 	}
 
 	/*
@@ -169,7 +177,10 @@ public class Exercises {
 	 withoutEnd2("ab") → ""
 	 */
 	public String withoutEnd2(String str) {
-		return null;
+		if (str.length() > 1) {
+			return str.substring(1,str.length()-1);
+		}
+		else return "";
 	}
 
 	/*
@@ -180,7 +191,7 @@ public class Exercises {
 	 middleTwo("Practice") → "ct"
 	 */
 	public String middleTwo(String str) {
-		return null;
+		return (str.substring((str.length()/2 - 1), (str.length()/2) + 1));
 	}
 
 	/*
@@ -190,7 +201,10 @@ public class Exercises {
 	 endsLy("oddy") → false
 	 */
 	public boolean endsLy(String str) {
-		return false;
+		if (str.endsWith("ly")) {
+			return true;
+		}
+		else return false;
 	}
 
 	/*
@@ -201,7 +215,7 @@ public class Exercises {
 	 nTwice("Chocolate", 1) → "Ce"
 	 */
 	public String nTwice(String str, int n) {
-		return null;
+		return (str.substring(0,n) + str.substring(str.length()-n));
 	}
 
 	/*
@@ -213,7 +227,7 @@ public class Exercises {
 	 twoChar("java", 3) → "ja"
 	 */
 	public String twoChar(String str, int index) {
-		return null;
+		
 	}
 
 	/*
