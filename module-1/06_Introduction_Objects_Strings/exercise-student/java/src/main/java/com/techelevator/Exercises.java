@@ -227,7 +227,13 @@ public class Exercises {
 	 twoChar("java", 3) → "ja"
 	 */
 	public String twoChar(String str, int index) {
-		return null;  //-------------------------------------------------------------------------------------------------------------------
+
+		if (index < 0 || index > str.length()-2) {
+			return (Character.toString(str.charAt(0)) + Character.toString(str.charAt(1)));
+		}
+		else return str.substring(index, index+2);
+
+
 	}
 
 	/*
@@ -281,7 +287,21 @@ public class Exercises {
 	 frontTimes("Abc", 3) → "AbcAbcAbc"
 	 */
 	public String frontTimes(String str, int n) {
-		return null;
+
+		String firstThree = "";  // characters to repeat
+
+		if (str.length() < 3) {
+
+			firstThree = str;  // set characters to repeat what was passed in
+
+		}
+		else {
+			firstThree = str.substring(0,3);  // set characters to repeat the first 3 letters
+		}
+
+
+		return firstThree.repeat(n);  // taking characters to repeat and repeating them n times
+
 	}
 
 	/*
