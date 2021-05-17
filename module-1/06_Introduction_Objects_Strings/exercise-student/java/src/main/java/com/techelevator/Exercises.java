@@ -227,7 +227,7 @@ public class Exercises {
 	 twoChar("java", 3) → "ja"
 	 */
 	public String twoChar(String str, int index) {
-		
+		return null;  //-------------------------------------------------------------------------------------------------------------------
 	}
 
 	/*
@@ -238,7 +238,7 @@ public class Exercises {
 	 middleThree("solving") → "lvi"
 	 */
 	public String middleThree(String str) {
-		return null;
+		return str.substring(str.length()/2-1, str.length()/2+2);
 	}
 
 	/*
@@ -250,7 +250,10 @@ public class Exercises {
 	 hasBad("xxbadxx") → false
 	 */
 	public boolean hasBad(String str) {
-		return false;
+		if (str.indexOf("bad") == 0 || str.indexOf("bad") == 1) {
+			return true;
+		}
+		else return false;
 	}
 
 	/*
@@ -260,7 +263,14 @@ public class Exercises {
 	 stringTimes("Hi", 1) → "Hi"
 	 */
 	public String stringTimes(String str, int n) {
-		return null;
+
+		String repeatingString = "";
+
+		for (int i = 0; i < n ; i++) {
+			repeatingString = repeatingString + str;
+		}
+
+		return repeatingString;
 	}
 
 	/*
