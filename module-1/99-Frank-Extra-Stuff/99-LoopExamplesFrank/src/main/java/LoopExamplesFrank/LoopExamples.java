@@ -33,7 +33,7 @@ public class LoopExamples {
 	 *                2. Test the loop-condition - if true, go to step #3
 	 *                                             if false, end the loop
 	 *                                           
-	 *                3. Execcute the code in the loop body.
+	 *                3. Execute the code in the loop body.
 	 *              
 	 *                4. Perform the increment process
 	 *              

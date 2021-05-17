@@ -182,17 +182,21 @@ public class Exercises {
 	}
 
 	/*
-	 12. Return the sum of the numbers in the array, returning 0 for an empty array. Except the number 
-	 13 is very unlucky, so it does not count and numbers that come immediately after a 13 also do 
-	 not count.
+	 12. Return the sum of the numbers in the array, returning 0 for an empty array.
+	     Except the number 13 is very unlucky, so it does not count
+	       and numbers that come immediately after a 13 also do not count.
+
 	 sum13([1, 2, 2, 1]) → 6
 	 sum13([1, 1]) → 2
 	 sum13([1, 2, 2, 1, 13]) → 6
+	    i  =0  1  2  3   4   5
 	 sum13([1, 2, 2, 1, 13, 3]) → 6
+	    i  =0  1  2  3   4  5  6
 	 sum13([1, 2, 2, 1, 13, 3, 4]) → 10
 	 */
 	public int sum13(int[] nums) {
 
+<<<<<<< HEAD
 		int sum = 0;
 
 		if (nums.length > 0) {
@@ -211,7 +215,26 @@ public class Exercises {
 			return sum;
 		}
 		 return 0;
+=======
+		int sum = 0;  // define a variable to hold the sum to be returned
+
+		if (nums.length == 0) { // check for an empty array (.length=0)
+			return 0;           // return 0 if it's empty
+		}
+		for (int i=0; i < nums.length; i++) { //loop through the array one element at a time
+			if (nums[i] != 13) {       // check to see if the number in the element is not equal 13
+				sum = sum + nums[i];   //     adding the element to sum
+			}
+			else {      // we get here when the number is 13
+				  i++;  //      skip the number after this one by incrementing loop variable
+			}
+		}
+
+		return sum;
+>>>>>>> 1152982d0a6cf926cf096a9519e620723f1f1d09
 	}
+
+
 
 	/*
 	 13. Given an array of ints, return true if the array contains a 2 next to a 2 somewhere.
