@@ -1,6 +1,8 @@
 package com.techelevator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Exercises {
@@ -16,7 +18,10 @@ public class Exercises {
 	 array2List( {"Left", "Right", "Forward", "Back"} )  ->  ["Left", "Right", "Forward", "Back"]
 	 */
 	public List<String> array2List(String[] stringArray) {
-		return null;
+
+		ArrayList<String> inSameOrderList = new ArrayList(Arrays.asList(stringArray));
+
+		return inSameOrderList;
 	}
 
 	/*
@@ -26,7 +31,10 @@ public class Exercises {
 	 list2Array( ["Left", "Right", "Forward", "Back"] )  ->  {"Left", "Right", "Forward", "Back"}
 	 */
 	public String[] list2Array(List<String> stringList) {
-		return null;
+
+		String[] inSameOrderArray = stringList.toArray(new String[0]);
+
+		return inSameOrderArray;
 	}
 
 	/*
@@ -37,7 +45,16 @@ public class Exercises {
 	 no4LetterWords( {"Jack", "Jill", "Jane", "John", "Jim"} )  ->  ["Jim"]
 	 */
 	public List<String> no4LetterWords(String[] stringArray) {
-		return null;
+
+		ArrayList<String> sameOrderNot4 = new ArrayList();
+
+		for (int i = 0; i < stringArray.length; i++) {
+			if (stringArray[i].length() != 4) {
+				sameOrderNot4.add(stringArray[i]);
+			}
+		}
+
+		return sameOrderNot4;
 	}
 
 	/*
@@ -47,7 +64,14 @@ public class Exercises {
 	 arrayInt2ListDouble( {84, 99, 3285, 13, 877} ) -> [42, 49.5, 1642.5, 6.5, 438.5]
 	 */
 	public List<Double> arrayInt2ListDouble(int[] intArray) {
-		return null;
+
+		ArrayList<Double> dividedBy2 = new ArrayList();
+
+		for (int i = 0; i < intArray.length; i ++) {
+			dividedBy2.add((double)intArray[i]/2);
+		}
+
+		return (dividedBy2);
 	}
 
 	/*
@@ -57,7 +81,12 @@ public class Exercises {
 	 findLargest( [34070, 1380, 81238, 7782, 234, 64362, 627] ) -> 64362
 	 */
 	public Integer findLargest(List<Integer> integerList) {
-		return null;
+
+		Collections.sort(integerList);
+
+		Collections.reverse(integerList);
+
+		return integerList.get(0);
 	}
 
 	/*
@@ -67,7 +96,16 @@ public class Exercises {
 	 oddOnly( {734, 233, 782, 811, 3, 9999} ) -> [233, 811, 3, 9999]
 	 */
 	public List<Integer> oddOnly(Integer[] integerArray) {
-		return null;
+
+		ArrayList<Integer> justTheOdds = new ArrayList();
+
+		for (int i = 0; i < integerArray.length; i++) {
+			if (integerArray[i] %2 != 0) {
+				justTheOdds.add(integerArray[i]);
+			}
+		}
+
+		return justTheOdds;
 	}
 
 	/*
@@ -78,6 +116,13 @@ public class Exercises {
 	 foundIntTwice( [9, 23, 44, 2, 88, 44], 44) -> true
 	 */
 	public boolean foundIntTwice(List<Integer> integerList, int intToFind) {
+
+		int areThereTwo = 0;
+
+		for (int i = 0; i < integerList.size(); i++) {
+				
+		}
+
 		return false;
 	}
 
