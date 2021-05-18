@@ -120,7 +120,15 @@ public class Exercises {
 		int areThereTwo = 0;
 
 		for (int i = 0; i < integerList.size(); i++) {
-				
+
+			if (integerList.get(i).equals(intToFind)) {
+
+				areThereTwo = areThereTwo + 1;
+			}
+		}
+
+		if (areThereTwo >= 2) {
+			return true;
 		}
 
 		return false;
@@ -139,7 +147,24 @@ public class Exercises {
 	HINT: To convert an Integer x to a String, you can use x.toString() in your code. For example, if x = 1, then x.toString() returns "1."
 	 */
 	public List<String> fizzBuzzList(Integer[] integerArray) {
-		return null;
+
+		ArrayList<String> fizzBuzzList = new ArrayList();
+
+		for (int i = 0; i < integerArray.length; i++) {
+			if (integerArray[i] %3 == 0 && integerArray[i] %5 == 0) {
+				fizzBuzzList.add("FizzBuzz");
+			}
+			else if (integerArray[i] %5 == 0) {
+				fizzBuzzList.add("Buzz");
+			}
+			else if (integerArray[i] %3 ==0) {
+				fizzBuzzList.add("Fizz");
+
+			}
+			else fizzBuzzList.add(integerArray[i].toString());
+		}
+
+		return fizzBuzzList;
 	}
 
 	/*
@@ -150,7 +175,18 @@ public class Exercises {
 	 interleaveLists( [1, 2, 3], [4, 5, 6] )  ->  [1, 4, 2, 5, 3, 6]
 	 */
 	public List<Integer> interleaveLists(List<Integer> listOne, List<Integer> listTwo) {
-		return null;
+
+		ArrayList<Integer> list1Then2 = new ArrayList();
+
+		for (int i = 0; i < listOne.size(); i++) {
+			for (int j = 0; j <listTwo.size(); j++) {
+				list1Then2.add(i);
+				list1Then2.add(j);
+			}
+		}
+
+		return list1Then2;
+
 	}
 
 }
