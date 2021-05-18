@@ -178,12 +178,17 @@ public class Exercises {
 
 		ArrayList<Integer> list1Then2 = new ArrayList();
 
-		for (int i = 0; i < listOne.size(); i++) {
-			for (int j = 0; j <listTwo.size(); j++) {
-				list1Then2.add(i);
-				list1Then2.add(j);
+		for (int i = 0, j = 0; i < listOne.size() || j < listTwo.size(); i++, j++) {
+
+			if (i < listOne.size()) {
+				list1Then2.add(listOne.get(i));
 			}
+			if (i < listTwo.size()) {
+				list1Then2.add(listTwo.get(j));
+			}
+
 		}
+
 
 		return list1Then2;
 
