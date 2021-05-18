@@ -391,6 +391,10 @@ public class Exercises {
 
 		int substringOf2 = 0;
 
+		if (str.length() < 4) {
+			return 0;
+		}
+
 
 		for (int i = 0; i < str.length()-1 ; i++) {
 			if (str.substring(i,i+2).equals(str.substring(str.length()-2))) {
@@ -399,7 +403,7 @@ public class Exercises {
 		}
 
 
-		return substringOf2;
+		return substringOf2 - 1;
 
 	}
 
@@ -412,30 +416,25 @@ public class Exercises {
 	 */
 	public String stringX(String str) {
 
-		//int firstX = str.indexOf("x");
-		//int lastX = str.lastIndexOf("x");
+		String allXsGone = "";
 
-		//String[] noXs = str.split("x");
+		if (str.length() == 1) {
+			return "x";
+		}
 
-		//String xsAreGone = "";
+		for (int i = 0; i < str.length(); i++) {
+			if (Character.toString(str.charAt(i)).equals("x")) {
+				allXsGone = allXsGone + "";
+			}
+			else {
+				allXsGone = allXsGone + Character.toString(str.charAt(i));
+			}
+		}
+		if (str.indexOf("x") == 0 || str.indexOf("x") == str.length()) {
+			return ("x" + allXsGone + "x");
+		}
 
-	//	for (int i = 0; i < noXs.length-1; i++) {
-	//		xsAreGone = xsAreGone + (Character.toString(str.charAt(i)));
-	//	}
-
-	//	if (firstX == 0 && lastX == 0) {
-	//		return ("x" + xsAreGone + "x");
-	//	}
-	//	else if (firstX == 0) {
-	//		return ("x" + xsAreGone);
-	//	}
-
-	//	else if (lastX == 0) {
-	//		return (xsAreGone + "x");
-	//	}
-	//	else return xsAreGone;
-
-return null;
+return allXsGone;
 
 	}
 
@@ -447,7 +446,27 @@ return null;
 	 */
 	public String altPairs(String str) {
 
-		return null;
+		String alternatingPair = "";
+
+		if (str.length() >= 4) {
+			for (int i = 0; i < str.length() - 1; i = i + 4) {
+				alternatingPair = alternatingPair + (Character.toString(str.charAt(i))) + (Character.toString(str.charAt(i+1)));
+			}
+			if (str.length() % 2 == 0) {
+				return alternatingPair;
+			}
+			else {
+				return alternatingPair + (Character.toString(str.charAt(str.length()-1)));
+			}
+		}
+		else if (str.length() == 1) {
+			return str.substring(0);
+		}
+		else if (str.length() == 3 || str.length() == 2) {
+			return str.substring(0,2);
+		}
+
+		return "";
 
 
 	}
