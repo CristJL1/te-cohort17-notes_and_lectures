@@ -2,6 +2,7 @@ package com.techelevator;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Exercises {
 
@@ -107,7 +108,39 @@ public class Exercises {
 	 *
 	 */
 	public double isItOnSale(String itemNumber) {
-		return -1.0;
+
+
+
+		if (itemNumber == null) {
+			return 0.00;
+		}
+
+
+		Map<String, Double> isItOnSale = new HashMap();
+
+		isItOnSale.put ("KITCHEN4001", 0.20);
+		isItOnSale.put ("GARAGE1070", 0.15);
+		isItOnSale.put ("LIVINGROOM", 0.10);
+		isItOnSale.put ("KITCHEN6073", 0.40);
+		isItOnSale.put ("BEDROOM3434", 0.60);
+		isItOnSale.put ("BATH0073", 0.15);
+
+		Set<String> item = isItOnSale.keySet();
+
+		for (String itemSale: item) {
+			if (itemSale.equals(itemNumber.toUpperCase())) {
+				return isItOnSale.get(itemNumber.toUpperCase());
+			}
+
+		}
+
+
+
+		// groupName = groupsOfAnimals.get(animalName.toLowerCase());
+
+
+
+		return 0.00;
 	}
 
 	/*
