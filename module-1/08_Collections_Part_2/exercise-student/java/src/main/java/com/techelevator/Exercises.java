@@ -179,7 +179,21 @@ public class Exercises {
 	 * beginningAndEnding(["muddy", "good", "moat", "good", "night"]) → {"g": "d", "m": "t", "n": "t"}
 	 */
 	public Map<String, String> beginningAndEnding(String[] words) {
-		return null;
+
+		Map<String, String> firstLetterLastLetter = new HashMap();
+
+		String wordsString = "";
+
+		for (String wordsReturn : words) {
+			wordsString = wordsReturn;
+
+
+		firstLetterLastLetter.put(wordsString.substring(0, 1), wordsString.substring(wordsString.length() - 1));
+	}
+
+
+
+		return firstLetterLastLetter;
 	}
 
 	/*
@@ -195,7 +209,21 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> wordCount(String[] words) {
-		return null;
+
+
+		Map<String, Integer> numberOfWords = new HashMap();
+
+		for (String returnWords: words) {
+			if (numberOfWords.containsKey(returnWords)) {
+				numberOfWords.put(returnWords, numberOfWords.get(returnWords) +1 );
+			}
+			else {
+				numberOfWords.put(returnWords, 1);
+			}
+		}
+
+
+		return numberOfWords;
 	}
 
 	/*
@@ -210,7 +238,20 @@ public class Exercises {
 	 *
 	 */
 	public Map<Integer, Integer> integerCount(int[] ints) {
-		return null;
+
+		Map<Integer, Integer> numberCount = new HashMap();
+
+		for (Integer timesIntAppears: ints) {
+			if (numberCount.containsKey(timesIntAppears)) {
+				numberCount.put(timesIntAppears, numberCount.get(timesIntAppears) +1);
+			}
+			else {
+				numberCount.put(timesIntAppears, 1);
+			}
+		}
+		
+
+		return numberCount;
 	}
 
 	/*
