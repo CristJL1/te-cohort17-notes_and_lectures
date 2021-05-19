@@ -10,7 +10,7 @@ public class StackAndQueueExamples {
 		int itemNum = 0;  // variable used in loops below		
 
 /********************************************************************************
- *  Stack - LIFO Collection (Last-In-First-Out)
+ *  Stack - LIFO Collection (Last-In-First-Out) - like a stack of plates
  *  
  *  Normal access to elements in a Stack is through the push() and pop() methods
  *  
@@ -37,9 +37,9 @@ public class StackAndQueueExamples {
  * 
  **********************************************************************************/
 
-		Stack <String> myStack = new Stack<String>();
+		Stack <String> myStack = new Stack<String>(); // a stack of string objects
 		
-		myStack.push("Kirk");
+		myStack.push("Kirk");  // add element to the top of the stack
 		myStack.push("Spock");
 		myStack.push("McCoy");
 		myStack.push("Uhura");
@@ -53,6 +53,8 @@ public class StackAndQueueExamples {
 		System.out.println("Displaying elements in myStack: ");
 		
 		itemNum = 0;
+
+		// using a for-each to process the stack does not remove anything from the stack
 		
 		for (String item : myStack) {  // Loop through each item in the Stack one at a time
 			                           //    each time through the loop item contains the current element
@@ -60,13 +62,14 @@ public class StackAndQueueExamples {
 			}
 			
 		System.out.println("\nNumber items in myStack - .size(): " + myStack.size());
-		System.out.println("  Getting Top of myStack - .pop(): " + myStack.pop());
-		System.out.println("Number items in myStack - .size(): " + myStack.size());
-		System.out.println("  Last element in Stack - .get(0): " + myStack.get(0));
-		System.out.println("   Top Element on Stack - .peek(): " + myStack.peek());
-		System.out.println("Number items in myStack - .size(): " + myStack.size());
+		System.out.println("  Getting Top of myStack - .pop(): "   + myStack.pop());  // get and remove the top element
+		System.out.println("Number items in myStack - .size(): "   + myStack.size());
+		System.out.println("  Last element in Stack - .get(0): "   + myStack.get(0));  // get and leave the element at index 0
+		System.out.println("   Top Element on Stack - .peek(): "   + myStack.peek());  // get and leave the top element in the stack
+		System.out.println("Number items in myStack - .size(): "   + myStack.size());
 		
 		System.out.println("\nCloning myStack - .clone()");
+//                           cast to the type of the cloned Stack because .clone() returns a generic Bbject
 		Stack<String> clonedStack = (Stack<String>) myStack.clone();
 		
 		System.out.println("Number items in clonedStack - size(): " + clonedStack.size());
@@ -79,8 +82,8 @@ public class StackAndQueueExamples {
 			
 		System.out.println("--------------------------------------------");
 /********************************************************************************
- *  Queue - FIFO Collection
- *  
+ *  Queue - FIFO Collection - like a line at the bank or drive thru
+ *                            when you want to retrieve date in the same order it was added
  *  Some methods:
  *  
  *  .add(object)      - add element to end of Queue
@@ -101,17 +104,17 @@ public class StackAndQueueExamples {
  *                      you must cast reference to type necessary
  * 
  **********************************************************************************/
-	
+	//  The class for a Queue is called LinkedList NOT Queue
 		LinkedList <String> myQueue = new LinkedList<String>();	    
 		//myQueue.
 		
-		myQueue.add("Josh");
-		myQueue.add("Joe");
-		myQueue.push("Craig");   // Put at the start of Queue
+		myQueue.add("John"); // add to the end of the queue
+		myQueue.add("David"); // add to the end of the queue
+		myQueue.push("Ben");   // Put at the start of Queue
 		
-		myQueue.add("Dan");
+		myQueue.add("Joe");
 		myQueue.add("Mike");
-		myQueue.add("Frank");			
+		myQueue.add("Craig");
 			
 		itemNum = 0;
 	

@@ -34,7 +34,54 @@ public class Exercises {
 	 *
 	 */
 	public String animalGroupName(String animalName) {
-		return null;
+
+		if (animalName == null) {  // if no animalName is given to the method
+			return "unknown";      // return "unknown"
+		}
+
+		String groupName = ""; // hold the value to be returned
+
+		// associate an animal to a group name - use a Map
+		//		key - animal - a String
+		//		value - group name - a String
+
+		Map<String,String> groupsOfAnimals = new HashMap();
+
+		// we need to add the animals and their associated group names
+		// since the animal name is supposed to be case insensitive
+		// pick a case we are using for the key
+
+		groupsOfAnimals.put("rhino","Crash"); // .put(key, value)
+		groupsOfAnimals.put("giraffe","Tower");
+		groupsOfAnimals.put("elephant","Herd");
+		groupsOfAnimals.put("lion","Pride");
+		groupsOfAnimals.put("crow","Murder");
+		groupsOfAnimals.put("pigeon","Kit");
+		groupsOfAnimals.put("flamingo","Pat");
+		groupsOfAnimals.put("deer","Herd");
+		groupsOfAnimals.put("dog","Pack");
+		groupsOfAnimals.put("crocodile","Float");
+
+		// check to see if the animal name passed into the method is in our Map - .get()
+		// if we try to use the animal name passed into the method to access the map and it's not there
+		// 				we get back a null
+		//				if it is there we get back the group name
+		// since we have to be case insensitive and the animal names in our map are all lowercase
+		// we need to convert the animalNames that's pass through the method to all lowercase
+
+		groupName = groupsOfAnimals.get(animalName.toLowerCase());
+
+		if (groupName == null) {  // if animalName not in the map
+			groupName = "unknown"; // set groupName to unknown
+		}
+
+		// if it is - set the groupName to the value from the Map for the animalName
+		// if it's not set the groupName to "unknown"
+
+
+
+
+		return groupName;
 	}
 
 	/*
