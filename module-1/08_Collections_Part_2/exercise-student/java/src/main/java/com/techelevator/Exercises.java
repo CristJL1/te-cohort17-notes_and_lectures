@@ -249,7 +249,7 @@ public class Exercises {
 				numberCount.put(timesIntAppears, 1);
 			}
 		}
-		
+
 
 		return numberCount;
 	}
@@ -264,7 +264,22 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Boolean> wordMultiple(String[] words) {
-		return null;
+
+		Map<String, Boolean> twoOrMore = new HashMap();
+
+
+
+		for (String doubleWordsTrue: words) {
+			if (twoOrMore.containsKey(doubleWordsTrue)) {
+				twoOrMore.put(doubleWordsTrue, true);
+			}
+			else twoOrMore.put(doubleWordsTrue, false);
+		}
+		
+
+
+
+		return twoOrMore;
 	}
 
 	/*
