@@ -275,7 +275,7 @@ public class Exercises {
 			}
 			else twoOrMore.put(doubleWordsTrue, false);
 		}
-		
+
 
 
 
@@ -294,7 +294,36 @@ public class Exercises {
 	 */
 	public Map<String, Integer> consolidateInventory(Map<String, Integer> mainWarehouse,
 			Map<String, Integer> remoteWarehouse) {
-		return null;
+
+			Map<String, Integer> bothWarehouses = new HashMap();  // empty map to store new values
+
+			Set<String> justStringMain = mainWarehouse.keySet();  // allow me to look at just the strings in mainWarehouse
+
+			Set<String> justStringRemote = remoteWarehouse.keySet(); // allow me to look at just the strings in remoteWarehouse
+
+		String mainValue = "";
+		String remoteValue = "";
+
+		for (String stringMainReturn: justStringMain) { // get string values for mainWarehouse
+			mainValue = stringMainReturn;
+		}
+
+		for (String stringRemoteReturn: justStringRemote) { // get string values for remoteWarehouse
+			remoteValue = stringRemoteReturn;
+		}
+
+			if (mainWarehouse.containsKey(remoteValue)) { // if there is a key value in remote warehouse that matches a one in mainWarehouse
+				bothWarehouses.put(mainValue, (mainWarehouse.get(mainValue) + remoteWarehouse.get(remoteValue)));  // then put the key from mainWarehouse and add the value of mainWarehouse and remoteWarehouse together
+			}
+			else { // if values in main and remote don't match then just add the key and value from main or the key and value from remote
+				bothWarehouses.put(mainValue,mainWarehouse.get(mainValue));
+				bothWarehouses.put(remoteValue, remoteWarehouse.get(remoteValue));
+			}
+
+
+
+
+		return bothWarehouses;
 	}
 
 	/*
