@@ -154,7 +154,26 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> robPeterToPayPaul(Map<String, Integer> peterPaul) {
-		return null;
+
+		Map<String, Integer> peterToPaul = new HashMap();
+
+		if (peterPaul.get("Paul") < 1000 && peterPaul.get("Peter") > 0) {
+
+			peterToPaul.put("Peter", peterPaul.get("Peter") - (peterPaul.get("Peter")/2));
+			peterToPaul.put("Paul", peterPaul.get("Paul") + (peterPaul.get("Peter")/2));
+
+		}
+
+		else {
+			peterToPaul.put("Peter", peterPaul.get("Peter"));
+			peterToPaul.put("Paul", peterPaul.get("Paul"));
+		}
+
+
+
+
+
+		return peterToPaul;
 	}
 
 	/*
@@ -167,7 +186,26 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> peterPaulPartnership(Map<String, Integer> peterPaul) {
-		return null;
+
+		Map<String, Integer> peterToPaul = new HashMap();
+
+		if (peterPaul.get("Peter") >= 5000 && peterPaul.get("Paul") >= 10000) {
+
+			peterToPaul.put("Peter", (peterPaul.get("Peter") - (peterPaul.get("Peter")/4)));
+			peterToPaul.put("Paul", (peterPaul.get("Paul") - (peterPaul.get("Paul")/4)));
+			peterToPaul.put("PeterPaulPartnership", (peterPaul.get("Peter")/4) + (peterPaul.get("Paul")/4));
+
+		}
+
+		else {
+			peterToPaul.put("Peter", peterPaul.get("Peter"));
+			peterToPaul.put("Paul", peterPaul.get("Paul"));
+		}
+
+
+
+
+		return peterToPaul;
 	}
 
 	/*
