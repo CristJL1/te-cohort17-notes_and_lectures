@@ -333,29 +333,26 @@ public class Exercises {
 	public Map<String, Integer> consolidateInventory(Map<String, Integer> mainWarehouse,
 			Map<String, Integer> remoteWarehouse) {
 
-			Map<String, Integer> bothWarehouses = new HashMap();  // empty map to store new values
+			Map<String, Integer> bothWarehouses = new HashMap();
 
-			Set<String> justStringMain = mainWarehouse.keySet();  // allow me to look at just the strings in mainWarehouse
+			bothWarehouses.putAll(mainWarehouse);
 
-			Set<String> justStringRemote = remoteWarehouse.keySet(); // allow me to look at just the strings in remoteWarehouse
+			String key = "";
+			Integer value = 0;
 
-		String mainValue = "";
-		String remoteValue = "";
+			for (Map.Entry<String, Integer> warehouseLoop: remoteWarehouse.entrySet()) {
 
-		for (String stringMainReturn: justStringMain) { // get string values for mainWarehouse
-			mainValue = stringMainReturn;
-		}
+				key = warehouseLoop.getKey();
+				value = warehouseLoop.getValue();
 
-		for (String stringRemoteReturn: justStringRemote) { // get string values for remoteWarehouse
-			remoteValue = stringRemoteReturn;
-		}
+				if (bothWarehouses.containsKey(key)) {
+					bothWarehouses.put(key, (bothWarehouses.get(key) + value));
+				}
+				else {
+					bothWarehouses.put(key,value);
+				}
 
-			if (mainWarehouse.containsKey(remoteValue)) { // if there is a key value in remote warehouse that matches a one in mainWarehouse
-				bothWarehouses.put(mainValue, (mainWarehouse.get(mainValue) + remoteWarehouse.get(remoteValue)));  // then put the key from mainWarehouse and add the value of mainWarehouse and remoteWarehouse together
-			}
-			else { // if values in main and remote don't match then just add the key and value from main or the key and value from remote
-				bothWarehouses.put(mainValue,mainWarehouse.get(mainValue));
-				bothWarehouses.put(remoteValue, remoteWarehouse.get(remoteValue));
+
 			}
 
 
@@ -380,7 +377,24 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> last2Revisited(String[] words) {
-		return null;
+
+		Map <String, Integer> last2 = new HashMap();
+
+		for (String word: words) {
+			String initial = word.substring(word.length()-2);
+			last2.put(word,0);
+
+			for (int i = 0; i < word.length() - 2; i++) {
+
+				String twoLetters = word.substring(i, i+2);
+				if (twoLetters.equals(initial)) {
+					last2.put(word, last2.get(word) +1);
+				}
+
+			}
+		}
+
+		return last2;
 	}
 
 }
