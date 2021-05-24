@@ -39,8 +39,18 @@ public class PlayingCard {
 	 * 
 	 *      Integer.parseInt()     -   Integer is the class name; parseInt() is the method
 	 ********************************************************************************************/
+		/*********************************************************************************************
+		 * this. - indicates the current object being processed by the method
+		 *
+		 * "this method's copy of the object"
+		 *
+		 * Only are required to use "this." when a parameter for the method has the same name as a member variable
+		 *********************************************************************************************/
 	//********************************************************************************************
-	// Class member constants 
+	// Class member constants  - a value that cannot be changed once it is set
+	// use a constant to represent a value rather than just coding the value when needed (loosely coupled)
+	// final indicates a variable is a constant	- Java convention says constant names should be UPPERCASE
+	//												and separate words with underscores
 	//********************************************************************************************
 	private final int MINVALUE    = 0;             // Minimum valid card value 
 	private final int MAXVALUE    = 13;            // Maximum valid card value
@@ -53,11 +63,13 @@ public class PlayingCard {
 	private String  suit;
 	private int     value;   // 0=Joker, 11=Jack, 12=Queen, 13=King
 	private String  color;
-	private boolean showing;
+	private boolean showing; // true - face up; false - face down
 	private String  shape;   // read-only - no Setter or argument to a constructor
 	
 //********************************************************************************************
-// Constructors for the class
+// Constructors for the class - initialize the data members for a class
+//
+// constructors are automatically used by Java when it needs to create an object of a class
 //
 // Constructors have the same name as the class have no return type - NOT EVEN void	
 //
@@ -75,18 +87,19 @@ public class PlayingCard {
 		shape="Rectangle";
 	}
 	/**
-	 * 4-arg constructor
+	 * 4-arg constructor // allows the user to create a card with a specific value, suit, color, and if it's showing or not
 	 */
 	public PlayingCard(int value, String suit, String color, boolean showing) {
 		setValue(value);          // Use member method to set value in case value passed is invalid
-		this.suit    = suit;
-		this.showing = showing;
+		this.suit    = suit;	  // this.suit is required because there is a parameter called suit
+		this.showing = showing;	  // this.showing is required because there is a parameter called showing
+	// showing = showing;		  // assign the parameter names showing to the parameter named showing
 		determineColor();         // Use class member method to set the color based on the suit
-		                          //     ignore color sent is as a parameter by user
-		shape="Rectangle";
+		                          //     ignore color sent as a parameter by user
+		shape="Rectangle";		  // no need to use this.shape because no parameter called shape for the method
 	}
 	/**
-	 * 2-arg constructor
+	 * 2-arg constructor - allow the user to create a card with a specific value and suit
 	 */
 		public PlayingCard(int value, String suit) {
 			setValue(value);          // Use member method to set value in case value passed is invalid
@@ -96,7 +109,7 @@ public class PlayingCard {
 			shape="Rectangle";
 		}
 //********************************************************************************************
-// Getters	
+// Getters	- allow the user to retrieve values in the private data members (encapsulation)
 //********************************************************************************************
 	/**
 	 * @return the PlayingCard suit attribute
@@ -124,7 +137,7 @@ public class PlayingCard {
 	 */
 	public boolean isShowing() {
 		return showing;
-	}
+	}  // boolean getters start with is rather than get
 	
 	/**
 	 * @return the shape attribute of the PlayingCard
@@ -134,7 +147,12 @@ public class PlayingCard {
 	}
 
 //********************************************************************************************
-// Setters	
+// Setters	- allow users to change the values in private data members (encapsulation)
+//
+// not all data members require setters - if you don't want to allow a user to change the data
+//											don't provide a setter
+//
+// if a data member has a getter without a setter it is said to be read-only (shape in this class)
 //********************************************************************************************
 	/**
 	 * @param suit is the value to set PlayingCard suit attribute
@@ -153,6 +171,8 @@ public class PlayingCard {
 	 * @return void
 	 */
 	public void setValue(int value) {
+		// since this function requires access to the parameter passed by the user
+		// that parameter is passed to this function
 		if (value >= MINVALUE && value <= MAXVALUE) { // Is the value passed in the range for a valid card?
 			this.value = value;                       //     Yes - assign it to the value data member
 		}
@@ -197,10 +217,10 @@ public class PlayingCard {
 	}
 	// Determine card color based on suit
 	// So we control what color is set and can be sure it is correct for the suit
-	// private so only members of the class may use it
+	// private so only members of the class may use it. application programs cannot use this method
 	
 	private void determineColor() { // set the cardColor based on the cardSuit
-		if (suit.equals("Spades") 
+		if (suit.equals("Spades")  // if the object's suit data member equals "Spades"
 		 || suit.equals("Clubs")
 		 || suit.equals("Joker")) {
 			color = "Black";
@@ -227,12 +247,42 @@ public class PlayingCard {
 //             Overriding methods have same name, same parameters, but different behavior	
 //********************************************************************************************
 
-	/**
+		/**
+		 * define .equals method to compare two PlayingCards to see if they are equal
+		 *
+		 * A PlayingCard is equal to another PlayingCard when the value and suit are equal
+		 *
+		 * @params PlayingCard - the card to compare to
+		 * @return boolean
+		 */
+
+		public boolean equals (PlayingCard theOtherCard) {
+			// to use this method: aPlayingCardObject.equals(anotherPlayingCardObject)
+			//
+			// this. represents the PlayingCard to the left of the .equals
+			//
+			// danielsCard.equals(briansCard) - .this represents danielsCard
+			//									theOtherCard represents briansCard
+			//
+			// use the String.equals() to compare suit because the suit is a String
+			//
+			if (this.value == theOtherCard.value && this.suit.equals(theOtherCard.suit)) {
+				return true;
+			}
+			return false;
+			// return this.value == theOtherCard.value && this.suit.equals(theOtherCard.suit)
+			// 		is OK too
+		}
+
+
+
+		/**
 	 * Construct a String representation of the object
+	 * due to the Object class toString() not doing what we wanted it to do
 	 * @return String containing the attributes of the object
 	 */
 	
-	@Override             // Ask the compiler to verify this is a proper override
+	@Override             // Ask the compiler to verify this is a proper override of Object class toString()
 	public String toString() {
 		return "PlayingCard [suit=" + suit + ", value=" + value + ", color=" + color + ", showing=" + showing
 				            + "shape=" + shape +"]";
