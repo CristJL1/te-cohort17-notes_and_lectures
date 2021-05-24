@@ -7,7 +7,8 @@ import java.util.TreeMap;
  * American Playing Card Class - subclass of generic PlayingCard
  ***************************************************************************************************/
 
-public class AmericanPlayingCard extends PlayingCard{
+//           subclass             is-a    superclass
+public class AmericanPlayingCard extends PlayingCard{ // extends indicates inheritance
 	/************************************************************************************************
 	 * Constants for values related to American Playing Cards
 	 ***********************************************************************************************/	
@@ -19,14 +20,31 @@ public class AmericanPlayingCard extends PlayingCard{
 
 	/**************************************************************************************************
 	 * Maps used to validate/limit suits, colors and value names for American Playing Cards
-	 *************************************************************************************************/	
-	
-	private static Map<String,  String> suitMap  = new HashMap<String , String>();  
+	 *************************************************************************************************/
+	//                   key     value
+	//                  suit     color
+	private static Map<String,  String> suitMap  = new HashMap<String , String>();  // ~ says same as on the left side
+	//                  value  face value
 	private static Map<Integer, String> valueMap = new TreeMap<Integer, String>(); 
 	
 	/***************************************************************************************************
 	 *Invoke method to populate maps with valid suits, colors & value names for American Playing Cards
-	 **************************************************************************************************/	
+	 **************************************************************************************************/
+
+	// We are using methods to initialize the suitMap and valueMap
+	// methods have to be called from some program
+	// so since the suitMap and valueMap are defined as static
+	// only static methods can change their data
+	//
+	// static data can exist even if no objects exist
+	// the suitMap and valueMap will exist if no AmericanPlayingCards objects exist
+	// if no AmericanPlayingCards objects exist, no constructors are ever run
+	//
+	// if we called initializeMaps from a constructor it might never run
+	// since we need to have data in the suitMap and valueMap when the constructor is run
+	// we tell Java to run initializeMaps() as soon as the application starts
+	//
+	// to do so, define a static method outside any other part of the code
 	
 	static {             // static method to initialize maps before are ever used
        initializeMaps();
@@ -42,6 +60,10 @@ public class AmericanPlayingCard extends PlayingCard{
 	 * 2-arg Constructor for a user provided value and suit
 	 ***************************************************************************************************/	
 	public AmericanPlayingCard(int value, String suit) {
+	// we MUST call a super class constructor as the first thing we do in a subclass constructor
+	// so the superclass object	that is automatically instantiated by Java gets initialized
+	// Java has no idea how we want to initialize a superclass object, so it makes us do it
+	// 		  value, suit, color	- using our suitMap to get the color based on the suit
 		super(value, suit, suitMap.get(suit));       // Determine color and call super class 3-arg ctor
 	
 		if (value > MAXVALUE) {                      // If value provided is greater than max value allowed         
