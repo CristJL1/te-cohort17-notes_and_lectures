@@ -85,4 +85,11 @@ public class PlayingCard {
 		}
 		return true;
 	}
-}
+
+	// superclass is required to have any method where polymorphism might be used, even if it doesn't need it
+	public void showCard() {} // required for polymorphism to work - even though it does nothing
+
+
+
+
+} // end of PlayingCard class

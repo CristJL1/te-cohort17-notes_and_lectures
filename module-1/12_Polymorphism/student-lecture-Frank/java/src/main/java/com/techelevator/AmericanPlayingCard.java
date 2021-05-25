@@ -92,14 +92,23 @@ public class AmericanPlayingCard extends PlayingCard{
 		valueMap.put(12,"Queen");
 		valueMap.put(13,"King");
 	}
-	
+
+
+	// it is common for a subclass to call a superclass method it overrides, in this case toString()
+	// because the subclass doesn't know how to handle the superclass data
+	// the subclass is only responsible for any data it adds to the superclass
+	// so all the subclass has to do is decide how to handle it's new data and use the superclass method
+	// and use the superclass method to handle superclass data
 	@Override
 	public String toString() {
 		return "AmericanPlayingCard: " 
-	          +"Value: "  + valueMap.get(getValue())
-	          +" - Color: " + suitMap.get(getSuit()) 
-			  +" - Suit: "  + getSuit()
-			  +" - super.toString()=" + super.toString() + "\n";
+	          +"Value: "  + valueMap.get(getValue()) // use the valueMap to get the value name
+	          +" - Color: " + suitMap.get(getSuit()) // use the suitMap to get the color for the suit
+			  +" - Suit: "  + getSuit()				// use the superclass method to get the suit
+													// super. optional because the subclass does not have a method called getSuit()
+			  +" - super.toString()=" + super.toString() + "\n"; // call superclass toString()
+																 // super. is required because we have a method with the same name
+																// if we omitted super. we would be calling ourselves
 	}
 
 	public void showCard() {
