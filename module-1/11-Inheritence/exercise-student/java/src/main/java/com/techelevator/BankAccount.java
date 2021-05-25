@@ -38,13 +38,13 @@ public class BankAccount {
         return balance;
     }
 
-    public int deposit(int amountToDeposit) {
+    public int deposit(int amountToDeposit) { // deposit method
         balance = balance + amountToDeposit;
 
         return getBalance();
     }
 
-    public int withdraw(int amountToWithdraw) {
+    public int withdraw(int amountToWithdraw) { // withdraw method
         balance = balance - amountToWithdraw;
 
         return getBalance();
