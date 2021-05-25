@@ -35,7 +35,7 @@ public class ItalianPlayingCard extends PlayingCard {
 		if (value < MINVALUE) {
 			setValue(MINVALUE);
 		}
-		if (value > 7 && value < 10) {
+		if (value > 7 && value < 10) { // Italian playing cards have no 8s or 9s
 			setValue(MINVALUE);
 		}
 		

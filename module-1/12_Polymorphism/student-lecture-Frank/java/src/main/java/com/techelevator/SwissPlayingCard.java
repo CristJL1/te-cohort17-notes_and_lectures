@@ -31,7 +31,7 @@ public class SwissPlayingCard extends PlayingCard {
 		if (value > MAXVALUE) {
 			setValue(MAXVALUE);
 		}
-		if (value < MINVALUE) {
+		if (value < MINVALUE && value != 1) {
 			setValue(MINVALUE);
 		}
 	}
