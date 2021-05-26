@@ -43,14 +43,12 @@ public class BankAccount implements Accountable{
     }
 
     public int transferTo(BankAccount destinationAccount, int transferAmount){
-        if (balance >= transferAmount) {
-            balance = balance - transferAmount;
-        }
-        else {
-            return getBalance();
-        }
 
-        destinationAccount.deposit(transferAmount);
+
+            this.withdraw(transferAmount);
+            destinationAccount.deposit(transferAmount);
+
+
         return getBalance();
     }
 

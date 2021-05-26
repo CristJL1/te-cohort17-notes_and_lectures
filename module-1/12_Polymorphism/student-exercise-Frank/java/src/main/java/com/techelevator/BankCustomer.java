@@ -50,10 +50,21 @@ public class BankCustomer {
 
     public boolean isVip () {
 
-       // need to figure out how to call the balances of CheckingAccount, SavingsAccount, and CreditCardAccount
-       // need to figure out why transfer to SavingsAccount isn't working
+         int totalBalance = 0;
 
-        return false;
+       for (Accountable isVipCheck : accounts) {
+
+           totalBalance = totalBalance + isVipCheck.getBalance();
+
+       }
+
+       if (totalBalance >= 25000) {
+           return true;
+       }
+
+       else {
+           return false;
+       }
     }
 
 
