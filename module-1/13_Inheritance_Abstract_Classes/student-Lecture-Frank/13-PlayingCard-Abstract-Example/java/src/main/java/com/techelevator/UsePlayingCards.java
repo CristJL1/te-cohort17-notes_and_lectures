@@ -31,7 +31,9 @@ public class UsePlayingCards {
 		System.out.println("anSwissCard3 is : \n" + aSwissCard3);
 		
 	System.out.println("\n----- Polymorphism example follows ------ \n");
-		
+
+	// to use polymorphism - instantiate objects of the superclass and assign them objects of the subclass
+		//	use the superclass object in any code and Java will run the correct subclass method based on the object assigned to the superclass object
 		
 		List<PlayingCard> someCards = new ArrayList<PlayingCard>();
 		
@@ -39,8 +41,8 @@ public class UsePlayingCards {
 		someCards.add(aUSACard);
 		someCards.add(aSwissCard2);
 		
-		for(PlayingCard aCard : someCards) {
-			aCard.showCard();
+		for(PlayingCard aCard : someCards) { // define a superclass object as an element in the for-each loop
+			aCard.showCard(); // use a superclass object to invoke methods - correct subclass method will run
 		}
 			
 	}

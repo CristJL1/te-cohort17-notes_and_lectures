@@ -6,6 +6,9 @@ import java.util.LinkedList;
 
 
 public class CardDeck {
+
+	// using a queue to hold the deck of PlayingCards
+	// a queue is a FiFo data structure
 	LinkedList<PlayingCard> deckOfCards = new LinkedList<PlayingCard>();
 	private int numCardsInDeck = 54;
 
@@ -29,7 +32,7 @@ public class CardDeck {
 		}
 	}
 
-	public PlayingCard dealCard() {
+	public PlayingCard dealCard() { // return the first card in the deck, unless it's empty
 		if (deckOfCards.size() > 0) {
 			return deckOfCards.remove();
 		}
@@ -38,7 +41,7 @@ public class CardDeck {
 		}
 	}
 
-	public void resetDeck(boolean withJoker) {
+	public void resetDeck(boolean withJoker) { // create a deck of PlayingCards with optional Jokers
 		deckOfCards.clear();
 
 		for (int i = 1; i < 14; i++) {
@@ -60,9 +63,9 @@ public class CardDeck {
 		}
 	}
 
-	public void shuffleDeck() {
-		resetDeck(false);
-		Collections.shuffle(deckOfCards);
+	public void shuffleDeck() { // using the Collections class shuffle method to randomize the deck of cards
+		resetDeck(false); // give me a new deck without Jokers
+		Collections.shuffle(deckOfCards); // randomize the cards in the deck
 	}
 
 }

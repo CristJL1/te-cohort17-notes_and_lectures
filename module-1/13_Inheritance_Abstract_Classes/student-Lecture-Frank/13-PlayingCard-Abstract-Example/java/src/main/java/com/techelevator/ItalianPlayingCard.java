@@ -12,17 +12,23 @@ public class ItalianPlayingCard extends PlayingCard {
 	private static final int    MAXVALUE         = 13;
 	private static final int    MINVALUE         = 0;
 
+
+	// static allows the Maps to exist even if no objects are constructed
 	private static Map<String,  String> suitMap  = new HashMap<String , String>();  
 	private static Map<Integer, String> valueMap = new TreeMap<Integer, String>(); 
 	
 	public ItalianPlayingCard() 
 	{
 		super(DEFAULTCARDVALUE, DEFAULTSUIT, DEFAULTCOLOR);
-		initializeMaps();
+		initializeMaps(); // we delay initialization until an object is constructed
+						  // if no objects exist and the Maps are referenced they are empty
 	} 
 
 	public ItalianPlayingCard(int value, String suit) {
-		super(value, suit, suitMap.get(suit));{
+		super(value, suit, suitMap.get(suit)); // we are using the suitMap assuming it has already been initialized
+												// We don't actually initialize the Maps until line 42 at the end of the constructor
+												// if a default constructor was not run before this constructor, the Maps are not initialized
+												// and suitMap.get(suit) will return null
 	
 		if (value > MAXVALUE) {
 			setValue(MAXVALUE);
@@ -34,7 +40,7 @@ public class ItalianPlayingCard extends PlayingCard {
 			setValue(MINVALUE);
 		}
 		initializeMaps();
-		}
+
 		
 	}
 

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class AmericanPlayingCard extends PlayingCard{
+public class AmericanPlayingCard extends PlayingCard{ // this is a subclass of PlayingCard
 	
 	private static final int    DEFAULTCARDVALUE = 0;
 	private static final String DEFAULTCOLOR     = "BLACK";
@@ -62,8 +62,9 @@ public class AmericanPlayingCard extends PlayingCard{
 	public String toString() {
 		return "AmericanPlayingCard: " 
 	          +"Value: "  + valueMap.get(getValue())
-	          +" - Color: " + suitMap.get(getSuit()) 
-			  +" - Suit: "  + getSuit()
+	          +" - Color: " + suitMap.get(getSuit())
+			  +" - Suit: " + suit // we have direct access to the protected data in the superclass
+		//	  +" - Suit: "  + getSuit() // use the superclass method to get the suit because it is private
 			  +" - super.toString()=" + super.toString() + "\n";
 	}
 

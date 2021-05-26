@@ -2,7 +2,9 @@ package com.techelevator;
 
 import java.util.ArrayList;
 
-public class BlackJackHand	 implements CardHand {
+public class BlackJackHand	 implements CardHand { // implement an interface
+												  // this is a type of CardHand
+												  // it implements all the behaviors of CardHand
 
 	private int numCardsInHand = 2;
 	
@@ -11,8 +13,11 @@ public class BlackJackHand	 implements CardHand {
 	public BlackJackHand() {
 		aHand = new ArrayList<PlayingCard>(numCardsInHand);
 	}
+
+	// methods required because we implemented the CardHand interface
+	// override the methods in the interface - same name, same return type, same parameters
 	
-	@Override
+	@Override // optional, but a good idea to code so you are sure you are properly defining the method for the interface
 	public ArrayList<PlayingCard> getHand() {
 		return aHand;
 	}
@@ -37,6 +42,10 @@ public class BlackJackHand	 implements CardHand {
 		}
 			return;
 	}
+
+	//
+	// additional methods not required by the CardHand interface
+	//
 	
 	public void dealHand(CardDeck aDeck) {
 		for (int i=0; i < numCardsInHand; i++ ) {

@@ -1,10 +1,18 @@
 package com.techelevator;
 
-public class PlayingCard {
+// an abstract class is a class that is never meant to be instantiated
+// 		you CANNOT instantiate an abstract class
+//
+// abstract classes are meant to be superclasses
+//
+// an abstract class is a generic description of an object - does not have all the details for an object
+
+abstract public class PlayingCard {  //Generic PlayingCard - cannot be instantiated
 	
-	private int value;    
+	private int value;    // private indicates only members of the class can access it
 	private String color;    
-	private String suit;     
+	protected String suit;     // protected indicates that members of the class and subclass can access it
+							   // 		subclasses do not need to use getters/setters to access protected data
 	
 	
 	public PlayingCard(int value, String suit, String color) {
@@ -61,6 +69,24 @@ public class PlayingCard {
 		return true;
 	}
 
-	public void showCard() {}  // Required for Polymorphism - does nothing
+	// to allow for polymorphism a superclass must define any method that is to be polymorphic
+	//		even if it doesn't do anything
+	// the subclass may override the polymorphic method to actually do something that it wants to do
+	//
+	// making a method abstract indicates this class does not know what the method should do
+	//		and requires any subclass to override the method
+	//
+	// to make a method abstract - code the abstract property in the method signature and no body; () instead of {}
+	//
+	// if any method in a class is abstract, the class must be abstract
+	//
+	// abstract on a method means we don't know the details, we just know we need it
+	//
+	// abstract methods are frequently used for polymorphism
+	// 		and/or the superclass wants to require a subclass to implement the behavior
+	//
+	// any subclass MUST define an abstract method define in the superclass
+
+	abstract public void showCard();  // Required for Polymorphism - does nothing
 		
 }

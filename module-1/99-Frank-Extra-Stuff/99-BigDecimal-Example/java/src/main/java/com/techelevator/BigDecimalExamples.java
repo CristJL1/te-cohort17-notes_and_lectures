@@ -11,7 +11,7 @@ public class BigDecimalExamples {
  * 
  * BigDecimal does not have the precision issues that double has
  * 
- * BigDecimal is a good choice for money fields as precision is not lost
+ * BigDecimal is a good choice for money fields as precision is not lost when displayed
  *                 (double tends to be good for all other uses)
  * 
  * BigDecimal objects are initialized using String values
@@ -35,12 +35,12 @@ public class BigDecimalExamples {
 		System.out.println("              aNum.toString() is: " + aNum.toString()); 
 		System.out.println("         aNum.aNum.intValue() is: " + aNum.intValue());
 		System.out.println("           aNum.doubleValue() is: " + aNum.doubleValue());
-		System.out.println("               aNum.add(bNum) is: " + aNum.add(bNum));
+		System.out.println("               aNum.add(bNum) is: " + aNum.add(bNum)); // cannot use + to add, must use method
 		System.out.println(" aNum.add(new BigDecimal(\"1\") is: " + aNum.add(new BigDecimal("1")));
-		System.out.println("          aNum.subtract(bNum) is: " + aNum.subtract(bNum));
-		System.out.println("          aNum.multiply(bNum) is: " + aNum.multiply(bNum));
-		System.out.println("            aNum.divide(bNum) is: " + aNum.divide(bNum));
-		System.out.println("                  aNum.pow(2) is: " + aNum.pow(2));
+		System.out.println("          aNum.subtract(bNum) is: " + aNum.subtract(bNum)); // cannot use - to subtract
+		System.out.println("          aNum.multiply(bNum) is: " + aNum.multiply(bNum)); // cannot use *
+		System.out.println("            aNum.divide(bNum) is: " + aNum.divide(bNum)); // cannot use /
+		System.out.println("                  aNum.pow(2) is: " + aNum.pow(2)); // exponentiation (raise to power)
 		System.out.println("------------------------------------------------");	
 		System.out.println("  aNum.setScale(1,RoundingMode.DOWN is: " + aNum.setScale(1,RoundingMode.DOWN));
 		System.out.println("  aNum.setScale(1,RoundingMode.UP   is: " + aNum.setScale(1,RoundingMode.UP));
