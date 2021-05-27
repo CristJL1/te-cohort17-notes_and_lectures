@@ -14,7 +14,7 @@ public class CigarPartyTest {
 
 
     @Test
-    public void is_it_a_weekend_party () {
+    public void does_a_weekend_party_take_place () {
 
         testCode.haveParty(61, true);
 
@@ -23,7 +23,7 @@ public class CigarPartyTest {
     }
 
     @Test
-    public void is_it_a_weekday_party () {
+    public void does_a_weekday_party_take_place () {
 
         testCode.haveParty(40, false);
 
@@ -32,9 +32,18 @@ public class CigarPartyTest {
     }
 
     @Test
-    public void are_there_enough_cigars() {
+    public void are_there_enough_cigars_for_a_weekday () {
 
         testCode.haveParty(39, false);
+
+        assertFalse(false);
+
+    }
+
+    @Test
+    public void are_there_enough_cigars_for_a_weekend () {
+
+        testCode.haveParty(39, true);
 
         assertFalse(false);
 
