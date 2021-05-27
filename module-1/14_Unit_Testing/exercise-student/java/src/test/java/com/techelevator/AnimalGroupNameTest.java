@@ -5,7 +5,11 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import static org.junit.Assert.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
 public class AnimalGroupNameTest {
+
+
 
 // instantiate an object with the code to be tested
 AnimalGroupName theCode = new AnimalGroupName();
