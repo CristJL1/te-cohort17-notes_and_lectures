@@ -8,6 +8,9 @@ public abstract class Wall {
 
     public Wall (String name, String color) {
 
+        this.name = name;
+        this.color = color;
+
     }
 
     public String getName() {
