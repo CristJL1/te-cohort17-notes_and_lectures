@@ -46,13 +46,13 @@ class PaintCalculator {
                     int length = Integer.parseInt(userInput.nextLine());
 
                     // Step Two:
-                    newWall = new RectangleWall(name, color, height, length); // decomment this line when you complete step 2
+                    newWall = new RectangleWall(name, color, height, length);
                 } else if (shapeChoice.equals("2")) {
                     System.out.println("Enter wall side length >>> ");
                     int sideLength = Integer.parseInt(userInput.nextLine());
 
                     // Step Three:
-                    //newWall = new SquareWall(name, color, sideLength); // decomment this line when you complete step 3
+                    newWall = new SquareWall(name, color, sideLength);
                 } else if (shapeChoice.equals("3")) {
                     System.out.println("Enter wall height >>> ");
                     int height = Integer.parseInt(userInput.nextLine());
@@ -60,7 +60,7 @@ class PaintCalculator {
                     int base = Integer.parseInt(userInput.nextLine());
 
                     // Step Four:
-                    //newWall = new TriangleWall(name, color, height, base); // decomment this line when you complete step 4
+                    newWall = new TriangleWall(name, color, height, base); // decomment this line when you complete step 4
                 }
 
                 // Step Two:
