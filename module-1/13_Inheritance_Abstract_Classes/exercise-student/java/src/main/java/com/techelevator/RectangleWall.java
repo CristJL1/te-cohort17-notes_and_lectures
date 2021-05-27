@@ -23,6 +23,11 @@ public class RectangleWall extends Wall {
 
     }
 
+    public RectangleWall (String name, String color) {
+        super(name, color);
+    }
+
+
     @Override
     public int getArea() {
         return length * height;
