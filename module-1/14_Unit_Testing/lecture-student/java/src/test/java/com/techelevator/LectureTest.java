@@ -17,16 +17,20 @@ import org.junit.runners.MethodSorters;
  * production class with "Test" at the end.  For example, the test class
  * for the production class "Foo" would be "FooTest"
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class LectureTest {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING) // optional line - list the tests in ascending name order
+
+public class LectureTest { // class to hold all the JUnit test methods in Lecture Class
 
 	/* If a method is annotated with @Before, it will be executed immediately prior to every test.
 	 * It is intended to be used when there is a repetitive setup (i.e. "Arrange") task that is
 	 * performed by several tests */
-	@Before
+
+	@Before // do this before EVERY test - setup of data that needs to be done for all tests
+
 	public void setup() {
 		System.out.println("setup");
-	}
+	} // method holds the setup for every test
+														 // the name can be anything you want as long as it is descriptive
 
 	/* If a method is annotated with @After, it will be executed immediately after every test.
 	 * It is intended to be used when there is a repetitive cleanup task that is performed by
@@ -34,7 +38,8 @@ public class LectureTest {
 	@After
 	public void teardown() {
 		System.out.println("teardown");
-	}
+	} // method that holds all your processing after every test
+															   // the name can be anything you want as long as it is descriptive
 
 	/* Each test is implemented as a method with the @Test annotation. When the JUnit
 	 * framework is invoked, it looks for these @Test annotations on the test class
@@ -56,17 +61,20 @@ public class LectureTest {
 	 *     - are public
 	 *     - return void
 	 *     - take no arguments
+	 *
+	 * tests rarely, if ever, contain user interactions - NO SCANNERS or System.out.println()
 	 */
-	@Test
+	@Test // MUST BE BEFORE EVERY TEST - if not, JUnit does not see the test
 	public void length_returns_the_number_of_characters_in_a_String() {
 		System.out.println("length_returns_the_number_of_characters_in_a_String"); // FOR DEMONSTRATION PURPOSES ONLY, don't do this in your own tests
 
 		/* The assertEquals method validates that two values are equal and
 		 * fails the test if they are not equal */
 
-		String theString = "Java"; // Arrange
-		int length = theString.length(); // Act
-		Assert.assertEquals(4, length); // Assert
+		String theString = "Java"; // Arrange - define the input data for the test
+		int length = theString.length(); // Act - run the method with the test data
+		//					expected,   actual
+		Assert.assertEquals(4, length); // Assert - verify the result from teh ACt was the expected result
 	}
 
 	@Test
@@ -85,6 +93,10 @@ public class LectureTest {
 		 * This is particularly helpful with assertTrue as otherwise the failure output would simply
 		 * state "Expected: true Actual: false", which sometimes isn't much help in figuring out
 		 * what went wrong */
+
+		// If you do not specify an expected result it's obvious AssertTrue expects true
+
+		//					           error message if test fails					result
 		Assert.assertTrue("String did not start with Hello as expected.", startsWithHello); // Assert
 	}
 
@@ -97,6 +109,8 @@ public class LectureTest {
 		Assert.fail("This is how I can force a test to fail");
 	}
 
+
+	// No @Test before this method, so JUnit does not run it
 	public void this_method_is_not_a_test_because_it_does_not_have_the_Test_annotation() {
 		// This method will not be run by Junit, because it's not a test
 	}

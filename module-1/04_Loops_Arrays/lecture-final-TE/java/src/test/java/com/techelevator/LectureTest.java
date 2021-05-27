@@ -7,12 +7,16 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LectureTest {
 
-    Lecture exercises = new Lecture();
+    Lecture exercises = new Lecture(); // instantiate an object with the code to be tested
 
     @Test
+    // Arrange, Act, and Assert are combined in one statement
+    //                                                      define0temp- result
+    //                                                      expected-result-array , method-returns-array
     public void testReturnArray() {
         assertArrayEquals(new int[] { 80, 8080, 443 }, exercises.returnArray());
     }
+    //                                  assert                      arrange             act
 
     @Test
     public void testReturnFirstElement() {
@@ -26,8 +30,9 @@ public class LectureTest {
 
     @Test
     public void testReturnFirstElementOfParam() {
+        int[] expected = {5, 10, 15};
         assertEquals("That's not the first element from {5, 10, 15}", 5,
-                exercises.returnFirstElementOfParam(new int[] { 5, 10, 15 }));
+                exercises.returnFirstElementOfParam(expected));
         assertEquals("That's not the first element from {10, 20, 30, 40, 50}", 10,
                 exercises.returnFirstElementOfParam(new int[] { 10, 20, 30, 40, 50 }));
     }
