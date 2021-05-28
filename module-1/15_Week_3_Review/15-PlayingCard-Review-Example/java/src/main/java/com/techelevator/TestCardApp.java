@@ -4,10 +4,13 @@ import com.techelevator.PokerHand.PokerHandRanking;
 
 public class TestCardApp {
 
+	//application program 0 instantiate class and manipulate them to get work done
+		//main() tells us it's an application program
+
 	public static void main(String[] args) {
 
 		CardDeck myDeck = new CardDeck();
-//		CardHand myHand = new CardHand();
+//		CardHand myHand = new CardHand();  // cannot instantiate a generic CardHand - it's abstract
 		PokerHand myPokerHand = new PokerHand();
 
 		System.out.println("-----------------------------------------------------");

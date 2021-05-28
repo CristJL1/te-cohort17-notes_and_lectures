@@ -13,28 +13,38 @@ public class PlayingCard {
 	 * static so it can be referenced using the class name. ie. no object required
 	 * 
 	 * enum - define a set of constant values that may be referenced as a data type
+	 * 			allows the assign of a word to a constant value to limit the values in a variable
+	 * 			used as data-types - define variables as enums, parameters as num - anywhere a variable is allowed
+	 * 			Java will ensure that an enum type only has values valid for the enum (we don't have to check)
+	 * 			enum are actual integer values starting at 0 inside Java
 	 ***************************************************************************************************/
-	public static enum CardColor {          
-		BLACK, RED                         
+
+	// making the enums public allows application programs to use the enum as constant too
+
+	public static enum CardColor { // define words to represent allowable card colors instead of using a String
+		BLACK, RED                 // these are the only valid values that Java will allow
 	};
 
 	public static enum CardSuit {          // public is OK since they are constants and cannot be changed
 		SPADE, CLUB, HEART, DIAMOND, JOKER // static so it can be referenced using the class name. ie. no object required
 	};
 
-	public static enum CardValue {
+	public static enum CardValue { // using the fact that enum are really integers inside Java to name our values
 		JOKER, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
 	};
 
 	/***************************************************************************************************
 	 * Define constants to represent defaults for card attributes
+	 *
+	 * protected means members of this class and members of any subclass can access the data/method
+	 * 		directly without having to use methods to do so
 	 * 
 	 * protected so subclasses may access is OK since they are constants and cannot be changed
 	 * 
 	 * static so it can be referenced using the class name. ie. no object required
 	 ***************************************************************************************************/
 	
-	protected static final CardValue DEFAULTCARDVALUE = CardValue.JOKER; 
+	protected static final CardValue DEFAULTCARDVALUE = CardValue.JOKER; // using enum data-type for the value
 	protected static final CardColor DEFAULTCOLOR     = CardColor.BLACK;
 	protected static final CardSuit  DEFAULTSUIT      = CardSuit.JOKER;
 	/***************************************************************************************************
@@ -43,7 +53,7 @@ public class PlayingCard {
 	 * private to protect as prescribed by encapsulation - method must be used to access the data 
 	 ***************************************************************************************************/
 	
-	private CardValue value;
+	private CardValue value;  // use enum for data-type - Java will enforce allowable values
 	private CardColor color;
 	private CardSuit suit;
 
@@ -80,9 +90,10 @@ public class PlayingCard {
 		return value;
 	}
 
+	//return the integer value assigned to the card - value is an enum called CardValue
 	public int getIntValue() {    // Return integer value of CardValue stored in the object
 		return value.ordinal();
-	}
+	} // .ordinal returns the integer value of an enum
 	
 	public CardColor getColor() { // Return CardColor stored in the object
 		return color;
@@ -95,11 +106,50 @@ public class PlayingCard {
 	 * setter methods
 	 ***************************************************************************************************/
 	public CardValue setValue(int ivalue) {  // Set the CardValue based on an int value
-		switch (ivalue) {
-		case 1:
-			return CardValue.ONE;
-		case 2:
-			return CardValue.TWO;
+		/*
+		 * switch is an alternative to a set of nested if-then-else-if statements
+		 * switch is followed by a series of case statements which are the value you want to check in the variable
+		 * when a case is true the statements following the case AND ALL OTHER CASES are run too
+		 * 		unless you have a break at the end of the case
+		 * 		when a case is true all statements in the switch following the case are run until
+		 * 		it hits a break statement or the end of the switch - no other cases are checked
+		 *
+		 * stacking cases simulates an equals-or condition
+		 * there is no way to simulate an equals-and in a switch
+		 *
+		 * switch(variable) { - check the value in this variable
+		 * 		case value: - if the value for the switch equals the case value
+		 * 			statements-to-run if value in the case matches the one in the switch
+		 *
+		 * 		default: - if none of the cases were true
+		 * 					statement-to-run is none of the cases were true
+		 * 		}
+		 *
+		 * if the code below was written as a set of nested if-then-else-is it would look like this
+		 *
+		 * if (ivalue == 1) {
+		 * 		return CardValue.ONE;
+		 * 	  }
+		 * else if (ivalue == 2) {
+		 * 		return CardValue.TWO;
+		 * 	  }
+		 * 		else if (ivalue == 3) {
+		 * 			return CardValue.THREE;
+		 * 	  	}
+		 * 	 		else if (ivalue == 4) {
+		 * 				return CardValue.FOUR;
+		 * 	  		}
+		 *  etc.
+		 */
+
+	// a break is NOT required at the end of the case in this example to prevent falling through to the next case
+		// because the cases contain a return statement which ends the method and returns to the caller
+			// so we can't fall through to the next case
+		switch (ivalue) {         // check ivalue
+		case 1:			          // if ivalue == 1
+			return CardValue.ONE; // do this
+		case 2:					  // if ivalue == 2
+			return CardValue.TWO; // do this
 		case 3:
 			return CardValue.THREE;
 		case 4:
@@ -128,17 +178,20 @@ public class PlayingCard {
 	}
 
 	private void setColor(CardSuit suit) {  // Set the color based on the suit of the object
+
+		// if (suit == cardSuit.Spade || suit == cardSuit.CLUB) - stack cases
+
 		switch (suit) {
-		case SPADE:
+		case SPADE:		// stacking cases simulated an equals-or condition
 		case CLUB:
 			this.color = CardColor.BLACK;
-			break;
+			break; // break is required so we don't fall through to the next case - we exit the switch
 		case DIAMOND:
 		case HEART:
 			this.color = CardColor.RED;
-			break;
+			break; // break is required so we don't fall through to the next case - we exit the switch
 		default:
-			this.color = DEFAULTCOLOR;
+			this.color = DEFAULTCOLOR; // no break is needed here because it is the lase case
 		}
 	}
 
@@ -153,7 +206,16 @@ public class PlayingCard {
 
 	public String toString() {                         // Return a String representation of the object
 		//-------------------------------------------------------------------------------------------------
-		// StringBuffer is a mutable version of String
+		// StringBuffer is a mutable version of String - allows a new value to be assigned to the same String
+		//		a more efficient type than String
+		//
+		// it's not a regular class, not special like String, so Java has no built-in support for it
+		//
+		// to you concatenate values: String + String - Java knows the + with a String means concatenation
+		//							  StringBuffer.append(otherString) - methods are required
+		//
+		// Strings are immutable - if you assign a new value to a String Java destroys the old String and
+		// 		creates a new one
 		//-------------------------------------------------------------------------------------------------
 		StringBuffer stringCard = new StringBuffer();  // Define an object to hold String version of object
 
@@ -177,11 +239,12 @@ public boolean equals(Object otherObject) {   // Compare two PlayingCards for eq
 			return true;             // objects are equal
 		}
 		else {
+			// instanceof returns true if an object is an instance of the class specified
 			if ((otherObject instanceof PlayingCard)) {            // If the object being compared to is the same class as object 
 				PlayingCard otherCard = (PlayingCard) otherObject; // Define a PlayingCard object from object being compared to
 				return (this.value == otherCard.value && this.color == otherCard.color && this.suit == otherCard.suit);
 			}
-	    return false;    // Required so Eclipse realizes we are returning a boolean
+	    return false;    // Required so IntelliJ realizes we are returning a boolean
 		}
 		
 }

@@ -1,5 +1,14 @@
 package com.techelevator;
 
+/*********************************************************************************************
+ * an interface identifies methods that must be define by the class implementing the interface
+ *
+ * think of it as behaviors a class must exhibit to be a type of the interface
+ *
+ * an interface only contains method signatures followed by a colon - no body/code in the methods
+ *********************************************************************************************/
+
+
 public interface ValidCardHand {
 	
 	public void clearHand();                // Remove all cards from a hand

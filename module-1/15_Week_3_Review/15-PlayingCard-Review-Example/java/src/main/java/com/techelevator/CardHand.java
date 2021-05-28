@@ -5,8 +5,14 @@ import java.util.Collections;
 import java.util.Comparator;
 /***************************************************************************************************
  * Class to Simulate an American Playing Card Hand
+ *
+ * abstract means it's meant to be a superclass and cannot be instantiated on it's own
+ *
+ * an abstract class provides a generic description of an object
+ *
+ * CardHand is a type of ValidCardHand - "type of" - implement an interface
  ***************************************************************************************************/
-public abstract class CardHand   implements ValidCardHand  { 
+public abstract class CardHand   implements ValidCardHand  { // a CardHand is a type of ValidCardHand
 
 	/***********************************************************************************************
 	 * Member Data
@@ -50,7 +56,8 @@ public abstract class CardHand   implements ValidCardHand  {
 	}
 
 @Override     // Ask compiler to check to be sure this is a valid override of superclass or interface method
-	public abstract void dealHand(CardDeck aDeck);
+	public abstract void dealHand(CardDeck aDeck); // required by the interface, but this class doesn't know what it does
+														// abstract means the subclass must define it
 
 @Override     // Ask compiler to check to be sure this is a valid override of superclass or interface method	
 	public void show() {                // Display each card in Hand

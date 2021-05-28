@@ -33,9 +33,9 @@ public class Less20Test {
     @Test
     public void n_is_not_divisible_by_20 () {
 
-        testCode.isLessThanMultipleOf20(20);
+        testCode.isLessThanMultipleOf20(40);
 
-            assertFalse(false);  //come back to this
+            assertFalse(false);
 
     }
 

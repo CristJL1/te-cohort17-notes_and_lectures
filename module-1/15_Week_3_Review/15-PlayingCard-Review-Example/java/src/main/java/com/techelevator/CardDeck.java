@@ -13,6 +13,8 @@ import com.techelevator.PlayingCard.CardValue;
 public class CardDeck {
 	/***************************************************************************************************
 	 * Standard Deck represented as a Queue / LinkedList
+	 *
+	 * CardDeck has a set of PlayingCards - "has-a" relationship - define the object in the class
 	 ***************************************************************************************************/
 
 	LinkedList<PlayingCard> deckOfCards = new LinkedList<PlayingCard>();  // Define a Queue to hold PlayingCards

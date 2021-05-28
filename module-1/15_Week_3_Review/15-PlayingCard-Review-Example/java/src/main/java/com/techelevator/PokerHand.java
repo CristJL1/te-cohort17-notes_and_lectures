@@ -1,6 +1,8 @@
 package com.techelevator;
 /***************************************************************************************************
- * Class to Simulate an PokerHand using and American PlayingCard Hand
+ * Class to Simulate an PokerHand using an American PlayingCard Hand
+ *
+ * PokerHand is a CardHand - "is-a" relationship - inheritance
  ***************************************************************************************************/
 
 public class PokerHand  extends CardHand {
