@@ -31,6 +31,30 @@ public class WordCountTest {
     }
 
 
+    @Test
+    public void counts_number_of_times_string_appears () {
+
+        Map<String,Integer> expected = new HashMap<>();
+
+        expected.put("ba", 2);
+
+        expected.put("black", 1);
+
+        expected.put("sheep", 1);
+
+        Map<String, Integer> result;
+
+        String [] testArray = new String[]{"ba", "ba", "black", "sheep"};
+
+        result = testCode.getCount(testArray);
+
+        assertEquals(expected, result);
+
+    }
+
+
+
+
 
 
     /*
