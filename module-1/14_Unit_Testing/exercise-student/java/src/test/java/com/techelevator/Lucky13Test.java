@@ -14,34 +14,45 @@ public class Lucky13Test {
     Lucky13 testCode = new Lucky13();
 
     @Test
-    public void array_has_no_1s () {
+    public void array_has_no_1s_or_3s () {
 
-       int[] testArray = new int [0];
+       boolean results;
 
-       testCode.getLucky(testArray);
+        int[] testArray = new int []{0,2,4};
 
-       assertTrue(true);  // don't think this is right, need to add more numbers to array
+      results = testCode.getLucky(testArray);
+
+       assertTrue(results);
 
     }
 
-   // no idea, can't get test to accept array values
+    @Test
+    public void array_has_1s () {
 
+        boolean results;
 
-    /*
-     * Given an array of ints, return true if the array contains no 1's and no 3's.
-     * GetLucky([0, 2, 4]) → true GetLucky([1, 2, 3]) → false GetLucky([1, 2,
-     * 4]) → false
+        int[] testArray = new int []{1,2,4};
 
-    public boolean getLucky(int[] nums) {
-        if (nums != null) {
-            for (int i = 0; i < nums.length; i++) {
-                if (nums[i] == 1 || nums[i] == 3) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    } */
+        results = testCode.getLucky(testArray);
+
+        assertFalse(results);
+
+    }
+
+    @Test
+    public void array_has_3s () {
+
+        boolean results;
+
+        int[] testArray = new int []{0,3,4};
+
+        results = testCode.getLucky(testArray);
+
+        assertFalse(results);
+
+    }
+
+    
 
 
 
