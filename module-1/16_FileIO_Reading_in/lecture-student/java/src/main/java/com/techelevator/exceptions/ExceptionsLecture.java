@@ -14,16 +14,22 @@ public class ExceptionsLecture {
 		 * By using try/catch blocks, you can stop the Exception from exiting the method and provide
 		 * code to handle it. */
 		System.out.println("The following cities: ");
-		String[] cities = new String[] { "Cleveland", "Columbus", "Cincinatti" };
-		try {
+		String[] cities = new String[] { "Cleveland", "Columbus", "Cincinnati" };
+		try { // if an exception occurs in this block of code, I will handle it with a catch block
 			System.out.println(cities[0]);
 			System.out.println(cities[1]);
 			System.out.println(cities[2]);
 			System.out.println(cities[3]);  // This statement will throw an ArrayIndexOutOfBoundsException
 			System.out.println("are all in Ohio."); // This line won't execute because the previous statement throws an Exception
-		} catch(ArrayIndexOutOfBoundsException e) {
+		} catch(ArrayIndexOutOfBoundsException exceptionObj) { // if this exception happens in the preceding try block, I will handle it
+			// when a a catch is executed an Exception object is pass to it as a parameter
+			//		in this example we called the Exception object "exceptionObj"
+			//		the Exception object will give you access to information and methods related to the error
 			// Flow of control resumes here after the Exception is thrown
 			System.out.println("XXX   Uh-oh, something went wrong...   XXX");
+			System.out.println(exceptionObj.getMessage()); // display the system message for the Exception
+			// exceptionObj.printStackTrace(); // this will display the stacktrace from main() down to the method causing the exception
+											// in this case nothing is displayed because we're in main()
 		}
 		
 		System.out.println();
@@ -57,9 +63,9 @@ public class ExceptionsLecture {
 		int nights = -3;
 		int numberOfGuests = 2;
 		try {
-			double amountOwed = calculateHotelRoomCharges(nights, numberOfGuests);
+			double amountOwed = calculateHotelRoomCharges(nights, numberOfGuests); // may throw an IllegalArgumentException
 			System.out.println("Total owed for "+numberOfGuests+" guests for "+nights+" nights is $"+amountOwed);
-		} catch(IllegalArgumentException e) {
+		} catch(IllegalArgumentException e) { // handle any IllegalArgumentException thrown in try block
 			System.out.println(numberOfGuests+" guests for "+nights+" nights just doesn't make sense.");
 			System.out.println(e.getMessage());
 		}
@@ -73,8 +79,9 @@ public class ExceptionsLecture {
 		try {
 			double newBalance = withdraw(currentBalance, amountToWithdraw);
 			System.out.println("new balance is "+newBalance);
-		} catch(OverdraftException e) {
+		} catch(OverdraftException e) { // handle our custom OverdraftException
 			System.out.println("Unfortunately, you can't withdraw more money than you have in the bank...");
+			// use the Exception object passed to the catch block to get the overdraft amount
 			System.out.println("The requested amount would overdraw the account by "+e.getOverdraftAmount());
 		}
 		System.out.println();
@@ -102,7 +109,9 @@ public class ExceptionsLecture {
 		final double EXTRA_GUEST_CHARGE = 20;
 		final double ROOM_RATE = 85;
 		
-		/* The throw statements below demonstrate how to throw a new Exception. */
+		/* The throw statements below demonstrate how to throw a new Exception.
+		* if any argument passed to this method is invalid, throw an IllegalArgumentException
+		* */
 		if(nights < 1) {
 			throw new IllegalArgumentException("Minimum number of nights is 1");
 		} else if(numberOfGuests < 1) {

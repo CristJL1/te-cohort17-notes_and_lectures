@@ -83,6 +83,7 @@ public class FileWritingAppendToExistingFileExample {
 			     }
 
 		// Define a FileWriter object for the File with the append switch value
+		// appendToFile is set to true or false in the logic above based on user response
 		FileWriter aFileWriter = new FileWriter(outputFile, appendToFile);  // If the file already exists, it will overylay teh existing data
 		
 		// Define a BufferedWriter Object for the output file
