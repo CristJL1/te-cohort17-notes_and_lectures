@@ -11,12 +11,14 @@
 --
 --      SELECT   - columns to include in the result (seperate mutiple column reqeusts with commas)
 --      FROM     - table containing rows used in the query 
---      WHERE    - rows to include in the result
+--      WHERE    - rows to include in the result (row filter)
 --      ORDER BY - sequence of rows in the result
 --                 without an ORDER BY the sequence of the rows in the result is not predictable
 --                 if the sequence of teh rows in teh result matter - code an ORDER BY
 --
--- WHERE predicates:
+-- WHERE predicates (condition - similar to Java if conditions with may more options):
+
+-- not equals is either <> or != 
 --
 --        =  <>  !=  >  >=  <  <= 
 --        IN(list-of-values)      -- alterative to a series of = OR
@@ -28,7 +30,7 @@
 --                                _ means exactly any one character)
 --        ILIKE   (case insensivtive LIKE - Postgres extension)
 --
--- predicates may be combined using AND and OR
+-- predicates may be combined using AND and OR - full predicates must be coded on both sides for AND / OR
 --
 -- use parentheses to make your multi-predicate condition clear
 
@@ -41,42 +43,129 @@
 
 -- Selecting the names for all countries
 
+select name -- columns I want to see in the result
+   from country -- a table with the columns I want
+; -- use semi-colon to mark the end of an SQL statement in a file
+
 
 -- Selecting the name and population of all countries
 
+select name, population -- the columns to see in the result in the order you want to see them
+  from country -- table with the columns we want
+  ;
+  
+  select population, name -- the columns to see in the result in the order you want to see them
+  from country -- table with the columns we want
+  ;
+
 
 -- Selecting all columns from the city table
+
+select * -- columns I want to see in the result and the order I want to see them
+             -- * means all the columns in order defined in the table
+   from city -- table with the columns
+   ; 
 
 
 -- SELECT ... FROM ... WHERE
 -- Selecting the cities in Ohio
 
+select name             -- show me the name
+from city               -- from the city table
+where district = 'Ohio' -- only include rows for district = 'Ohio'
+                        -- string literals are coded inside apostrphes (not double quotes like in Java)
+                        -- case of the string literal matters - MUST match what is in the table
+
 
 -- Selecting countries that gained independence in the year 1776
+
+select name
+from country
+where indepyear = 1776; -- numeric literals are just coded as numbers
 
 
 -- Selecting countries not in Asia
 
+select name, continent -- sometimes include columns not asked for to verify your result
+from country
+where continent != 'Asia';
 
--- Selecting countries that do not have an independence year
+
+-- Selecting countries that do not have an independence year - independence year is null
+-- in relational databases, null represents a missing or unknown value
+-- (Frank calls it the "I don't know" value)
+-- since it's value is unknown, we cannot use normal WHERE predicates to test it (e.g. <, >, =, etc.)
+-- special WHERE predicates are used to check nulls - NOT NULL or IS NULL
+
+select name, indepyear
+from country
+where indepyear is null; -- must use the special predicate IS NULL to check for a null
 
 -- Selecting countries that do have an independence year
 
+select name, indepyear
+from country
+where indepyear is not null;
+
 
 -- Selecting countries that have a population greater than 5 million
+
+select name, population
+from country
+where population > 5000000;
 
 
 
 -- SELECT ... FROM ... WHERE ... AND/OR
 -- Selecting cities in Ohio and Population greater than 400,000
 
+select name, district, population
+from city
+where population > 400000 -- a full predicate is required on each side of an AND / OR
+and district = 'Ohio'; -- a full predicate is a column, operator, and value
+
 -- Selecting country names on the continent North America or South America
 
+select name, continent
+from country
+where continent = 'North America'
+or continent = 'South America';
+
+select name, continent
+from country
+where continent like '%America'; -- where the continent ends with the word 'America'
+
+select name, continent
+from country
+where continent like '%America%'; -- where the continent contains the word 'America'
+
+select name, continent
+from country
+where continent ilike '%AMERICA'; -- where the continent ends with the word 'America' - ilike ignores the case
+                                        -- ilike ia a postgreSQL extension to stnadard SQL
+                                        -- ilike may not work in database managers other than postgreSQL
 
 
 
 -- SELECTING DATA w/arithmetic
 -- Selecting the population, life expectancy, and population per area
+
+select name, 
+population, 
+lifeexpectancy, 
+population/surfacearea -- derived column, result of a calculation or function
+                        -- derived columns do not have names in the result
+from country;
+
+
+select name, 
+population, 
+lifeexpectancy, 
+population/surfacearea as population_per_area -- as may be used to assign a name to a column in the result
+                        -- DO NOT put the name inside apostrophe's or quotes
+                        -- DO NOT put spaces between the words
+                        -- use _ to separate the words in the name
+from country;
 
 
 
