@@ -132,23 +132,60 @@ limit 10;
 -- difference and absolute difference.
 -- (smallest difference: 1.00, 1.00, "Ecuador")
 
+select abs(gnp - gnpold) as absolute_gnp_difference, gnp - gnpold as gnp_differnce
+from country
+order by absolute_gnp_difference;
+
 -- 17. The average population of cities in each country (hint: use city.countrycode)
 -- ordered from highest to lowest.
 -- (highest avg population: 4017733.0000, "SGP")
+
+select avg(population)
+from city
+group by countrycode
+order by avg(population) desc;
+
 	
 -- 18. The count of cities in each state in the USA, ordered by state name.
 -- (45 rows)
+
+select count(*)
+from city
+where countrycode = 'USA'
+group by district
+order by district;
 	
 -- 19. The count of countries on each continent, ordered from highest to lowest.
 -- (highest count: 58, "Africa")
+
+select count(*)
+from country
+group by continent
+order by count(*) desc;
 	
 -- 20. The count of cities in each country ordered from highest to lowest.
 -- (largest number of  cities ib a country: 363, "CHN")
+
+select count(*)
+from city
+group by countrycode
+order by count(*) desc;
 	
 -- 21. The population of the largest city in each country ordered from highest to 
 -- lowest.
 -- (largest city population in world: 10500000, "IND")
 
+select max(population)
+from city
+group by countrycode
+order by max(population) desc;
+
 -- 22. The average, minimum, and maximum non-null life expectancy of each continent 
 -- ordered from lowest to highest average life expectancy. 
 -- (lowest average life expectancy: 52.5719, 37.2, 76.8, "Africa")
+
+select avg(lifeexpectancy), min(lifeexpectancy), max(lifeexpectancy)
+from country
+where lifeexpectancy is not null
+group by continent
+order by avg(lifeexpectancy);
