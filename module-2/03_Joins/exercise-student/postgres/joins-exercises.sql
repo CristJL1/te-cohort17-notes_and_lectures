@@ -204,11 +204,74 @@ limit 10;
 -- 17. The top five film categories by number of rentals
 -- (#1 should be Sports with 1179 rentals and #5 should be Family with 1096 rentals)
 
+select name, count(rental_id)
+from film
+inner join film_category
+on film.film_id = film_category.film_id
+inner join category
+on film_category.category_id = category.category_id
+inner join inventory
+on film.film_id = inventory.film_id
+inner join rental
+on inventory.inventory_id = rental.inventory_id
+group by name
+order by count (rental_id) desc
+limit 5;
+
+
 -- 18. The top five Action film titles by number of rentals
 -- (#1 should have 30 rentals and #5 should have 28 rentals)
+
+select title, count(rental_id)
+from film
+inner join film_category
+on film.film_id = film_category.film_id
+inner join category
+on film_category.category_id = category.category_id
+inner join inventory
+on film.film_id = inventory.film_id
+inner join rental
+on inventory.inventory_id = rental.inventory_id
+where name = 'Action'
+group by title
+order by count (rental_id) desc
+limit 5;
 
 -- 19. The top 10 actors ranked by number of rentals of films starring that actor
 -- (#1 should be GINA DEGENERES with 753 rentals and #10 should be SEAN GUINESS with 599 rentals)
 
+select first_name||' '||last_name as actor_name, count(rental_id)
+from actor
+inner join film_actor
+on actor.actor_id = film_actor.actor_id
+inner join film
+on film_actor.film_id = film.film_id
+inner join inventory
+on film.film_id = inventory.film_id
+inner join rental
+on inventory.inventory_id = rental.inventory_id
+group by actor.actor_id
+order by count (rental_id) desc
+limit 10;
+
 -- 20. The top 5 Comedy actors ranked by number of rentals of films in the Comedy category starring that actor
 -- (#1 should have 87 rentals and #5 should have 72 rentals)
+
+select first_name||' '||last_name as actor_name, count(rental_id)
+from actor
+inner join film_actor
+on actor.actor_id = film_actor.actor_id
+inner join film
+on film_actor.film_id = film.film_id
+inner join film_category
+on film.film_id = film_category.film_id
+inner join category
+on film_category.category_id = category.category_id
+inner join inventory
+on film.film_id = inventory.film_id
+inner join rental
+on inventory.inventory_id = rental.inventory_id
+where name = 'Comedy'
+group by actor_name
+order by count (rental_id) desc
+limit 5;
