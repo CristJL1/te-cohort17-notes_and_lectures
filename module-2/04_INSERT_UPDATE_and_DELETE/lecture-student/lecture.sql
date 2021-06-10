@@ -41,6 +41,15 @@
 --  Format 3: INSERT INTO table-name 
 --            (SELECT statement)      -- order of columns in the SELECT must match the order of columns as defined in the table
 --                                    -- () are optional
+--
+-- you MUST provide values for all non-null columns, columns that the datebase doesn't generate
+--
+-- the database generates values for columns:
+--        serial data types casuse the data base managetr to generate the next integer in a sequence to ensure uniqueness
+--              used for primary keys a lot
+--
+--        if a column is assigned  a default value it will be used by the database manager
+--              if a value is not provided on an INSERT
 --                                            
 ---------------------------------------------------------------------------------------------------------------------------------------
 --  UPDATE - change data in a table
@@ -57,20 +66,109 @@
 -- INSERT
 
 -- 1. Add Klingon as a spoken language in the USA
+begin transaction; -- start a unit of work for the insert so we can decide to commit or rollback
+
+insert into countrylanguage (countrycode, language, isofficial, percentage)
+values('USA', 'Klingon', false, 1);
+
+-- verify that the insert worked
+select * from countrylanguage where language ='Klingon';
+
+rollback; -- undo the insert until we are sure it worked
 
 -- 2. Add Klingon as a spoken language in Great Britain
+-- we need the country code for Great Britain - it's United Kingdom in the country table
+
+begin transaction; -- start a unit of work for the insert so we can decide to commit or rollback
+
+insert into countrylanguage (countrycode, language, isofficial, percentage)
+values('GBR', 'Klingon', true, 34);
+
+-- verify that the insert worked
+select * from countrylanguage where language ='Klingon';
+
+rollback;
+
+-- use subquery to getcountrycode
+
+begin transaction; -- start a unit of work for the insert so we can decide to commit or rollback
+
+insert into countrylanguage (countrycode, language, isofficial, percentage)
+values((select code from country where name = 'United Kingdom'), 'Klingon', true, 34);
+
+-- verify that the insert worked
+select * from countrylanguage where language ='Klingon';
+
+rollback;
 
 
 -- UPDATE
 
 -- 1. Update the capital of the USA to Houston
+-- the capital is an int in country representing the id in the city table for the city
+-- we need to find the city id in the city table for Houston and use it to update the country table
+begin transaction;
 
--- 2. Update the capital of the USA to Washington DC and the head of state
+-- display current value
+select capital as Before_Update
+from country 
+where code = 'USA';
+
+update country
+set capital = (select id from city where name ='Houston')
+where code = 'USA';
+
+-- verify that update worked
+select capital as After_Update
+from country 
+where code = 'USA';
+
+rollback;
+
+-- 2. Update the capital of the USA to Cleveland and the head of state
+
+begin transaction;
+
+-- display current value
+select capital, headofstate
+from country 
+where code = 'USA';
+
+update country
+set capital = (select id from city where name ='Cleveland'),
+headofstate = 'Frank Fella'
+where code = 'USA';
+
+-- verify that update worked
+select capital, headofstate
+from country 
+where code = 'USA';
+
+rollback;
 
 
 -- DELETE
 
 -- 1. Delete English as a spoken language in the USA
+
+begin transaction;
+
+-- check values before update
+select *
+from countrylanguage
+where countrycode = 'USA';
+
+delete from countrylanguage
+where countrycode = 'USA'
+and language = 'English';
+
+-- verify that delete worked
+select *
+from countrylanguage
+where countrycode = 'USA';
+
+-- undo anychange until we verify it did what we wanted it to
+rollback;
 
 -- 2. Delete all occurrences of the Klingon language 
 
