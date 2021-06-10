@@ -25,10 +25,10 @@ begin transaction;
 --or first_name = 'Lisa';
 
 insert into actor (first_name, last_name)
-values ('Hampton', 'Avenue');
+values ('HAMPTON', 'AVENUE');
 
 insert into actor (first_name, last_name)
-values ('Lisa', 'Byway');
+values ('LISA', 'BYWAY');
 
 --select first_name, last_name
 --from actor
@@ -40,21 +40,57 @@ values ('Lisa', 'Byway');
 -- Since its an epic, the run length is 3hrs and 18mins. There are no special
 -- features, the film speaks for itself, and doesn't need any gimmicks.
 
-select * from film where title ='Euclidean PI';
+-- select * from film where title ='Euclidean PI';
 
-insert into film (title, release_year, language_id, original_language_id, length)
-values ('Euclidean PI', 2008, (select language_id from language where name = 'English'), (select language_id from language where name = 'English'), 198);
+insert into film (title, description, release_year, language_id, original_language_id, length)
+values ('Euclidean PI', 'The epic story of Euclid as a pizza delivery boy in
+ ancient Greece', 2008, (select language_id from language where name = 'English'), (select language_id from language where name = 'English'), 198);
 
-select * from film where title ='Euclidean PI';
+-- select * from film where title ='Euclidean PI';
 
 
 -- 3. Hampton Avenue plays Euclid, while Lisa Byway plays his slightly
 -- overprotective mother, in the film, "Euclidean PI". Add them to the film.
 
+-- select * from film_actor where film_id = (select film_id from film where title = 'Euclidean PI');
+
+insert into film_actor (actor_id, film_id)
+values ((select actor_id from actor where last_name = 'AVENUE'), (select film_id from film where title = 'Euclidean PI'));
+
+insert into film_actor (actor_id, film_id)
+values ((select actor_id from actor where last_name = 'BYWAY'), (select film_id from film where title = 'Euclidean PI'));
+
+-- select * from film_actor where film_id = (select film_id from film where title = 'Euclidean PI');
+
+
 -- 4. Add Mathmagical to the category table.
+
+-- select * from category;
+
+insert into category (name)
+values ('Mathmagical');
+
+-- select * from category;
 
 -- 5. Assign the Mathmagical category to the following films, "Euclidean PI",
 -- "EGG IGBY", "KARATE MOON", "RANDOM GO", and "YOUNG LANGUAGE"
+
+select *
+from film_category
+where category_id = (select category_id from category where name = 'Mathmagical');
+
+update film_category
+set category_id = (select category_id from category where name = 'Mathmagical')
+where film_id in ((select film_id from film where title = 'Euclidean PI'), 
+(select film_id from film where title = 'EGG IGBY'), 
+(select film_id from film where title = 'KARATE MOON'), 
+(select film_id from film where title = 'RANDOM GO'), 
+(select film_id from film where title = 'YOUNG LANGUAGE'));
+
+select *
+from film_category
+where category_id = (select category_id from category where name = 'Mathmagical');
+
 
 -- 6. Mathmagical films always have a "G" rating, adjust all Mathmagical films
 -- accordingly.
