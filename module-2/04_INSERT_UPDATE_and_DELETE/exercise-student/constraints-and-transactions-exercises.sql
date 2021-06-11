@@ -98,13 +98,15 @@ where film_id in ((select film_id from film where title = 'EGG IGBY'),
 -- accordingly.
 -- (5 rows affected)
 
-
---
+-- tightly coupled answer
 --update film
 --set rating = 'G'
---where film_id = (select film_id from film_category where category_id= (select category_id from category where name = 'Mathmagical'));
+--where title in ('Euclidean PI', 'EGG IGBY', 'KARATE MOON', 'RANDOM GO', 'YOUNG LANGUAGE');
 
-
+--loosely coupled answer
+update film
+set rating = 'G'
+where title in ((SELECT title from film where film_id in (select film_id from film_category where category_id in (select category_id from category where name = 'Mathmagical'))));
 
 
 
