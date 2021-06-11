@@ -2,7 +2,22 @@
 -- This SQL depends on the dvdstore database
 --
 -- The case statement is used to "decode" value in a database
+-- case allows you to specify conditional value for the column
+
+-- 2 formats of case
+--      case column
+--              when 'value' then 'result' -- only one WHEN can be true, elvaluates in order so as soon as WHEN is true it ends the case; order matters
+--              when 'value' then 'result'
+--              when 'value' then 'result'
+--              when 'value' then 'result' -- any condition allowed on a WHERE 
+--              else 'result'
+--      end
 --
+
+
+--      case
+--              when condition then 'result'
+--      end
 
 select title
       ,rating
@@ -14,7 +29,7 @@ select title
             when 'PG-13'  then 'Parents Strongly Cautioned'
             else 'Un-rated'
         end
-        as film_Rating
+        as film_Rating -- is there is an as for the case it is placed after the end for the case
   from film
   ;
   

@@ -272,6 +272,6 @@ on film.film_id = inventory.film_id
 inner join rental
 on inventory.inventory_id = rental.inventory_id
 where name = 'Comedy'
-group by actor_name
+group by actor.actor_id
 order by count (rental_id) desc
 limit 5;

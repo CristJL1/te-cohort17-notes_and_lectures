@@ -89,28 +89,44 @@ where film_id in ((select film_id from film where title = 'EGG IGBY'),
 (select film_id from film where title = 'RANDOM GO'), 
 (select film_id from film where title = 'YOUNG LANGUAGE'));
 
---select *
---from film_category
---where category_id = (select category_id from category where name = 'Mathmagical');
+-- select *
+-- from film_category
+-- where category_id = (select category_id from category where name = 'Mathmagical');
 
 
 -- 6. Mathmagical films always have a "G" rating, adjust all Mathmagical films
 -- accordingly.
 -- (5 rows affected)
 
--- tightly coupled answer
---update film
---set rating = 'G'
---where title in ('Euclidean PI', 'EGG IGBY', 'KARATE MOON', 'RANDOM GO', 'YOUNG LANGUAGE');
+
+--select *
+--from film
+--where film_id in (select film_id from film_category where category_id in (select category_id from category where name = 'Mathmagical'));
 
 --loosely coupled answer
 update film
 set rating = 'G'
 where title in ((SELECT title from film where film_id in (select film_id from film_category where category_id in (select category_id from category where name = 'Mathmagical'))));
 
+--select *
+--from film
+--where film_id in (select film_id from film_category where category_id in (select category_id from category where name = 'Mathmagical'));
+
 
 
 -- 7. Add a copy of "Euclidean PI" to all the stores.
+
+--select inventory_id 
+--from inventory 
+--where film_id in (select film_id from film where title = 'Euclidean PI');
+
+insert into inventory (film_id, store_id)
+select (select film_id from film where title = 'Euclidean PI'), store_id from store;
+
+--select inventory_id 
+--from inventory 
+--where film_id in (select film_id from film where title = 'Euclidean PI');
+
 
 -- 8. The Feds have stepped in and have impounded all copies of the pirated film,
 -- "Euclidean PI". The film has been seized from all stores, and needs to be
