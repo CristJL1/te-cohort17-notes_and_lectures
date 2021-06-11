@@ -131,25 +131,96 @@ select (select film_id from film where title = 'Euclidean PI'), store_id from st
 -- 8. The Feds have stepped in and have impounded all copies of the pirated film,
 -- "Euclidean PI". The film has been seized from all stores, and needs to be
 -- deleted from the film table. Delete "Euclidean PI" from the film table.
+
+--select *
+--from film
+--where title = 'Euclidean PI';
+--
+--delete from film
+--where title = 'Euclidean PI';
+--
+--select *
+--from film
+--where title = 'Euclidean PI';
+
 -- (Did it succeed? Why?)
--- <YOUR ANSWER HERE>
+-- No, it did not succeed because there was a foreign key contraint where the movie's film_id was being used as a primary key in the film_actor table. You would need to use the DELETE SET NULL or DELETE CASCADE in order for it to work.
 
 -- 9. Delete Mathmagical from the category table.
+
+--select *
+--from category
+--where name = 'Mathmagical';
+--
+--delete from category
+--where name ='Mathmagical';
+--
+--select *
+--from category
+--where name = 'Mathmagical';
+
+
 -- (Did it succeed? Why?)
--- <YOUR ANSWER HERE>
+-- No, this failed for the same reason as #8, a foreign key constraint, because the category_id has a dependent key in the film_category table. Once again you would need to use the DELETE SET NULL or DELETE CASCADE.
 
 -- 10. Delete all links to Mathmagical in the film_category tale.
+
+--select *
+--from film_category
+--where category_id in (select category_id from category where name = 'Mathmagical');
+
+delete from film_category
+where category_id in (select category_id from category where name = 'Mathmagical');
+
+--select *
+--from film_category
+--where category_id in (select category_id from category where name = 'Mathmagical');
+
+
+
 -- (Did it succeed? Why?)
--- <YOUR ANSWER HERE>
+-- Yes, it succeeded because there were no foreign keys depending on it
 
 -- 11. Retry deleting Mathmagical from the category table, followed by retrying
 -- to delete "Euclidean PI".
+--
+--select *
+--from film
+--where title = 'Euclidean PI';
+--
+--select *
+--from category
+--where name = 'Mathmagical';
+--
+--delete from category
+--where name ='Mathmagical';
+--
+--delete from film
+--where title = 'Euclidean PI';
+--
+--select *
+--from film
+--where title = 'Euclidean PI';
+--
+--select *
+--from category
+--where name = 'Mathmagical';
+
+
 -- (Did either deletes succeed? Why?)
--- <YOUR ANSWER HERE>
+-- One worked and one didn't. Removing the Mathmagical category worked, but removing Euclidean PI did not.
+-- You're able to remove Mathmagical because the key that depended on it in film_category was removed first, so there was nothing else depending on it and it could be safely removed.
+-- You're unable to remove Euclidean PI because there are still foreign keys that depend upon it that would need to be removed first before it would work.
 
 -- 12. Check database metadata to determine all constraints of the film id, and
 -- describe any remaining adjustments needed before the film "Euclidean PI" can
--- be removed from the film table.
+---- be removed from the film table.
+--
+--SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS; -- the catalog table in postgres with table contraints
+--SELECT * FROM INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE; -- the catalog table in postgres with column contraints
+--SELECT * FROM INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS; -- the catalog table in postgres with referential integrity (RI) contraints
+
+-- You would need to do the same thing you did in #10 but remove all links to Euclidean PI so that the film_id wasn't tied to it anymore and it could be safely removed.
 
 
 rollback;
