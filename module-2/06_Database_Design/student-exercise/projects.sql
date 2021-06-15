@@ -107,5 +107,64 @@ values ('Human Fund Project', '07/01/2020', (select count (department) from empl
 insert into project (project_name, start_date, number_of_employees)
 values ('Manager Project', '01/01/2021', (select count (job_title) from employee where job_title = 'Manager'));
 
+insert into employee_project (employee_id, project_id)
+values ((select employee_id from employee where first_name = 'George'), (select project_id from project where project_name = 'Architecture Project'));
 
-rollback;
+insert into employee_project (employee_id, project_id)
+values ((select employee_id from employee where first_name = 'Frank'), (select project_id from project where project_name = 'Architecture Project'));
+
+insert into employee_project (employee_id, project_id)
+values ((select employee_id from employee where first_name = 'Elaine'), (select project_id from project where project_name = 'Architecture Project'));
+
+insert into employee_project (employee_id, project_id)
+values ((select employee_id from employee where first_name = 'Jerry'), (select project_id from project where project_name = 'Latex Sales Project'));
+
+insert into employee_project (employee_id, project_id)
+values ((select employee_id from employee where first_name = 'Susan'), (select project_id from project where project_name = 'Latex Sales Project'));
+
+insert into employee_project (employee_id, project_id)
+values ((select employee_id from employee where first_name = 'Art'), (select project_id from project where project_name = 'Latex Sales Project'));
+
+insert into employee_project (employee_id, project_id)
+values ((select employee_id from employee where first_name = 'Cosmo'), (select project_id from project where project_name = 'Human Fund Project'));
+
+insert into employee_project (employee_id, project_id)
+values ((select employee_id from employee where first_name = 'Estelle'), (select project_id from project where project_name = 'Human Fund Project'));
+
+insert into employee_project (employee_id, project_id)
+values ((select employee_id from employee where first_name = 'Susan'), (select project_id from project where project_name = 'Manager Project'));
+
+insert into employee_project (employee_id, project_id)
+values ((select employee_id from employee where first_name = 'Frank'), (select project_id from project where project_name = 'Manager Project'));
+
+insert into employee_project (employee_id, project_id)
+values ((select employee_id from employee where first_name = 'Estelle'), (select project_id from project where project_name = 'Manager Project'));
+
+insert into employee_department (employee_id, department_id)
+values ((select employee_id from employee where first_name = 'George'), (select department_id from department where department_name = 'Design'));
+
+insert into employee_department (employee_id, department_id)
+values ((select employee_id from employee where first_name = 'Frank'), (select department_id from department where department_name = 'Design'));
+
+insert into employee_department (employee_id, department_id)
+values ((select employee_id from employee where first_name = 'Elaine'), (select department_id from department where department_name = 'Design'));
+
+insert into employee_department (employee_id, department_id)
+values ((select employee_id from employee where first_name = 'Jerry'), (select department_id from department where department_name = 'Sales'));
+
+insert into employee_department (employee_id, department_id)
+values ((select employee_id from employee where first_name = 'Susan'), (select department_id from department where department_name = 'Sales'));
+
+insert into employee_department (employee_id, department_id)
+values ((select employee_id from employee where first_name = 'Art'), (select department_id from department where department_name = 'Sales'));
+
+insert into employee_department (employee_id, department_id)
+values ((select employee_id from employee where first_name = 'Cosmo'), (select department_id from department where department_name = 'HR'));
+
+insert into employee_department (employee_id, department_id)
+values ((select employee_id from employee where first_name = 'Estelle'), (select department_id from department where department_name = 'HR'));
+
+
+
+
+commit;
