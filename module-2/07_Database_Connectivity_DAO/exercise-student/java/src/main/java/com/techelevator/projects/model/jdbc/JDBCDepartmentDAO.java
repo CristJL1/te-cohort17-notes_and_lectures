@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.techelevator.projects.model.Department;
 import com.techelevator.projects.model.DepartmentDAO;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 public class JDBCDepartmentDAO implements DepartmentDAO {
 	
@@ -30,6 +31,14 @@ public class JDBCDepartmentDAO implements DepartmentDAO {
 
 	@Override
 	public void saveDepartment(Department updatedDepartment) {
+
+		String sqlSaveDepartment = "Insert into department (department_id, name) " +
+								   "values (?, ?)";
+
+		updatedDepartment.setDepartment_id(getNextDepartmentId());
+
+		jdbcTemplate.update(sqlSaveDepartment, updatedDepartment.getDepartment_id(),
+												updatedDepartment.getName());
 		
 	}
 
@@ -41,6 +50,18 @@ public class JDBCDepartmentDAO implements DepartmentDAO {
 	@Override
 	public Department getDepartmentById(Long id) {
 		return null;
+
+	}
+
+	private long getNextDepartmentId() {
+		SqlRowSet nextIdResult = jdbcTemplate.queryForRowSet("select nextval('seq_department_id')");
+
+		if (nextIdResult.next()) {
+			return nextIdResult.getLong(1);
+		}
+		else {
+			throw new RuntimeException("Something went wrong while getting an id for the new department");
+		}
 	}
 
 }

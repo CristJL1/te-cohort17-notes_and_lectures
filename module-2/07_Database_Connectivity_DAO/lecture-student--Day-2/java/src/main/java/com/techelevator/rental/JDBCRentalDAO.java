@@ -41,8 +41,8 @@ public class JDBCRentalDAO implements RentalDAO {
 
         Rental theRental = new Rental();
 
-        String getRentalSQL = "Select * "       // note space at end of code to ensure it is interpeted correctly
-                             +"  from rental "  // note space at end of code to ensure it is interpeted correctly
+        String getRentalSQL = "Select * "       // note space at end of code to ensure it is interpreted correctly
+                             +"  from rental "  // note space at end of code to ensure it is interpreted correctly
                              +"Where rental_id = ?";
 
         SqlRowSet theRow = theDataBase.queryForRowSet(getRentalSQL, rentalId);
@@ -100,6 +100,7 @@ public class JDBCRentalDAO implements RentalDAO {
     public int removeRentalForDateRange(LocalDateTime fromDate, LocalDateTime toDate) {
         int numberOfRowsDeleted = 0;
 
+        // deleting any dependents on payment (in rental) before deleting the rentals
         String deleteRentalSQL = "delete from rental " +
                                  "where rental_date between ? and ?";
 

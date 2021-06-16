@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DAOExampleApplicationProgram {
 
@@ -20,6 +21,7 @@ public class DAOExampleApplicationProgram {
 
 		// Need to define a data source to the database we want to access
 		BasicDataSource worldDataSource = new BasicDataSource();         // simple JDBC data source
+		//						access:dbmr:server-name:port/databasename
 		worldDataSource.setUrl("jdbc:postgresql://localhost:5432/world");// connection string
 		worldDataSource.setUsername("postgres");                         // owner of the database
 		worldDataSource.setPassword("postgres1");                        // password for owner
@@ -30,7 +32,7 @@ public class DAOExampleApplicationProgram {
 		dvdstoreDataSource.setUsername("postgres");                             // owner of the database
 		dvdstoreDataSource.setPassword("postgres1");                            // password for owner
 
-		// Define the DAO we want to use and pass it the datasource we defined
+		// Define the DAO object we want to use and pass it the datasource we defined
 		CityDAO cityTableDao = new JDBCCityDAO(worldDataSource);
 		RentalDAO rentalTableDao = new JDBCRentalDAO(dvdstoreDataSource);
 
@@ -48,12 +50,53 @@ public class DAOExampleApplicationProgram {
 		// we use the dao object we defined to access the methods of the DAO
 		cityTableDao.save(smallville);   // use the dao save method to save our City object into the database
 
+		// verify that the City project was actually saved to the database by trying to retrieve it
 		// we use the dao object we defined to access the methods of the DAO
+		// retrieve the City from the database with the id passed to the method
 		City theCity = cityTableDao.findCityById(smallville.getId());
 
 		System.out.println("\ntheCity City object retrieved from the database: " + theCity);
 
-		/* Leave this commented out until Frank tells you to de-comment it
+		// ask the DAO to find all the Cities for Ohio
+		// since DAO method returns a List<City> and we want an ArrayList<City>
+		// we need to cast the List<City> that comes back from method to ArrayList<City>
+		ArrayList<City> someCities = (ArrayList<City>) cityTableDao.findCityByDistrict("Ohio");
+
+		// List<City> Anthony = cityTableDao.findCityByDistrict("Ohio"); // use this style to avoid the cast
+
+		//display all the City objects returned from the DAO (process each element in the List/ArrayList)
+
+		for(City aCity: someCities){
+			System.out.println(aCity.getName()); // use the toString() method for City to only get the name
+		}
+
+
+		// update the population for Amsterdam (id = 5) to 30000
+		// get the existing row for Amsterdam (id = 5) into a City object so Java can use
+		City cityToChange = cityTableDao.findCityById(5);
+
+		System.out.println(cityToChange); // display current values in the City to be changed
+
+		// change the population in the City object to new value
+		cityToChange.setPopulation(14);
+
+		// change the population in the City object to new value
+		cityToChange.setName("Brian McBriBri");
+
+		// call the DAO to update the city
+		cityTableDao.update(cityToChange);
+
+		City updatedCity = cityTableDao.findCityById(5);
+
+		System.out.println(updatedCity);
+
+		System.out.println(cityTableDao.findCityById(245)); // for testing - BEFORE display the city to be deleted
+
+		cityTableDao.delete(245);
+
+		System.out.println(cityTableDao.findCityById(245)); // for testing - AFTER display the city that was deleted
+
+
 
 		System.out.println("\n"+"-".repeat(40) + "\n" + "Rental Table Access" + "\n" + "-".repeat(40));
 
@@ -85,7 +128,7 @@ public class DAOExampleApplicationProgram {
 		numberRentalsDeleted = rentalTableDao.removeRentalForDateRange(fromDate,toDate);
 
 		System.out.println(numberRentalsDeleted + " rows deleted for date range " + fromDate + "-" + toDate);
-		End of code Frank commented out */
+
 
 
 

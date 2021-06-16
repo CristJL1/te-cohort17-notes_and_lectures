@@ -5,7 +5,7 @@ public class Department {
 
     private Long department_id;
 
-    private String department;
+    private String name;
 
     public Long getDepartment_id() {
         return department_id;
@@ -15,16 +15,16 @@ public class Department {
         this.department_id = department_id;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getName() {
+        return name;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Department - " + department;
+        return "Department - " + name;
     }
 }

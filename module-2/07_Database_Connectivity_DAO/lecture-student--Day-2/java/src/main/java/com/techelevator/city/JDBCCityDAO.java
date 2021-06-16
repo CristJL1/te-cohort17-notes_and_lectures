@@ -32,6 +32,7 @@ public class JDBCCityDAO implements CityDAO {
 		// coding ? in the SQL statement where we want to provide values from variables
 		//          when we run the statement
 		// the number of ? must match the number of values expected by the SQL statement
+		// Note: space after the last thing coded on the line when concatenating (+) so when it's processed the lines don't run together
 		String sqlInsertCity = "INSERT INTO city(id, name, countrycode, district, population) " +
 							   "VALUES(?, ?, ?, ?, ?)";  // ?-indicates a value from a variable when run
 
@@ -53,12 +54,19 @@ public class JDBCCityDAO implements CityDAO {
 	@Override
 	public City findCityById(long id) {
 		City theCity = null;
+		// always put a space after the last item coded in the line when using a multi-line SQL statement
+		// to avoid an SQLBadGrammar exception due to concatenation without the space
+		// the SQL statement to retrieve the data from the table for the id specified
 		String sqlFindCityById = "SELECT id, name, countrycode, district, population "+
 							   "FROM city "+
 							   "WHERE id = ?";
+
+		// run the SQL statement specifying values for each ? in the SQL statement
+		// since it's a select statement we use queryForRowSet() to run it
+		// an SQLRowSet is returned containing all rows for the SELECT
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlFindCityById, id);
-		if(results.next()) {
-			theCity = mapRowToCity(results);
+		if(results.next()) {		// if the SQLRowSet has a next row - position to it in the result
+			theCity = mapRowToCity(results); // copy the data from the SQLRowSet into a Java object using a helper method
 		}
 		return theCity;
 	}
@@ -80,22 +88,72 @@ public class JDBCCityDAO implements CityDAO {
 
 	// Return all the City objects from the database for the given district (state)
 	@Override
-	public List<City> findCityByDistrict(String district) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<City> findCityByDistrict(String districtTheyWant) {
+		// define the return object for the function for the method
+		List<City> theCities = new ArrayList<>();
+		// define the SQL statement to be run as a String with ? as placeholder for values provided when it runs
+
+		String sqlSelectByDistrict = "select * " +
+				"from city " +
+				"where district = ? ;";
+
+		//define the SqlRowSet to hold the results from the SELECT
+		SqlRowSet theCitiesFromTheTable;
+
+		// run the SQL statement using the JdbcTemplate and store the results in my SqlRowSet
+		// specify the values for any ? in the SQL statement when we run it
+		theCitiesFromTheTable = jdbcTemplate.queryForRowSet(sqlSelectByDistrict, districtTheyWant);
+
+		// add the data from the SqlRowSet to the ArrayList we are returning as City objects
+
+		while(theCitiesFromTheTable.next()) { // loop as long as there are rows in the SqlRowSet
+												// next will position to the next row and return true or return false if no more rows
+			City aCity; 	// define a reference to a new City object
+			aCity = mapRowToCity(theCitiesFromTheTable); // use the helper method to copy a row from the SqlRowSet to the new City
+
+			theCities.add(aCity); // add the new City with the data from row to the ArrayList we're returning
+		}
+
+		return theCities; // return the ArrayList with the Cities for the district passed to the method
 	}
 
 	// Update the City data in the database using the City object passed
 	@Override
-	public void update(City city) {
-		// TODO Auto-generated method stub
+	public void update(City cityForUpdate) {
+		// to update a single row in a table we need to know it's Primary Key
+		// since we are receiving an object representing the row, it must be assumed...
+		// 		the variable representing the Primary Key must be set to the value of the row to be updated
+		// any data that will change needs to be changed in the object
+		// any data that is not changed will also be in the object as it is now in the table
+		// it is much easier to update all values in the row using values in the object
+		//		than it is to try and figure out which values should be updated
+
+		// all columns EXCEPT the Primary Key column(s) are coded in the set
+		// the Primary Key columns are in the WHERE clause
+		String SqlUpdateStatement = "update city " +
+				"set population = ? " +
+				" , name = ? " +
+				" , countrycode = ? " +
+				" , district = ? " +
+				"where id = ? ;";
+		// execute the update statement using the JdbcTemplate object and the value from the object that was passed
+
+		jdbcTemplate.update(SqlUpdateStatement, cityForUpdate.getPopulation(), // get the population from the City object passed for 1st ?
+												cityForUpdate.getName(), // get the name from the City object passed for 2nd ?
+												cityForUpdate.getCountryCode(), // get the countrycode from the City object passed for 3rd ?
+												cityForUpdate.getDistrict(), // get the district from the City object passed for 4th ?
+												cityForUpdate.getId()); // get the id from the City object passed for 5th ?
 		
 	}
 
 	// Delete the city data in the database for the given id
 	@Override
-	public void delete(long id) {
-		// TODO Auto-generated method stub
+	public void delete(long idToBeDeleted) {
+		// define the SQL delete statement with the WHERE clause for  what to delete
+		String SqlDeleteStmt = "Delete from City where id = ?";
+
+		// run the DELETE statement using .update()
+		jdbcTemplate.update(SqlDeleteStmt, idToBeDeleted);
 		
 	}
 
@@ -129,14 +187,29 @@ public class JDBCCityDAO implements CityDAO {
 	}
 
 	// Return a City object from the data retrieved from the database
-	private City mapRowToCity(SqlRowSet results) {
-		City theCity;
+	// since Java needs objects and the data from the SQL is an SqlRowSet
+	// we typically code a method to create a Java object from an SqlRowSet
+	// we usually call this "Map" something because you are mapping the SQL data to a Java Object
+	// an SqlRowSet is the set of rows returned from a query (SELECT)
+	// you must position the cursor for the SqlRowSet to the row in the set you want to be processed
+	// positioning the cursor is usually done with next() which moves to the next row in the SqlRowSet and returns true
+	//													or returns false if the SqlRowSet is empty or you're at the end
+	// when the SqlRowSet is returned by the JdbcTemplate method we are positioned BEFORE the first row
+	//		we need to do a next() to get to the first row (similar to using nextLine() when processing a file)
+	private City mapRowToCity(SqlRowSet results) { // receive an SqlRowSet positioned at the row to be mapped
+												   // return a City object
+		// this method assumes all columns for the table are included in the SqlRowSet
+		// if they are not, this method will fail
+		City theCity;  // define a reference to hold the City object to be returned
 		theCity = new City();
-		theCity.setId(results.getLong("id"));
-		theCity.setName(results.getString("name"));
-		theCity.setCountryCode(results.getString("countrycode"));
-		theCity.setDistrict(results.getString("district"));
-		theCity.setPopulation(results.getInt("population"));
-		return theCity;
+		// City  theCity = new City(); // this is OK too. Define reference, instantiate object and assign in one statement
+
+		// set the attributes in the new City object from the values in the SqlRowSet using the object setters
+		theCity.setId(results.getLong("id"));	// get the value for id from SqlRowSet and assign to City object
+		theCity.setName(results.getString("name"));	// get the value for name from SqlRowSet and assign to City object
+		theCity.setCountryCode(results.getString("countrycode"));	// get the value for countrycode from SqlRowSet and assign to City object
+		theCity.setDistrict(results.getString("district"));	// get the value for district from SqlRowSet and assign to City object
+		theCity.setPopulation(results.getInt("population"));	// get the value for population from SqlRowSet and assign to City object
+		return theCity;	// return the City object with the data from the SqlRowSet
 	}
 }
