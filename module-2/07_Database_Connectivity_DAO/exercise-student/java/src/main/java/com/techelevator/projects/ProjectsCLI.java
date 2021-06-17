@@ -165,7 +165,7 @@ public class ProjectsCLI {
 			System.out.println("\n*** Choose a Department ***");
 			Department selectedDepartment = (Department)menu.getChoiceFromOptions(allDepartments.toArray());
 			String newDepartmentName = getUserInput("Enter new Department name");
-//			selectedDepartment.setName(newDepartmentName);     // If your setter is not called "setName()", change this to what yours is called
+			selectedDepartment.setName(newDepartmentName);     // If your setter is not called "setName()", change this to what yours is called
 			departmentDAO.saveDepartment(selectedDepartment);  // Use the DAO object to run DAO method
 		} else {
 			System.out.println("\n*** No results ***");

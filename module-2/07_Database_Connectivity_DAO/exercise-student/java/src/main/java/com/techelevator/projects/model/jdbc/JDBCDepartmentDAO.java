@@ -71,13 +71,14 @@ public class JDBCDepartmentDAO implements DepartmentDAO {
 	@Override
 	public void saveDepartment(Department updatedDepartment) {
 
-		String sqlSaveDepartment = "INSERT INTO department (department_id, name) " +
-								   "VALUES (?, ?)";
+		String sqlSaveDepartment = "UPDATE department " +
+								   "SET name = ? " +
+									"WHERE department_id = ?";
 
-		updatedDepartment.setDepartment_id(getNextDepartmentId());
 
-		jdbcTemplate.update(sqlSaveDepartment, updatedDepartment.getDepartment_id(),
-												updatedDepartment.getName());
+
+		jdbcTemplate.update(sqlSaveDepartment, updatedDepartment.getName(),
+												updatedDepartment.getDepartment_id());
 		
 	}
 
