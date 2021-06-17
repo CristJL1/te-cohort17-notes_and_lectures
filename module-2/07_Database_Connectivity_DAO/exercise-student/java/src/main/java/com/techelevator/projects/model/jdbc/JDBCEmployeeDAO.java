@@ -45,7 +45,26 @@ public class JDBCEmployeeDAO implements EmployeeDAO {
 
 	@Override
 	public List<Employee> searchEmployeesByName(String firstNameSearch, String lastNameSearch) {
-		return new ArrayList<>();
+
+		List<Employee> theEmployees = new ArrayList();
+
+		String sqlSearchEmployeesByName = "SELECT * " +
+											"FROM employee " +
+											"WHERE first_name ilike ? " +
+											"AND last_name ilike ?";
+
+		SqlRowSet employeeSearchResult;
+
+		employeeSearchResult = jdbcTemplate.queryForRowSet(sqlSearchEmployeesByName, firstNameSearch, lastNameSearch);
+
+		while (employeeSearchResult.next()) {
+			Employee anEmployee;
+			anEmployee = mapRowToEmployee(employeeSearchResult);
+
+			theEmployees.add(anEmployee);
+		}
+
+		return theEmployees;
 	}
 
 	@Override
