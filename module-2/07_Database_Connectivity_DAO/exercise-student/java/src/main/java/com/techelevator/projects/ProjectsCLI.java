@@ -153,9 +153,9 @@ public class ProjectsCLI {
 		printHeading("Add New Department");
 		String newDepartmentName = getUserInput("Enter new Department name");
 		Department newDepartment = new Department();
-//		newDepartment.setName(newDepartmentName);  // If your setter is not called "setName()", change this to what yours is called
+		newDepartment.setName(newDepartmentName);  // If your setter is not called "setName()", change this to what yours is called
 		newDepartment = departmentDAO.createDepartment(newDepartment);     // Use the DAO object to run DAO method
-//		System.out.println("\n*** "+newDepartment.getName()+" created ***");  // If your getter are not called "getName()", change this to what yours is called
+		System.out.println("\n*** "+newDepartment.getName()+" created ***");  // If your getter are not called "getName()", change this to what yours is called
 	}
 	
 	private void handleUpdateDepartmentName() {

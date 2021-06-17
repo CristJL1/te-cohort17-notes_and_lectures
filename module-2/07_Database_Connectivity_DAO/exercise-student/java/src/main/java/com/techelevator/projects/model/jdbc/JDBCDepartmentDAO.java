@@ -50,7 +50,7 @@ public class JDBCDepartmentDAO implements DepartmentDAO {
 
 		String sqlSelectDepartmentByName = "SELECT * " +
 										"FROM department " +
-										"WHERE name = ?";
+										"WHERE name ilike ?";
 
 		SqlRowSet departmentSearchResult;
 
@@ -83,7 +83,15 @@ public class JDBCDepartmentDAO implements DepartmentDAO {
 
 	@Override
 	public Department createDepartment(Department newDepartment) {
-		return null;
+
+		String sqlCreateDepartment = "INSERT INTO department (name) " +
+				"VALUES (?)";
+
+		newDepartment.setDepartment_id(getNextDepartmentId());
+
+		jdbcTemplate.update(sqlCreateDepartment, newDepartment.getName());
+
+		return newDepartment;
 	}
 
 	@Override
