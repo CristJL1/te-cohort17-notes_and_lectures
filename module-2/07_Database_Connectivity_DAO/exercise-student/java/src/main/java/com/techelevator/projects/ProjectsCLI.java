@@ -247,7 +247,7 @@ public class ProjectsCLI {
 		System.out.println();
 		if(employees.size() > 0) {
 			for(Employee emp : employees) {
-//				System.out.println(emp.getLastName() + ", " + emp.getFirstName()); // If your getters are not called "getLastName()" and "getFirstName(), change this to what yours is called
+				System.out.println(emp.getLast_name() + ", " + emp.getFirst_name()); // If your getters are not called "getLastName()" and "getFirstName(), change this to what yours is called
 			}
 		} else {
 			System.out.println("\n*** No results ***");
