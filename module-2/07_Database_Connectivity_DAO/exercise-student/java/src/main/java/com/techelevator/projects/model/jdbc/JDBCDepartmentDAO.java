@@ -16,24 +16,63 @@ public class JDBCDepartmentDAO implements DepartmentDAO {
 	private JdbcTemplate jdbcTemplate;
 
 	public JDBCDepartmentDAO(DataSource dataSource) {
+
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	@Override
 	public List<Department> getAllDepartments() {
-		return new ArrayList<>();
+
+		List<Department> theDepartments = new ArrayList();
+
+		String sqlSelectAllDepartments = "SELECT * " +
+										 "FROM Department;";
+
+		SqlRowSet allTheDepartments;
+
+		allTheDepartments = jdbcTemplate.queryForRowSet(sqlSelectAllDepartments);
+
+		while (allTheDepartments.next()) {
+			Department aDepartment;
+			aDepartment = mapRowToDepartment(allTheDepartments);
+
+			theDepartments.add(aDepartment);
+		}
+
+		return theDepartments;
+
 	}
 
 	@Override
 	public List<Department> searchDepartmentsByName(String nameSearch) {
-		return new ArrayList<>();
+
+		List<Department> theDepartments = new ArrayList();
+
+		String sqlSelectAllDepartments = "SELECT name " +
+										"FROM Department " +
+										"WHERE name = ?";
+
+		SqlRowSet allTheDepartments;
+
+		allTheDepartments = jdbcTemplate.queryForRowSet(sqlSelectAllDepartments, nameSearch);
+
+		while (allTheDepartments.next()) {
+			Department aDepartment;
+			aDepartment = mapRowToDepartment(allTheDepartments);
+
+			theDepartments.add(aDepartment);
+		}
+
+		return theDepartments;
+
+
 	}
 
 	@Override
 	public void saveDepartment(Department updatedDepartment) {
 
-		String sqlSaveDepartment = "Insert into department (department_id, name) " +
-								   "values (?, ?)";
+		String sqlSaveDepartment = "INSERT INTO department (department_id, name) " +
+								   "VALUES (?, ?)";
 
 		updatedDepartment.setDepartment_id(getNextDepartmentId());
 
@@ -49,7 +88,19 @@ public class JDBCDepartmentDAO implements DepartmentDAO {
 
 	@Override
 	public Department getDepartmentById(Long id) {
-		return null;
+		Department theDepartment = null;
+
+		String sqlGetDepartmentById = "SELECT department_id, name " +
+										"FROM department " +
+										"WHERE department_id = ?";
+
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetDepartmentById, id);
+
+		if (results.next()) {
+			theDepartment = mapRowToDepartment(results);
+		}
+
+		return theDepartment;
 
 	}
 
@@ -62,6 +113,16 @@ public class JDBCDepartmentDAO implements DepartmentDAO {
 		else {
 			throw new RuntimeException("Something went wrong while getting an id for the new department");
 		}
+	}
+
+	private Department mapRowToDepartment(SqlRowSet results) {
+		Department theDepartment;
+		theDepartment = new Department();
+
+		theDepartment.setDepartment_id(results.getLong("department_id"));
+		theDepartment.setName(results.getString("name"));
+
+		return theDepartment;
 	}
 
 }

@@ -202,7 +202,7 @@ public class ProjectsCLI {
 		System.out.println();
 		if(departments.size() > 0) {
 			for(Department dept : departments) {
-//				System.out.println(dept.getName()); // If your getter is not called "getName()", change this to what yours is called
+				System.out.println(dept.getName()); // If your getter is not called "getName()", change this to what yours is called
 			}
 		} else {
 			System.out.println("\n*** No results ***");
