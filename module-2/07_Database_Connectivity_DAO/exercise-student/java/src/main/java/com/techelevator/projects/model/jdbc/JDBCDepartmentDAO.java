@@ -48,17 +48,17 @@ public class JDBCDepartmentDAO implements DepartmentDAO {
 
 		List<Department> theDepartments = new ArrayList();
 
-		String sqlSelectAllDepartments = "SELECT name " +
-										"FROM Department " +
+		String sqlSelectDepartmentByName = "SELECT * " +
+										"FROM department " +
 										"WHERE name = ?";
 
-		SqlRowSet allTheDepartments;
+		SqlRowSet departmentSearchResult;
 
-		allTheDepartments = jdbcTemplate.queryForRowSet(sqlSelectAllDepartments, nameSearch);
+		departmentSearchResult = jdbcTemplate.queryForRowSet(sqlSelectDepartmentByName, nameSearch);
 
-		while (allTheDepartments.next()) {
+		while (departmentSearchResult.next()) {
 			Department aDepartment;
-			aDepartment = mapRowToDepartment(allTheDepartments);
+			aDepartment = mapRowToDepartment(departmentSearchResult);
 
 			theDepartments.add(aDepartment);
 		}
