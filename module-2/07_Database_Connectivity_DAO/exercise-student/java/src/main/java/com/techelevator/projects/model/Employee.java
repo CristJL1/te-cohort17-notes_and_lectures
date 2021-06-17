@@ -16,9 +16,9 @@ public class Employee {
 
     private String gender;
 
-    private Date birth_date;
+    private LocalDate birth_date;
 
-    private Date hire_date;
+    private LocalDate hire_date;
 
     public Long getEmployee_id() {
         return employee_id;
@@ -61,19 +61,19 @@ public class Employee {
         this.gender = gender;
     }
 
-    public Date getBirth_date() {
+    public LocalDate getBirth_date() {
         return birth_date;
     }
 
-    public void setBirth_date(Date birth_date) {
+    public void setBirth_date(LocalDate birth_date) {
         this.birth_date = birth_date;
     }
 
-    public Date getHire_date() {
+    public LocalDate getHire_date() {
         return hire_date;
     }
 
-    public void setHire_date(Date hire_date) {
+    public void setHire_date(LocalDate hire_date) {
         this.hire_date = hire_date;
     }
 
