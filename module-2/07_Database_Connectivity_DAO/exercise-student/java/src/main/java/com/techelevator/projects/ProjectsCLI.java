@@ -191,8 +191,8 @@ public class ProjectsCLI {
 		if(allDepartments.size() > 0) {
 			System.out.println("\n*** Choose a Department ***");
 			Department selectedDepartment = (Department)menu.getChoiceFromOptions(allDepartments.toArray());
-//			List<Employee> departmentEmployees = employeeDAO.getEmployeesByDepartmentId(selectedDepartment.getId());  // If your getter is not called "getId()", change this to what yours is called
-//			listEmployees(departmentEmployees);
+			List<Employee> departmentEmployees = employeeDAO.getEmployeesByDepartmentId(selectedDepartment.getDepartment_id());  // If your getter is not called "getId()", change this to what yours is called
+			listEmployees(departmentEmployees);
 		} else {
 			System.out.println("\n*** No results ***");
 		}

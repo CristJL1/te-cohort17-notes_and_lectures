@@ -70,7 +70,24 @@ public class JDBCEmployeeDAO implements EmployeeDAO {
 	@Override
 	public List<Employee> getEmployeesByDepartmentId(long id) {
 
-		return new ArrayList<>();
+		List<Employee> theEmployees = new ArrayList();
+
+		String sqlSearchEmployeesByDepartmentId = "SELECT * " +
+											"FROM employee " +
+											"WHERE department_id = ? ";
+
+		SqlRowSet employeeSearchResult;
+
+		employeeSearchResult = jdbcTemplate.queryForRowSet(sqlSearchEmployeesByDepartmentId, id);
+
+		while (employeeSearchResult.next()) {
+			Employee anEmployee;
+			anEmployee = mapRowToEmployee(employeeSearchResult);
+
+			theEmployees.add(anEmployee);
+		}
+
+		return theEmployees;
 	}
 
 	@Override
