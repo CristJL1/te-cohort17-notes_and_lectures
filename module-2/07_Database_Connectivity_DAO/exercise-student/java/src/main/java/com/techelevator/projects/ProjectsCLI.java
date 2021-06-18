@@ -265,7 +265,7 @@ public class ProjectsCLI {
 		List<Department> allDepartments = departmentDAO.getAllDepartments();  // Use the DAO object to run DAO method
 		Department selectedDepartment = (Department)menu.getChoiceFromOptions(allDepartments.toArray());
 		
-//		employeeDAO.changeEmployeeDepartment(selectedEmployee.getId(), selectedDepartment.getId());  // If your getters are not called "getId()", change this to what yours is called
+		employeeDAO.changeEmployeeDepartment(selectedEmployee.getEmployee_id(), selectedDepartment.getDepartment_id());  // If your getters are not called "getId()", change this to what yours is called
 	}
 
 	private void handleProjects() {
@@ -333,7 +333,7 @@ public class ProjectsCLI {
 		System.out.println();
 		if(projects.size() > 0) {
 			for(Project proj : projects) {
-//				System.out.println(proj.getName());   // If your getter are not called "getName()", change this to what yours is called
+				System.out.println(proj.getName());   // If your getter are not called "getName()", change this to what yours is called
 			}
 		} else {
 			System.out.println("\n*** No results ***");
