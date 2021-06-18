@@ -121,9 +121,9 @@ public class JDBCEmployeeDAO implements EmployeeDAO {
 
 		List<Employee> theEmployees = new ArrayList();
 
-		String sqlSearchEmployeesByDepartmentId = "SELECT * " +
-				"FROM employee " +
-				"WHERE department_id = ? ";
+		String sqlSearchEmployeesByDepartmentId = "select * " +
+				"from employee " +
+				"where employee_id in (select employee_id from project_employee where project_id = ?);";
 
 		SqlRowSet employeeSearchResult;
 
