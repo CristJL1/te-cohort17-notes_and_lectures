@@ -50,8 +50,8 @@ public class JDBCEmployeeDAO implements EmployeeDAO {
 
 		String sqlSearchEmployeesByName = "SELECT * " +
 											"FROM employee " +
-											"WHERE first_name ilike ? " +
-											"AND last_name ilike ?";
+											"WHERE first_name ilike  ?  " +
+											"AND last_name  ilike  ?";
 
 		SqlRowSet employeeSearchResult;
 
@@ -93,7 +93,26 @@ public class JDBCEmployeeDAO implements EmployeeDAO {
 	@Override
 	public List<Employee> getEmployeesWithoutProjects() {
 
-		return new ArrayList<>();
+		List<Employee> theEmployees = new ArrayList();
+
+		String sqlSearchEmployeesWithoutProject = "SELECT * " +
+													"FROM employee " +
+													"LEFT JOIN project_employee " +
+													"ON employee.employee_id = project_employee.employee_id " +
+													"WHERE project_employee.employee_id is null;";
+
+		SqlRowSet employeeSearchResult;
+
+		employeeSearchResult = jdbcTemplate.queryForRowSet(sqlSearchEmployeesWithoutProject);
+
+		while (employeeSearchResult.next()) {
+			Employee anEmployee;
+			anEmployee = mapRowToEmployee(employeeSearchResult);
+
+			theEmployees.add(anEmployee);
+		}
+
+		return theEmployees;
 	}
 
 	@Override
