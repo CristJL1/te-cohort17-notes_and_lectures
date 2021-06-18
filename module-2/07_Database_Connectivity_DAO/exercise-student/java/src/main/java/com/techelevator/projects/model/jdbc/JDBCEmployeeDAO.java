@@ -50,12 +50,13 @@ public class JDBCEmployeeDAO implements EmployeeDAO {
 
 		String sqlSearchEmployeesByName = "SELECT * " +
 											"FROM employee " +
-											"WHERE first_name ilike  ?  " +
-											"AND last_name  ilike  ?";
+											"WHERE first_name ilike ? " +
+											"AND last_name  ilike  ? ";
+
 
 		SqlRowSet employeeSearchResult;
 
-		employeeSearchResult = jdbcTemplate.queryForRowSet(sqlSearchEmployeesByName, firstNameSearch, lastNameSearch);
+		employeeSearchResult = jdbcTemplate.queryForRowSet(sqlSearchEmployeesByName, firstNameSearch + "%", lastNameSearch + "%");
 
 		while (employeeSearchResult.next()) {
 			Employee anEmployee;
@@ -118,7 +119,24 @@ public class JDBCEmployeeDAO implements EmployeeDAO {
 	@Override
 	public List<Employee> getEmployeesByProjectId(Long projectId) {
 
-		return new ArrayList<>();
+		List<Employee> theEmployees = new ArrayList();
+
+		String sqlSearchEmployeesByDepartmentId = "SELECT * " +
+				"FROM employee " +
+				"WHERE department_id = ? ";
+
+		SqlRowSet employeeSearchResult;
+
+		employeeSearchResult = jdbcTemplate.queryForRowSet(sqlSearchEmployeesByDepartmentId, projectId);
+
+		while (employeeSearchResult.next()) {
+			Employee anEmployee;
+			anEmployee = mapRowToEmployee(employeeSearchResult);
+
+			theEmployees.add(anEmployee);
+		}
+
+		return theEmployees;
 	}
 
 	@Override
