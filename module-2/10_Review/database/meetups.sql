@@ -2,6 +2,9 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS member, interest_group, event, interest_group_member, event_member CASCADE;
 
+-- any CONSTRAINT is asking the database manager to check to be sure the constraint is followed
+--              otherwise the database manager generates an error
+
 CREATE TABLE member (
 	member_id serial,
 	first_name varchar(20) NOT NULL,
@@ -18,8 +21,18 @@ CREATE TABLE interest_group (
 	group_id serial,
 	name varchar(40) NOT NULL,
 	CONSTRAINT PK_interest_group PRIMARY KEY (group_id),
-	CONSTRAINT UQ_interest_group_name UNIQUE (name)
+	CONSTRAINT UQ_interest_group_name UNIQUE (name) -- enforce uniqueness of the name even though it's not part of the primary key
 );
+--
+-- in these examples, the FOREIGN KEY constraint is specified in the create table
+-- rather than an ALTER statement to add FOREIGN KEY
+--
+-- when specifying the FOREIGN KEY constraint in the create table, the parent must already have been created
+--              the order of the table creates is critical
+--
+-- using ALTER statement to add FOREIGN KEY after all the tables are created, means they can be created in any order
+--              more flexibility and fewer opportunities for errors if add FOREIGN KEY with ALTER rather than on the CREATE TABLE
+--
 
 CREATE TABLE event (
 	event_id serial,
@@ -31,7 +44,7 @@ CREATE TABLE event (
 	group_id int NOT NULL,
 	CONSTRAINT PK_event PRIMARY KEY (event_id),
 	CONSTRAINT FK_event_interest_group FOREIGN KEY (group_id) REFERENCES interest_group(group_id),
-	CONSTRAINT CHK_duration CHECK (duration >= 30)
+	CONSTRAINT CHK_duration CHECK (duration >= 30) -- ensure that duration is greater than or equal to 30
 );
 
 CREATE TABLE interest_group_member (

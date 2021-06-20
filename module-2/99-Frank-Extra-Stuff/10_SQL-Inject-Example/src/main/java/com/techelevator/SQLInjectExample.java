@@ -25,13 +25,13 @@ public class SQLInjectExample {
 //  | franko | javania   |
 //  |--------------------|
 //******************************************************************************
-	
+	// this code uses Native JDBC database access instead of Spring DAO access
 	public static void main(String[] args) throws SQLException {
 
 // Define data source                                              
 		@SuppressWarnings("resource")
 		BasicDataSource userLoginSource = new BasicDataSource();
-		userLoginSource.setUrl("jdbc:postgresql://localhost:5432/userlogin");
+		userLoginSource.setUrl("jdbc:postgresql://localhost:5432/review10");
 		userLoginSource.setUsername("postgres");
 		userLoginSource.setPassword("postgres1");
 
@@ -57,11 +57,11 @@ public class SQLInjectExample {
 		System.out.println("----------------------------------------------------------");
         System.out.println("Using values entered by concatenating in SQL WHERE:");
 
-// Define  String containing the SQL statement - concatenating user entered values
+// Define  String containing the SQL statement - String concatenating user entered values instead of placeholders (?)
 		String getLogin =  "SELECT true "                        +
 				       	     "FROM user_logins "                 +
-					        "WHERE userid   = '"+inUserid  +"' " +
-					          "AND password = '"+inPassword+"' " ;
+					        "WHERE userid   = '"+inUserid  +"' " + // concatenate user input directly into the SQL statement
+					          "AND password = '"+inPassword+"' " ; // concatenate user input directly in the SQL statement
 
 // Display the SQL statement with concatenated user entered values
 		System.out.println("\n"+getLogin+"\n");
@@ -81,8 +81,8 @@ public class SQLInjectExample {
 		
 		String getLogin2 = "SELECT  true "        +
    	                         "FROM user_logins "  +
-                            "WHERE userid = ? "   +
-                              "AND password = ? " ;
+                            "WHERE userid = ? "   + // use a placeholder for user input - value supplied when we execute
+                              "AND password = ? " ; // use a placeholder for user input - value supplied when we execute
 		
 		System.out.println("\n"+getLogin2+"\n");
 
