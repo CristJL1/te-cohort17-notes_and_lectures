@@ -62,7 +62,7 @@ public class JDBCDepartmentDAOIntegrationTest {
     }
 
     @Test
-    public void create_new_department_and_read_it_back () throws SQLException {
+    public void create_new_department () throws SQLException {
         Department theDepartment = getDepartment("ABC123"); //create new test department
 
         dao.createDepartment(theDepartment); // add the test department to the table
@@ -72,6 +72,30 @@ public class JDBCDepartmentDAOIntegrationTest {
         assertNotEquals(null, theDepartment.getDepartment_id()); // verify test department was assigned an ID
         assertDepartmentsAreEqual(theDepartment, newDepartment); // verify that department returned matches department sent
                                                                 // giving a null pointer exception, unsure how to fix
+    }
+
+    @Test
+    public void search_departments_by_name () throws SQLException {
+
+        Department theDepartment = getDepartment("ABC123");
+
+        dao.searchDepartmentsByName(theDepartment.toString());
+
+        assertEquals("ABC123", theDepartment.toString()); 
+    }
+
+
+    @Test
+    public void search_department_by_id () throws SQLException {
+        Department theDepartment = getDepartment("ABC123");
+
+        dao.createDepartment(theDepartment);
+
+        Department testDepartment = new Department();
+
+        testDepartment = dao.getDepartmentById(theDepartment.getDepartment_id());
+
+        assertEquals(testDepartment.getDepartment_id(), theDepartment.getDepartment_id()); // also throwing null pointer exception, unsure how to fix
     }
 
     private Department getDepartment (String name) {
@@ -84,6 +108,9 @@ public class JDBCDepartmentDAOIntegrationTest {
         assertEquals(expected.getDepartment_id(), actual.getDepartment_id());
         assertEquals(expected.getName(), actual.getName());
     }
+
+
+    // really struggled with this assignment, did not make it to Employee or Project Integration tests
 
 
 }
