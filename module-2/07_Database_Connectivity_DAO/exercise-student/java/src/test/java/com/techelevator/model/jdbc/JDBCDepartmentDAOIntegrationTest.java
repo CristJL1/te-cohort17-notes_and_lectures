@@ -81,7 +81,7 @@ public class JDBCDepartmentDAOIntegrationTest {
 
         dao.searchDepartmentsByName(theDepartment.toString());
 
-        assertEquals("ABC123", theDepartment.toString()); 
+        assertEquals("ABC123", theDepartment.toString());
     }
 
 
