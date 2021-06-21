@@ -36,6 +36,7 @@ public class ConsoleService {
         return menuSelection;
     }
 
+    // display an array of Hotel objects passed to it
     public void printHotels(Hotel[] hotels) {
         System.out.println("--------------------------------------------");
         System.out.println("Hotels");
@@ -45,21 +46,25 @@ public class ConsoleService {
         }
     }
 
+    // display a single Hotel object passed to it
     public void printHotel(Hotel hotel) {
         System.out.println(hotel.toString());
     }
 
+    // display the array of Review objects passed to it
     public void printReviews(Review[] reviews) {
         for (Review review : reviews) {
             System.out.println(review.toString());
         }
     }
 
+    // display a message and wait for enter from the user
     public void next() {
         System.out.println("\nPress Enter to continue...");
         scanner.nextLine();
     }
 
+    // close the Scanner object used in the service and terminate the program
     public void exit() {
         scanner.close();
         System.exit(0);
