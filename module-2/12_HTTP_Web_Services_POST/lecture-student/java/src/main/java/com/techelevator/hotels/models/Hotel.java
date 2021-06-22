@@ -2,6 +2,8 @@ package com.techelevator.hotels.models;
 
 public class Hotel {
 
+
+
     private int id;
     private String name;
     private int stars;
@@ -30,6 +32,8 @@ public class Hotel {
                 "\n RoomsAvailable: " + roomsAvailable +
                 "\n overImage" + coverImage;
     }
+
+    // getters only as we do not want the users to change the data from the API
 
     public int getId() {
         return id;

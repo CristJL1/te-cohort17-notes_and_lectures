@@ -6,6 +6,7 @@ public class Reservation {
     private int hotelID;
     private String fullName;
     // Use LocalDate for dates but storing as a string to keep this example simple
+    // JSON data is string data, so it makes more sense to use Strings for dates rather than LocalDate
     private String checkinDate;
     private String checkoutDate;
     private int guests;
