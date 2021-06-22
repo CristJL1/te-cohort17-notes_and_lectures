@@ -17,29 +17,62 @@ public class LocationService {
 
     public LocationService(String url) {
         //append a trailing slash if not provided
-        BASE_URL = url.lastIndexOf('/') == url.length()? url : url + "/";
+        BASE_URL = url.lastIndexOf('/') == url.length() ? url : url + "/";
     }
 
     public Location getOne(int id) {
-        return restTemplate.getForObject(BASE_URL + id, Location.class);
+        Location location = null;
+        try {
+            location = restTemplate.getForObject(BASE_URL + id, Location.class);
+        } catch (RestClientResponseException ex) {
+            console.printError(ex.getRawStatusCode() + " : " + ex.getStatusText());
+        }
+        return location;
     }
 
     public Location[] getAll() {
-        return restTemplate.getForObject(BASE_URL, Location[].class);
+        Location[] locations = null;
+        try {
+            locations = restTemplate.getForObject(BASE_URL, Location[].class);
+        } catch (RestClientResponseException ex) {
+            console.printError(ex.getRawStatusCode() + " : " + ex.getStatusText());
+        }
+        return locations;
     }
 
     public Location add(String CSV) {
-    	// api code here
-	    return null;
+        Location location = makeLocation(CSV);
+        if (location == null) {
+            return null;
+        }
+        HttpEntity entity = makeEntity(location);
+        try {
+            location = restTemplate.postForObject(BASE_URL, entity, Location.class);
+        } catch (RestClientResponseException ex) {
+            console.printError(ex.getRawStatusCode() + " : " + ex.getStatusText());
+        }
+        return location;
     }
 
     public void delete(int id) {
-        // api code here
+        try {
+            restTemplate.delete(BASE_URL + id);
+        } catch (RestClientResponseException ex) {
+            console.printError(ex.getRawStatusCode() + " : " + ex.getStatusText());
+        }
     }
 
     public Location update(String CSV) {
-        // api code here
-        return null;
+        Location location = makeLocation(CSV);
+        if (location == null) {
+            return null;
+        }
+        try {
+            restTemplate.put(BASE_URL + location.getId(), location);
+        } catch (RestClientResponseException ex) {
+            console.printError(ex.getRawStatusCode() + " : " + ex.getStatusText());
+        }
+        return location;
     }
 
     private HttpEntity<Location> makeEntity(Location location){
