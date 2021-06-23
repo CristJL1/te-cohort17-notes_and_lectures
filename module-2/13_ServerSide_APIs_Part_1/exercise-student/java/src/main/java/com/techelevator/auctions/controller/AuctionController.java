@@ -4,6 +4,8 @@ import com.techelevator.auctions.DAO.AuctionDAO;
 import com.techelevator.auctions.DAO.MemoryAuctionDAO;
 import com.techelevator.auctions.model.Auction;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientResponseException;
 
 import java.util.List;
 
@@ -34,6 +36,22 @@ public class AuctionController {
     public Auction get(@PathVariable int id) {
         System.out.println("Auction Search by ID Returned");
         return dao.get(id);
+    }
+
+    @RequestMapping(path = "", method = RequestMethod.POST)
+    public Auction create(@RequestBody Auction newAuction) {
+
+        System.out.println("Created new Auction called " + newAuction.getTitle());
+
+        try {
+            dao.create(newAuction);
+        } catch (RestClientResponseException ex) {
+            ex.getStatusText();
+        } catch (ResourceAccessException ex) {
+            ex.getMessage();
+        }
+
+        return newAuction;
     }
 
 } // end of controller class
