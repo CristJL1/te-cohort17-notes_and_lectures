@@ -27,9 +27,13 @@ public class AuctionController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public List<Auction> list() {
-        System.out.println("List of Auctions Returned");
+    public List<Auction> list(@RequestParam(required = false) String title_like) {
+        if (title_like == null) {
         return dao.list();
+        }
+        else {
+            return dao.searchByTitle(title_like);
+        }
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
@@ -40,9 +44,7 @@ public class AuctionController {
 
     @RequestMapping(path = "", method = RequestMethod.POST)
     public Auction create(@RequestBody Auction newAuction) {
-
         System.out.println("Created new Auction called " + newAuction.getTitle());
-
         try {
             dao.create(newAuction);
         } catch (RestClientResponseException ex) {
@@ -50,8 +52,9 @@ public class AuctionController {
         } catch (ResourceAccessException ex) {
             ex.getMessage();
         }
-
         return newAuction;
     }
+
+
 
 } // end of controller class
