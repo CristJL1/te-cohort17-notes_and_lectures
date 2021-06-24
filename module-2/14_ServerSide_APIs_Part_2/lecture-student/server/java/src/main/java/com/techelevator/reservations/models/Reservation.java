@@ -5,13 +5,29 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+// validation annotations may be specified in the POJO
+// if we would like Spring Boot to validate our date before we process it
+//
+// @NotBlank - says there must be data in the field
+// @Max - set the maximum value
+// @Min - set the minimum value
+
 public class Reservation {
 
     private int id;
+
     private int hotelID;
+
     private String fullName;
+
+    @NotBlank
     private String checkinDate;
+
+    @NotBlank
     private String checkoutDate;
+
+    @Min(value = 1, message = "We need at least one guest for a reservation")
+    @Max(value = 4, message = "No parties!")
     private int guests;
 
     public Reservation() {

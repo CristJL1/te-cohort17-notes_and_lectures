@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Component // tell Spring to use dependency injection (DI) when I reference this class
 public class MemoryHotelDAO implements HotelDAO {
 
     private List<Hotel> hotels = new ArrayList<>();

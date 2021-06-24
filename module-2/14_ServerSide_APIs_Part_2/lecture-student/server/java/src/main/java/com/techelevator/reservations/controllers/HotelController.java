@@ -21,6 +21,14 @@ public class HotelController {
     private HotelDAO       theHotelResource;
     private ReservationDAO theReservationResource;
 
+    // constructor is accepting the DAO objects as parameters, rather than instantiate them itself
+    // where do the objects come from for the constructor? We ddi not instantiate them and send to ctor?
+    //      who did instantiate them and send to ctor?
+    //      Spring Dependency Injection did it for us!
+    // Spring Dependency Injection (DI) automagically instantiates objects and passes them to ctor
+    // you must specify the @Component annotation in a class you want to be considered for DI
+    // the concrete classes for the DAO must have @component annotation so Spring DI will instantiate them
+    //          and pass the new objects to the ctor
     public HotelController(HotelDAO theHotelResource, ReservationDAO theReservationResource) {
         this.theHotelResource       = theHotelResource;
         this.theReservationResource = theReservationResource;
@@ -91,14 +99,55 @@ public class HotelController {
      * @param reservation
      * @param hotelID
      */
-    @ResponseStatus(HttpStatus.CREATED)
+
+    // if you want the server to use any validation annotations you have in the POJO:
+    //
+    //      1. include @valid in the method parameter list before the @RequestBody
+    @ResponseStatus(HttpStatus.CREATED) // set the HTTP status code when the method terminates
     @RequestMapping(path="/hotels/{id}/reservations", method=RequestMethod.POST)
-    public Reservation addReservation(@RequestBody Reservation reservation
-                                     ,@PathVariable("id") int hotelID)
-            throws HotelNotFoundException {
+    public Reservation addReservation(  @Valid
+                                        @RequestBody Reservation reservation
+                                       ,@PathVariable("id") int hotelID)
+            throws HotelNotFoundException { // throws says "I know this exception might happen"
         logAPICall("POST - /hotels/" + hotelID + "/reservations");   // Log path to server log
         return theReservationResource.create(reservation, hotelID);
     }
+
+    /**
+     * update an existing reservation
+     *
+     * /reservations/{id} = standard RESTful path got an update
+     *
+     * handle an HTTP PUT for an update
+     *
+     * @param aReservation - from Request Body
+     * @param id          - from Path Variable
+     * @return the updated reservation
+     */
+
+    @RequestMapping (path = "/reservations/{id}", method = RequestMethod.PUT)
+    public Reservation updateReservation (@Valid @RequestBody Reservation aReservation, @PathVariable int id) throws ReservationNotFoundException {
+
+        // call the DAO to update the resource and return the updated reservation from the DAO
+        return theReservationResource.update(aReservation, id);
+    }
+
+    /**
+     * delete an existing reservation
+     *
+     * /reservations/{id} = standard RESTful path for a delete
+     *
+     * @param id - from PathVariable
+     *
+     * nothing to return
+     */
+
+    @ResponseStatus(HttpStatus.NO_CONTENT) // return the NO_CONTENT status after the delete
+    @RequestMapping (path = "/reservations/{id}", method = RequestMethod.DELETE)
+    public void deleteReservation (@PathVariable int id) throws ReservationNotFoundException {
+        theReservationResource.delete(id);
+    }
+
 
     /**
      * /hotels/filter?state=ohio&city=cleveland
@@ -140,7 +189,7 @@ public class HotelController {
      ***************************************************************************************************/
     public void logAPICall(String message) {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm/dd/yyyy HH:mm:ss.A");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss.A");
         String timeNow = now.format(formatter);
         System.out.println(timeNow + "-" + message);
     }
