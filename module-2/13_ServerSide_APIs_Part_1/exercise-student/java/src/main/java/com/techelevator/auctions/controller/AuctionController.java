@@ -27,14 +27,28 @@ public class AuctionController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public List<Auction> list(@RequestParam(required = false) String title_like) {
-        if (title_like == null) {
-        return dao.list();
-        }
-        else {
-            return dao.searchByTitle(title_like);
+    public List<Auction> list(@RequestParam(required = false) String title_like, @RequestParam(required = false) Double currentBid_lte) {
+        try {
+            if (currentBid_lte > 0 && title_like != null) {
+                return dao.searchByTitleAndPrice(title_like, currentBid_lte);
+            }
+            else if (title_like != null && currentBid_lte == 0) {
+                return dao.searchByTitle(title_like);
+            }
+            else if (currentBid_lte > 0 && title_like == null) {
+                return dao.searchByPrice(currentBid_lte);
+            }
+            else return dao.list();
+        } catch (NullPointerException ex) {
+            if (title_like == null) {
+                return dao.list();
+            }
+            else {
+                return dao.searchByTitle(title_like);
+            }
         }
     }
+
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public Auction get(@PathVariable int id) {
