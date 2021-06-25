@@ -21,6 +21,7 @@ public class HotelController {
     private HotelDAO       theHotelResource;
     private ReservationDAO theReservationResource;
 
+<<<<<<< HEAD
     // constructor is accepting the DAO objects as parameters, rather than instantiate them itself
     // where do the objects come from for the constructor? We ddi not instantiate them and send to ctor?
     //      who did instantiate them and send to ctor?
@@ -29,6 +30,16 @@ public class HotelController {
     // you must specify the @Component annotation in a class you want to be considered for DI
     // the concrete classes for the DAO must have @component annotation so Spring DI will instantiate them
     //          and pass the new objects to the ctor
+=======
+    // ctor is accepting the DAO objects as parameters rather than instantiate them itself
+    // Where do the objects come from for the ctor?  WE did not instantiate them and send to ctor?
+    //       Who did instantiate them and send to ctor?
+    //       Spring Dependency Injection did it for us!
+    // Spring Dependency Injection (DI) automagcally instantiate objects and pass them to ctor
+    // You must specify the @Component annotation in a class you want to be considered for DI
+    // The concrete classes for the DAO must have @Component annotation so Spring DI will instant them
+    //              and pass the new objects to the ctor
+>>>>>>> d5b753b9efd214f7e1211c736db82d0ee312b313
     public HotelController(HotelDAO theHotelResource, ReservationDAO theReservationResource) {
         this.theHotelResource       = theHotelResource;
         this.theReservationResource = theReservationResource;
@@ -99,6 +110,7 @@ public class HotelController {
      * @param reservation
      * @param hotelID
      */
+<<<<<<< HEAD
 
     // if you want the server to use any validation annotations you have in the POJO:
     //
@@ -109,6 +121,16 @@ public class HotelController {
                                         @RequestBody Reservation reservation
                                        ,@PathVariable("id") int hotelID)
             throws HotelNotFoundException { // throws says "I know this exception might happen"
+=======
+    // If you want the server to use any Validation Annotations you have in the POJO
+    //    include @Valid in the method parameter list before the @RequestBody for the object
+    //
+    @ResponseStatus(HttpStatus.CREATED)   // Set the HTTP Status code when the method terminates
+    @RequestMapping(path="/hotels/{id}/reservations", method=RequestMethod.POST)
+    public Reservation addReservation(@Valid @RequestBody Reservation reservation
+                                     ,@PathVariable("id") int hotelID)
+            throws HotelNotFoundException {  // throws says I know this Exception might happen
+>>>>>>> d5b753b9efd214f7e1211c736db82d0ee312b313
         logAPICall("POST - /hotels/" + hotelID + "/reservations");   // Log path to server log
         return theReservationResource.create(reservation, hotelID);
     }
@@ -116,6 +138,7 @@ public class HotelController {
     /**
      * update an existing reservation
      *
+<<<<<<< HEAD
      * /reservations/{id} = standard RESTful path got an update
      *
      * handle an HTTP PUT for an update
@@ -149,6 +172,38 @@ public class HotelController {
     }
 
 
+=======
+     * /reservations/{id}   = Standard RESTful path for an update
+     *
+     * Handle an HTTP PUT for an update
+     *
+     * @param aReservation - from Request Body for a an HTTP PUT
+     * @param id           - from Path Variable
+     * @return the updated Reservation
+     */
+     @RequestMapping(path="/reservations/{id}",method=RequestMethod.PUT)
+     public Reservation anyNameYouWant(@Valid @RequestBody Reservation aReservation
+                                      ,@PathVariable int id) throws ReservationNotFoundException {
+         //  Call the DAO to update the resource and return the updated reservation from the DAO
+         return theReservationResource.update(aReservation, id);
+     }
+
+    /**
+     *  delete an existing reservation
+     *
+     *  /reservations/{id}       = Standard RESTful path for an delete
+     *
+     * @param id - from PathVariable
+     *
+     *  Nothing to return
+     */
+    @ResponseStatus(HttpStatus.NO_CONTENT)  // return the No_CONTENT after the delete
+    @RequestMapping(path="/reservations/{id}",method=RequestMethod.DELETE)
+    public void YouPickAnyNameServerDoesNotCare(@PathVariable int id) throws ReservationNotFoundException {
+        theReservationResource.delete(id);
+    }
+
+>>>>>>> d5b753b9efd214f7e1211c736db82d0ee312b313
     /**
      * /hotels/filter?state=ohio&city=cleveland
      *
