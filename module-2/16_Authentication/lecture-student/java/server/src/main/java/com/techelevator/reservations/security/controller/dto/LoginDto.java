@@ -4,6 +4,7 @@ package com.techelevator.reservations.security.controller.dto;
  * DTO for storing a user's credentials.
  */
 public class LoginDto {
+   // the variable names must match the JSON attribute names so Spring automatically populates the object
 
    private String username;
    private String password;

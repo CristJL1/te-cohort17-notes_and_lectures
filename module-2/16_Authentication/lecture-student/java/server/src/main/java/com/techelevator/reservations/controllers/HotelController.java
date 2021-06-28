@@ -17,6 +17,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+@PreAuthorize("isAuthenticated()") // no
 @RestController
 public class HotelController {
 
@@ -44,6 +45,7 @@ public class HotelController {
      * @param id the id of the hotel
      * @return all info for a given hotel
      */
+    @PreAuthorize("isAuthenticated()") // only allow access to this path if the user is logged in (has a valid JWT)
     @RequestMapping(path = "/hotels/{id}", method = RequestMethod.GET)
     public Hotel get(@PathVariable int id) {
         return hotelDAO.get(id);
@@ -54,6 +56,7 @@ public class HotelController {
      *
      * @return all reservations
      */
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(path = "/reservations", method = RequestMethod.GET)
     public List<Reservation> listReservations() {
         return reservationDAO.findAll();
@@ -114,10 +117,13 @@ public class HotelController {
      * @param id
      * @throws ReservationNotFoundException
      */
+    @PreAuthorize("hasRole('ADMIN')") // only users with the ADMIN role may access this path to delete reservations
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path = "/reservations/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable int id) throws ReservationNotFoundException {
-        auditLog("delete", id, "username");
+    // Principal theCurrentUser will tell Spring to pass us the Principal object for the current user and store it in the object theCurrentUser
+    public void delete(@PathVariable int id, Principal theCurrentUser) throws ReservationNotFoundException {
+        // we need the currently logged in username (who called this path) to pass to audit log
+        auditLog("delete", id, theCurrentUser.getName()); // get the username of the current user and pass it to the auditLog method
         reservationDAO.delete(id);
     }
 
@@ -160,9 +166,10 @@ public class HotelController {
      * @param reservation
      * @param username
      */
+    // display a message in the server log using the operation, reservation, and username passed to it
     private void auditLog(String operation, int reservation, String username) {
         System.out.println(
-                "User: " + username + "performed the operation: " + operation + "on reservation: " + reservation);
+                "User: " + username + " performed the operation: " + operation + " on reservation: " + reservation);
     }
 
 }

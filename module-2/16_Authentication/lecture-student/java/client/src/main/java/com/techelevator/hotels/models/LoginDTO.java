@@ -5,10 +5,11 @@ public class LoginDTO {
     private String username;
     private String password;
 
+    //ctor will take a string containing the username,password and put the values in the data members
     public LoginDTO(String credentials) {
-        String[] parts = credentials.split(",");
-        username = parts[0];
-        password = parts[1];
+        String[] parts = credentials.split(","); // separate the credentials at the comma
+        username = parts[0]; // store the first word in username
+        password = parts[1]; // store the second word in password
     }
 
     public String getUsername() {

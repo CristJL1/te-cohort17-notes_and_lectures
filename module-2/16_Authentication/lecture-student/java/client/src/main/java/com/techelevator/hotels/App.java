@@ -49,12 +49,19 @@ public class App {
                     int reservationId = consoleService.promptForReservation(reservations, "Delete Reservation");
                     hotelService.deleteReservation(reservationId);
                 } else if (menuSelection == 6) {
+                    // get the user login from the ConsoleService
                     String credentials = consoleService.promptForLogin();
+                    // make sure we got exactly 2 words separated by a comma
                     if( credentials.split(",").length == 2 ) {
+                        // if we got properly formatted input, send it to the AuthenticationService Login()
+                        // the Login() is returning an HTTP response which we are storing in a variable called response
                         ResponseEntity<Map> response = authenticationService.login(credentials);
-                        if (response.hasBody()) {
-                            String token = (String) response.getBody().get("token");
-                            hotelService.AUTH_TOKEN = token;
+                        // get the JWT from the response (attribute named: token) and tell the HotelService about it
+                        //      the response is a Map, so use .get(key) to get the value in a Map
+                        if (response.hasBody()) {                                   // if the response has a body...
+                            String token = (String) response.getBody().get("token");// get the JWT token and store it in token
+                            hotelService.AUTH_TOKEN = token;                        // set the AUTH_TOKEN variable
+                                                                                    // in the HotelService to JWT
                             System.out.println("Login Successful");
                         }
                     } else {

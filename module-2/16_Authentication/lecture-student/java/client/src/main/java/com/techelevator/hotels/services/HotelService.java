@@ -13,12 +13,15 @@ import java.util.Random;
 
 public class HotelService {
 
-  public static String AUTH_TOKEN = "";
+  public static String AUTH_TOKEN = ""; // JWT acquired and set by the application
+
+
   private final String INVALID_RESERVATION_MSG = "Invalid Reservation. Please enter the Hotel Id, Full Name, Checkin Date, Checkout Date and Guests";
-  private final String BASE_URL;
+  private final String BASE_URL;       // server base URL, it will be passed when service is instantiated
   private final RestTemplate restTemplate = new RestTemplate();
   private final ConsoleService console = new ConsoleService();
 
+  // ctor - receive the base URL for the server and store it in our BASE_URL variable
   public HotelService(String url) {
     BASE_URL = url;
   }
@@ -149,6 +152,13 @@ public class HotelService {
   public Reservation getReservation(int reservationId) throws HotelServiceException {
     Reservation reservation = null;
     try {
+      // restTemplate.exchange - call the server
+      // call the server with (1) base URL + /reservations/{id} path        - BASE_URL + "reservations/" + reservationId
+      //                      (2) type of HTTP request                      - HttpMethod.GET
+      //                      (3) an authorization header                   - makeAuthEntity()
+      //                      (4) type of object to return                  - Reservation.class
+      //                      (5) retrieve the body of the response         - .getBody();
+      //                      (6) and store it in our variable reservation  - reservation =
       reservation = restTemplate
           .exchange(BASE_URL + "reservations/" + reservationId, HttpMethod.GET, makeAuthEntity(), Reservation.class)
           .getBody();
@@ -197,7 +207,7 @@ public class HotelService {
   private HttpEntity<Reservation> makeReservationEntity(Reservation reservation) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
-    headers.setBearerAuth(AUTH_TOKEN);
+    headers.setBearerAuth(AUTH_TOKEN); // we need to set the authorization header to JWT
     HttpEntity<Reservation> entity = new HttpEntity<>(reservation, headers);
     return entity;
   }
@@ -207,6 +217,8 @@ public class HotelService {
    * 
    * @return {HttpEntity}
    */
+  // this will create authorization headers with the BEARER_AUTH set to the JWT token
+  //    (we had to do this in Postman too)
   private HttpEntity makeAuthEntity() {
     HttpHeaders headers = new HttpHeaders();
     headers.setBearerAuth(AUTH_TOKEN);
