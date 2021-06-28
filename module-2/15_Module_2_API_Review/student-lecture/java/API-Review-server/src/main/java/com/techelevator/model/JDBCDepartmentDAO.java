@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+// This is the concrete class for the DepartmentDAO
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,9 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.techelevator.model.Department;
 import com.techelevator.model.DepartmentDAO;
+import org.springframework.stereotype.Component;
 
+@Component // tells Spring this class is eligible for dependency injection
 public class JDBCDepartmentDAO implements DepartmentDAO {
 	
 	private JdbcTemplate jdbcTemplate;

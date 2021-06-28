@@ -1,5 +1,6 @@
 package com.techelevator.api.review.client;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,6 +16,10 @@ import com.techelevator.api.review.client.model.jdbc.JDBCDepartmentDAO;
 import com.techelevator.api.review.client.model.jdbc.JDBCEmployeeDAO;
 import com.techelevator.api.review.client.model.jdbc.JDBCProjectDAO;
 import com.techelevator.api.review.client.view.Menu;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
 
 public class ProjectsCLI {
 	
@@ -122,7 +127,26 @@ public class ProjectsCLI {
 		String newDepartmentName = getUserInput("Enter new Department name");
 		Department newDepartment = new Department();
 		newDepartment.setName(newDepartmentName);
-		newDepartment = departmentDAO.createDepartment(newDepartment);
+		//replace the DAO call to add the department with API call
+		//newDepartment = departmentDAO.createDepartment(newDepartment);
+		//
+		// define a RestTemplate object to call the API
+
+		RestTemplate callApi = new RestTemplate();
+
+		// because we need to do an HTTP POST:
+		//
+		// we need headers to define the content type we are sending - HttpHeaders
+		// we need to create a request with the headers and new department - HttpEntity
+		// we need to send the request (HttpEntity) to the POST
+
+		HttpHeaders theHeaders = new HttpHeaders(); // define request headers
+		theHeaders.setContentType(MediaType.APPLICATION_JSON); // set the content type
+		HttpEntity theRequest = new HttpEntity(newDepartment, theHeaders); // create a request
+
+		//                postForObject                          URL                ,    request, class-of-object-to-be-returned
+		newDepartment = callApi.postForObject("http://localhost:8080/department", theRequest, Department.class);
+
 		System.out.println("\n*** "+newDepartment.getName()+" created ***");
 	}
 	
@@ -142,8 +166,21 @@ public class ProjectsCLI {
 
 	private void handleListAllDepartments() {
 		printHeading("All Departments");
-		List<Department> allDepartments = departmentDAO.getAllDepartments();
-		listDepartments(allDepartments);
+		// replace the call to the DAO with a call to our API server
+		// List<Department> allDepartments = departmentDAO.getAllDepartments();
+
+		RestTemplate callApi = new RestTemplate(); // define a RestTemplate object to make and manage API calls
+
+		// RestTemplate can return an array of objects automatically for us, so here ia an array to hold the returned objects
+		Department[] deptArray; // hold the Department objects that are returned from the API call
+								// there is no easy way to have a RestTemplate method return a Java List object
+
+		// call the API to get all the departments and store them in our array
+		// RestTemplate      getForObject(                  URL                , data-type-to-return
+		deptArray = callApi.getForObject("http://localhost:8080/department", Department[].class);
+
+		// call our method to list the departments with the data returned from API call
+		listDepartments(Arrays.asList(deptArray));
 	}
 
 	private void handleDepartmentSearch() {
