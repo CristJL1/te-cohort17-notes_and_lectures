@@ -9,6 +9,8 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Base64;
+
 public class AuctionService {
 
     public static String AUTH_TOKEN = "";
@@ -23,7 +25,7 @@ public class AuctionService {
     public Auction[] getAll() throws AuctionServiceException {
         Auction[] auctions = null;
         try {
-            // send request here
+            auctions = restTemplate.exchange(BASE_URL + "auctions", HttpMethod.GET, makeAuthEntity(), Auction[].class).getBody();
         } catch (RestClientResponseException ex) {
             throw new AuctionServiceException(ex.getRawStatusCode() + " : " + ex.getResponseBodyAsString());
         }
