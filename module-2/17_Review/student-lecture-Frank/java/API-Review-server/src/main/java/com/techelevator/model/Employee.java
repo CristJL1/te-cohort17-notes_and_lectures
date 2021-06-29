@@ -9,7 +9,7 @@ public class Employee {
 	private Long departmentId;
 	private String firstName;
 	private String lastName;
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd") // tells deserialize the format of the date to the JSON
 	private LocalDate birthDay;
 	private char gender;
 	@JsonFormat(pattern="yyyy-MM-dd")

@@ -69,12 +69,14 @@ public Department addNewDepartment(@RequestBody Department newDepartment) {
 //
 //    HTTP Request: PUT
 //    Path: /department
+//    HTTP Status to return: No_CONTENT - nothing in the response body - normal for a PUT and DELETE
+//
 //
 //  DAO method to use:
 //
 //           public void saveDepartment(Department updatedDepartment);
 //
-@ResponseStatus(HttpStatus.NO_CONTENT)
+@ResponseStatus(HttpStatus.NO_CONTENT) // return with an HTTP response of NO_CONTENT
 @RequestMapping(path="/department", method=RequestMethod.PUT)
 // @RequestBody - Get the data from the request body and store it in a Department object
 public void updateDepartment(@RequestBody Department newDepartment) {
@@ -100,11 +102,12 @@ public Department GetDepartment(@PathVariable Long id) {
 // Write a controller to get all the departments whose name contains the search string.
 //
 //    HTTP Request: GET
-//    Path: /department/search?name=search-string
+//    Path: /department/namesearch/search?name=search-string
 //
 //  DAO method to use:  public List<Department> searchDepartmentsByName(String nameSearch);
 //
 @RequestMapping(path="/department/namesearch", method=RequestMethod.GET)
+//                                             rename the query parameter name to searchName in the method
         public List<Department> serachForADept(@RequestParam(value="name") String searchName) {
         LogAPIRequest.logAPICall("GET   - /department/namesearch?name="+searchName);
         return(theDeptData.searchDepartmentsByName(searchName));

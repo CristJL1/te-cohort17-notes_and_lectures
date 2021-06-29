@@ -10,10 +10,11 @@ import java.time.LocalDate;
 
 public class Project {
 	// Tell Spring to automatically convert JSPN dates to LocalDates
-	@JsonDeserialize(using = LocalDateDeserializer.class)
-	@JsonSerialize(using = LocalDateSerializer.class)
+
 	private Long id;
 	private String name;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate startDate;
 	private LocalDate endDate;
 	

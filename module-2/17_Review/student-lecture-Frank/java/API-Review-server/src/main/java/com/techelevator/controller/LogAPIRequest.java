@@ -1,8 +1,10 @@
 package com.techelevator.controller;
 /******************************************************************************************************
  * Class to be used to LogAPICalls with timestamp and user provided message
+ *       className    .method       (parameters)
+ * use:  LogAPIRequest.LogAPIRequest(message)
  *
- * use:  LogAPICalls.LogAPICall(message)
+ * the static method(s) in the class may be called from anywhere using the class name
  ****************************************************************************************************/
 
 import java.time.LocalDateTime;

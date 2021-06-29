@@ -84,7 +84,7 @@ public class ProjectsCLI {
 	
 	public ProjectsCLI() {
 		this.menu = new Menu(System.in, System.out);
-		// postgres is a Data Base Mangager which contains many databases which contains many tables
+		// postgres is a Data Base Manager which contains many databases which contains many tables
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/apireview");
 		dataSource.setUsername("postgres");
@@ -157,10 +157,13 @@ public class ProjectsCLI {
 		// Replace the DAO call to add the department with API call
 		// List<Department> allDepartments = departmentDAO.getAllDepartments();
 		Department[] allDepartments;
-		allDepartments = callApi.getForObject(API_BASE_URL+"/departments", Department[].class);
+		allDepartments = callApi.getForObject(API_BASE_URL+"/department", Department[].class);
 
 		if(allDepartments.length > 0) {
 			System.out.println("\n*** Choose a Department ***");
+			// use the allDepartments array in our Menu class getChoiceFromOptions() method
+			// getChoiceFromOptions() receives an array of Strings and displays them as options to the user
+			//		it returns the String for the option they picked
 			Department selectedDepartment = (Department)menu.getChoiceFromOptions(allDepartments);
 			String newDepartmentName = getUserInput("Enter new Department name");
 			selectedDepartment.setName(newDepartmentName);

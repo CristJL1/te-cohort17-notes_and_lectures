@@ -11,7 +11,12 @@ import java.time.LocalDate;
 
 public class Employee {
 	// Tell Spring to automatically convert JSPN dates to LocalDates
-	@JsonDeserialize(using = LocalDateDeserializer.class)
+	// LocalDate is a Java specific data type
+	// RestTemplate works with any programming language
+	// so when we use a programming language specific feature, like LocalDate or BigDecimal
+	// we need to provide a way to have the JSON that goes between us and the server convert to the
+	//		Language specific data type
+	@JsonDeserialize(using = LocalDateDeserializer.class) // Spring provided process to convert JSON string to LocalDate
 	@JsonSerialize(using = LocalDateSerializer.class)
 
 	private Long employeeId;
@@ -47,6 +52,9 @@ public class Employee {
 		this.lastName = lastName;
 	}
 
+	// use a Spring provided process to convert a local to a String with teh format we want
+	//		when Spring takes an object and serializes into JSON for API calls
+	//			we need/can tell it what format we want LocalDate to be as a String
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	public LocalDate getBirthDay() {
 		return birthDay;
