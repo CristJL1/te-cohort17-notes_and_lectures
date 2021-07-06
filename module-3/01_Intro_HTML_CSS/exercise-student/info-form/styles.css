@@ -1,0 +1,11 @@
+/* info-form */
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: aquamarine;
+}
+
+input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

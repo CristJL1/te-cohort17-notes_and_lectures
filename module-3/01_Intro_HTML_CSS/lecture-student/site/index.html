@@ -1,0 +1,56 @@
+<!-- a comment in HTML is whatever is between less-than-exclamation-point-dash-dash
+                                              and dash-dash-exclamation-point-greater-than-->
+<!DOCTYPE html> <!-- tells the browser this file contains HTML - optional if using modern day browsers-->
+<!-- HTML elements have start and end tags-->
+<!-- an HTML start tag is less-than tag name optional-attributes greater-than-->
+<!-- an HTML end tag is less-than backslash tag-name greater-than-->
+<!-- an alternate way to specify an end tag is to put a slash at the end of the start tag-->
+<!--        the alternate end tag method is only allowed when there is no content for the tag-->
+<!-- HTML attributes are data/info for the tag and are word= "value" inside the tag-->
+<html lang="en"> <!-- this is a container to hold all the HTML for the page-->
+                 <!-- with the lang attribute that tells the browser the page is in English-->
+    <head> <!-- contains information the browser and CSS may need to know about this HTML-->
+        <meta charset="UTF-8"> <!-- meta tags provide info for the browser - they are not displayed-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lecture Code</title> <!-- what's displayed in the tab for this window in the browser-->
+        <!-- since the css we want to use is in a separate file, we have to tell the browser to go get it-->
+        <!-- the link tag allows us to include files outside this one in the file - css, html, anything-->
+        <!-- rel="" in the link tag tells the browser what type of file it is-->
+        <!-- href="" tells the browser where the file is-->
+    <link rel="stylesheet" href="styles.css"/> <!-- link the css file we have to this HTML-->
+    </head>
+    <body> <!-- the main display part of the webpage -->
+        <h1>Bits & Bytes</h1> <!-- h1 is main heading-->
+        <p>Welcome to the internet's best (non-Italian) restaurant</p>
+
+        <nav> <!-- document places a user may navigate outside this page-->
+                <!-- the anchor tag (a) gives you a place to specify a link for navigation-->
+                <!-- the href="" attribute specifies the URL of where you wanna go (outside the page)-->
+                <a href="reservations.html">Make a reservation</a> <!-- the text between the start & end tags is displayed-->
+        </nav>
+
+        <main><!--documents this content as being the main part of the web page - no impact on presentation-->
+            <h2>Menu</h2> <!-- slightly smaller heading than an h1-->
+            <section> <!-- documents a self-contained set of HTML for the page-->
+                <h3>Lunch</h3> <!-- slightly smaller heading than an h2-->
+                
+                <p>Full Stack Sandwich</p>
+                <!-- img tag is hwo you specify a picture for the page - code the path in the src="" attribute-->
+                <!-- path for the image is relative to the project folder (site folder in this example)-->
+                <img src="images/menu/lunch/full-stack-sandwich.png"/> <!-- use of alternate end-tag-->
+                
+                <p>Universal Serial Burger</p>
+                <img src="images/menu/lunch/USBurger.png"/>
+            </section>
+            <section>
+                <h3>Dinner</h3>
+                
+                <p>Rack of Ram</p>
+                <img src="images/menu/dinner/rack-of-ram.png"/>
+
+                <p>Vegetable Array</p>
+                <img src="images/menu/dinner/array-of-vegetables.png"/>
+            </section>
+        </main>
+    </body>
+</html> <!-- end of the HTML tag - end of the HTML container-->
