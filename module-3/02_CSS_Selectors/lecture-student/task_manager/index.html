@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+  <head> <!-- info for the browser, does not display, so it doesn't need styled -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -8,7 +8,8 @@
     <link
       href="https://fonts.googleapis.com/css?family=Raleway"
       rel="stylesheet"
-    />        
+    />
+    <link rel="stylesheet" href="style.css"/> <!-- connect to our css file -->        
   </head>
 
   <body>
@@ -18,8 +19,8 @@
       <p>Team Visible</p>
     </header>
 
-    <main id="trello-board">
-      <div class="trello-list">
+    <main id="trello-board"> <!-- an id allows us to assign a name to an element for styling -->
+      <div class="trello-list"> <!-- a class allows us to group similar elements for styling -->
         <h2>General</h2>
         <ol class="cards">
           <li class="card">
@@ -50,7 +51,7 @@
         <a href="#">Add another card</a>
       </div>
 
-      <!-- <div class="trello-list">
+      <div class="trello-list">
         <h2>Module 1 Week 1</h2>
         <ol class="cards">
           <li class="card">
@@ -93,7 +94,7 @@
         </ol>
         <a href="#">Add another card</a>
       </div>
-
+<!--
       <div class="trello-list">
         <h2>Module 1 Week 2</h2>
         <ol class="cards">
