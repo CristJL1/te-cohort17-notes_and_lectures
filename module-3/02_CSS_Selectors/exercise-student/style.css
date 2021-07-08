@@ -68,3 +68,28 @@ main > img {
   width: 100%;
 }
 
+div {
+  display: inline-block;
+  width: 33%;
+  padding-right: 20px;
+  margin-top: 20px;
+  vertical-align: auto;
+}
+
+h2 {
+  color: #8CC36F;
+}
+
+i {
+  margin-right: 10px;
+}
+
+div#what-we-do,
+div#our-work {
+  border-right: 1px solid rgba(170, 239, 135, 0.8);
+}
+
+div#our-work,
+div#contact-us {
+  padding-left: 20px;
+}
