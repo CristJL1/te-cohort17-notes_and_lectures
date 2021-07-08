@@ -120,3 +120,22 @@ div.food-item img {
 div.food-item p {
     line-height: 2em;
 }
+
+/* responsive design layouts follow */
+
+@media screen and (max-width: 450px) {
+   .sidebar h3 {
+       margin: 0.5em auto;
+   }
+   aside#upcoming-events {
+       text-align: center;
+       font-size: .9em;
+   }
+   sidebar li {
+       display: inline-block;
+       padding: 0px 10px;
+   }
+   ul.sub-menu {
+       display: none;
+   }
+}
