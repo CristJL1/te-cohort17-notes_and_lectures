@@ -22,3 +22,17 @@ body {
 .box:nth-child(4) {
   background-color: #005270;
 }
+
+.container {
+  display: flex;
+}
+
+div.box:nth-child(even) {
+  display: flex;
+  flex-basis: 50%;
+}
+
+div.box:nth-child(odd) {
+  display: flex;
+  flex-basis: 25%;
+}
