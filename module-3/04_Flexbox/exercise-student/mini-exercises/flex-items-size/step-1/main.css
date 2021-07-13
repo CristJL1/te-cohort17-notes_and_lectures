@@ -17,3 +17,12 @@ body {
   text-align: center;
   border: solid 1px #777;
 }
+
+.container {
+  display: flex;
+}
+
+div.box {
+  display: flex;
+  flex-basis: 25%;
+}
