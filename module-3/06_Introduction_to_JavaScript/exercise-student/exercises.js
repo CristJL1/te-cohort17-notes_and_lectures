@@ -31,6 +31,19 @@
 		hasTeen(20, 10, 13) → true
 */
 
+function hasTeen (num1, num2, num3) {
+	if ((num1 >= 13) && (num1 <=19)) {
+		return true;
+	} 
+	else if ((num2 >= 13) && (num2 <=19)) {
+		return true;
+	}
+	else if ((num3 >= 13) && (num3 <=19)) {
+		return true;
+	}
+	else return false;
+}
+
 /* 
 3. **lastDigit** Given two non-negative int values, return true if they have the same 
     last digit, such as with 27 and 57.
@@ -39,6 +52,12 @@
 		lastDigit(6, 17) → false
 		lastDigit(3, 113) → true
 */
+
+function lastDigit (num1, num2) {
+	if (num1 % 10 == num2 % 10) {
+		return true;
+	} else return false;
+}
 
 /*
 4. **seeColor** Given a string, if the string begins with "red" or "blue" return that color 
@@ -49,6 +68,17 @@
         seeColor("blueTimes") → "blue"
 */
 
+function seeColor (color) {
+
+if (color.startsWith("red")) {
+	return "red"
+} else if (color.startsWith("blue")) {
+	return "blue"
+} else return "";
+
+}
+
+
 /*
 5. **oddOnly** Write a function that given an array of integer of any length, filters out 
     the even number, and returns a new array of just the the odd numbers.
@@ -56,6 +86,16 @@
 		oddOnly([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) → [1, 3, 5, 7, 9, 11];
 		oddOnly([2, 4, 8, 32, 256]); → []
 */
+
+function oddOnly (arrayOfNumbers) {
+
+	return arrayOfNumbers.filter((currentElement) => {
+		if (currentElement %2 == 0) {
+			return false;
+		} else return true;
+	})
+
+}
 
 /*
 6. **frontAgain** Given a string, return true if the first 2 chars in the string also appear 
