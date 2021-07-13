@@ -17,4 +17,15 @@ body {
   margin: 0 10px;
 }
 
-.bio:nth-child(2) img {}
+.bio {
+  display: flex;
+}
+
+.bio:nth-child(2) img {
+  order: 2;
+}
+
+.bio:nth-child(2) {
+  align-items: flex-end;
+  order: 2;
+}
