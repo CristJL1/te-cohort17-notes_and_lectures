@@ -68,6 +68,12 @@ function useParameterToFilterArray(filterFunction) {
  * @returns {number} the sum of all the parameters (or arguments)
  */
 
+function addAll() {
+    return Array.from(arguments).reduce((sum, number) => {
+      return sum + number;
+    }, 0);
+  }
+
 /*
  * Write and document a function called makeHappy that takes
  * an array and prepends 'Happy ' to the beginning of all the
