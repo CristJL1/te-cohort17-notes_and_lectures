@@ -60,6 +60,13 @@ function useParameterToFilterArray(filterFunction) {
  * @returns {number} the resultant number
  */
 
+function makeNumber (num1 = 0, num2 = 0) {
+let concatNumber = num1 + num2
+
+    return Math.abs(concatNumber);
+}
+
+
 /**
  * Write a function called addAll that takes an unknown number of parameters
  * and adds all of them together. Return the sum.
