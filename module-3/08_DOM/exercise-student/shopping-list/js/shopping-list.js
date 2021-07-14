@@ -1,6 +1,6 @@
-// add pageTitle
+// add pageTitle - call the function that does this
 
-// add groceries
+// add groceries - call the function that does this
 
 /**
  * This function will get a reference to the title and set its text to the value
