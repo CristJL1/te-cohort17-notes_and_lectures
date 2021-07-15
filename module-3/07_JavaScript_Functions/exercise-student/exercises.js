@@ -87,6 +87,22 @@ function addAll() {
  * words and returns them as a new array. Use the `map` function.
  */
 
+function makeHappy (arrayOfWords) {
+
+Array.isArray(arrayOfWords);  
+
+let happyArray = arrayOfWords.map((word) => {
+
+    "Happy" + word;
+
+})
+
+return happyArray;
+
+
+}
+
+
 /*
  * Write and document a function called getFullAddressesOfProperties
  * that takes an array of JavaScript objects containing the
@@ -105,12 +121,34 @@ function addAll() {
  * Use `map` and an anonymous function.
  */
 
+function getFullAddressesOfProperties () {
+    let arrayOfProperties = [];
+
+    let mailingAddress = arrayOfProperties.map((streetNumber, streetName, streetType, city, state, zip) => {
+        return streetNumber + streetName + streetType + city + state + zip;
+    })
+
+return mailingAddress;
+}
+
+
 /*
  * Write and document a function called findLargest.
  *
  * Using `forEach`, find the largest element in an array.
  * It must work for strings and numbers.
  */
+
+ function findLargest ([anArray]) {
+
+     anArray.forEach((anElement) => {
+         console.log(anElement)
+     })
+
+     anArray.sort();
+
+     return anArray[0];
+ }
 
 /*
  * CHALLENGE
