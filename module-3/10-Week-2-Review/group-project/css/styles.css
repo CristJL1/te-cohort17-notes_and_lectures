@@ -46,6 +46,7 @@ button {
   border-radius: 4px;
   font-size: 20px;
 }
+/* if the class-"hidden" is added to an element, it will not be displayed */
 .hidden {
   display:none;
 }
