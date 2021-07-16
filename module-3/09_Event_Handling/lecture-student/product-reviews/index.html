@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Product Reviews</title>
+    <!-- this HTML uses the bootstrap css framework -->
+    <!-- we did not discuss this in class, nor will we -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
@@ -16,11 +18,13 @@
 
         <h2 id="page-title">Product Reviews for <span class="name"></span></h2>
         <p class="description"></p>
+        <!-- 'd-none' is a bootstrap that hides an element and all the form-control things are bootstrap -->
+        <!-- this input element is hidden by default - has 'd-none' to start with -->
         <input id="inputDesc" class="d-none form-control form-control-lg" type="text"/>
         <div class="clearfix"></div>
 
         <div class="float-right">
-            <button id="btnToggleForm" type="button" class="btn btn-outline-success btn-sm"">Add Review</button>
+            <button id="btnToggleForm" type="button" class="btn btn-outline-success btn-sm">Add Review</button>
         </div>
 
         <div class="clearfix"></div>
@@ -55,6 +59,14 @@
             <hr>
         </form>
 
+        <!-- this HTML uses a template which will discuss in the review session on Friday -->
+        <!-- an HTML template is a model for HTML to bne included in this page -->
+        <!-- it will be instantiated and populated by the JavaScript code -->
+        <!-- makes DOM manipulation a little easier -->
+        <!-- allows the JHAvaScript code to not have to create new elements and add them to DOM -->
+        <!-- all the JavaScript code does is populate the elements with values-->
+        <!-- this template is a model -->
+
         <template id="review-template">
             <div class="review">
                 <h4></h4>
@@ -68,7 +80,7 @@
 
 
     </div>
-
+    <!-- the script tag specifying any JavaScript code can appear anywhere in the HTML -->
     <script src="js/app.js"></script>
 </body>
 
