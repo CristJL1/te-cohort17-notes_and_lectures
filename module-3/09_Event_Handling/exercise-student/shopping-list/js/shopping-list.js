@@ -32,6 +32,7 @@ function displayGroceries() {
     li.innerText = item.name;
     const checkCircle = document.createElement('i');
     checkCircle.setAttribute('class', 'far fa-check-circle');
+    // li.setAttribute('class', 'completed');
     li.appendChild(checkCircle);
     ul.appendChild(li);
   });
@@ -39,3 +40,15 @@ function displayGroceries() {
 
 setPageTitle();
 displayGroceries();
+
+const completeAllItems = document.getElementById('toggleAll');
+completeAllItems.addEventListener('click', (eventObject) => {
+markAllComplete();
+});
+
+function markAllComplete () {
+  groceries.forEach((li) => {
+    li.setAttribute('class', 'completed');
+  })
+  allItemsIncomplete = false;
+}
