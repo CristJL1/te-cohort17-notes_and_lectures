@@ -23,7 +23,11 @@
           </select>
         </td>
       </tr>
-      <!-- user listing goes here -->
+      <div class="userInfo"
+        v-for="firstName in users" v-bind:key="users" 
+
+
+      </div>
     </tbody>
   </table>
 </template>
