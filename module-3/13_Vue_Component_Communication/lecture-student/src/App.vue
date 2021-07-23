@@ -1,14 +1,16 @@
+<!-- each seperate component is brought together in the home page -->
+
 <template>
   <div id="app" class="main">
     <h1>Product Reviews for </h1>
     <p class="description"></p>
     <div class="well-display">
-      <average-summary />
-      <star-summary />
-      <star-summary />
-      <star-summary />
-      <star-summary />
-      <star-summary />
+      <average-summary /> <!-- component name in kebob case -->
+      <star-summary rating="1"/> <!-- pass the value "1" to component's rating props -->
+      <star-summary rating="2"/> <!-- pass the value "2" to component's rating props -->
+      <star-summary rating="3"/> <!-- pass the value "3" to component's rating props -->
+      <star-summary rating="4"/> <!-- pass the value "4" to component's rating props -->
+      <star-summary rating="5"/> <!-- pass the value "5" to component's rating props -->
     </div>
     <add-review />
     <review-list />
@@ -16,6 +18,7 @@
 </template>
 
 <script>
+// we need to import the code for each component
 import AverageSummary from "./components/AverageSummary.vue";
 import StarSummary from "./components/StarSummary.vue";
 import AddReview from "./components/AddReview.vue";
@@ -23,7 +26,7 @@ import ReviewList from "./components/ReviewList.vue";
 
 export default {
   name: "app",
-  components: {
+  components: { // list of each component used
     AverageSummary,
     StarSummary,
     AddReview,

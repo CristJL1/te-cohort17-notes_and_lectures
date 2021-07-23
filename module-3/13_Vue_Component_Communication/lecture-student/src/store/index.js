@@ -1,9 +1,12 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue' // access to Vue Framework
+import Vuex from 'vuex' // access the Vuex part of Vue
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+//export will expose data to outside processes like components and Vue
+export default new Vuex.Store({ // define a new Vuex data store
+  // state is the name of the object containing all the data in the Vuex data store
+  // MUST BE CALLED STATE
   state: {
     name: 'Cigar Parties for Dummies',
     description: 'Host and plan the perfect cigar party for all of your squirrelly friends.',
@@ -43,14 +46,20 @@ export default new Vuex.Store({
       }
     ],
   },
+  // mutations are functions define in the methods section to change the data in the data store
+  // generally a mutation receives the data store and the data to be used to change it
+  // the data store parameter is automatically provided by Vue when mutation is called
+  //      all that is coded when the mutation is called is any value needed to be passed to it
+  // by convention mutation names are all uppercase with _ between words
+  // a Vuex rule is that any changes to the data store happen in a mutations (Single Responsibility)
   mutations: {
-    ADD_REVIEW(state, review) {
+    ADD_REVIEW(state, review) { // add a review to the start of the reviews array
       state.reviews.unshift(review);
     },
-    UPDATE_FILTER(state, filter) {
+    UPDATE_FILTER(state, filter) { // change the value in the filter variable
       state.filter = filter;
     },
-    FLIP_FAVORITED(state, reviewToChange) {
+    FLIP_FAVORITED(state, reviewToChange) { // toggle favorite between true and false
       reviewToChange.favorited = ! reviewToChange.favorited;
     }
   },
@@ -58,5 +67,5 @@ export default new Vuex.Store({
   },
   modules: {
   },
-  strict: true
+  strict: true // enforce the rule that changes to the data store can only be done by mutations
 })

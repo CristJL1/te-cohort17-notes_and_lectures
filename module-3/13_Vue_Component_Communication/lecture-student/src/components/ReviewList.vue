@@ -1,5 +1,11 @@
+<!-- this uses the ReviewDisplay Vue component -->
+
 <template>
   <div class="reviews">
+    <!-- generate a ReviewDisplay component for each review in filteredReviews array -->
+    <!-- pass the current review to the ReviewDisplay component for each one generated -->
+    <!--    v-bind:review="review" ReviewDisplay will receive the data as a prop called review -->
+    <!-- v-bind:variable="props-name"   variable is in this program; props-name is in the component -->
     <review-display
       v-for="review in filteredReviews"
       v-bind:key="review.title"
@@ -18,8 +24,10 @@ export default {
   },
   computed: {
     filteredReviews() {
-      const reviewsFilter = -1;
-      const reviews = [];
+      // set this component's reviewFilter to Vuex data store filter property
+      const reviewsFilter = this.$store.state.filter; 
+      // copy the reviews array from the Vuex data store
+      const reviews = this.$store.state.reviews;
       return reviews.filter(review => {
         return reviewsFilter === 0 ? true : reviewsFilter === review.rating;
       });

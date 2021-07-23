@@ -14,9 +14,11 @@
     <p>{{ review.review }}</p>
     <p>
       Favorite?
+      <!-- add an event handler so when the checkbox chnages we run onFavoritedChange() for the review -->
       <input
         type="checkbox"
         v-bind:checked="review.favorited"
+        v-on:change="onFavoritedChange(review)"
       />
     </p>
   </div>
@@ -25,10 +27,14 @@
 <script>
 export default {
   name: "review-display",
-  props: ["review"],
+  // props is used for data that comes from outside the component
+  //              it can come from other components that use this one or from events
+  // we are expecting an array we will call review from outside thsi component
+  // the ReviewList component that uses this component will pass the data for the props named review
+  props: ["review"], // the review to be displayed by this component
   methods: {
-    onFavoritedChange() {
-
+    onFavoritedChange() { // use the data store mutation to toggle favorited variable
+      this.$store.commit("FLIP_FAVORITED", this.review)
     }
   }
 };

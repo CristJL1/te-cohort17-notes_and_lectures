@@ -57,6 +57,7 @@
     <!-- we want to prevent the default behavior of click an <a> since we are handling the click -->
     <!--    we want stop teh click of <a> from going to the href (default behavior)              -->
     <!-- !boolean - toggles from true and false                                                  -->
+    <!--      if showForm is true - "Hide Form", if showForm is false - "Show Form"              -->
     <a id="show-form-button"
        href="#"
        v-on:click.prevent="showForm = !showForm">{{ showForm ? "Hide Form" : "Show Form" }}  
