@@ -52,7 +52,7 @@
           <td>{{ user.emailAddress }}</td>
           <td>{{ user.status }}</td>
           <td>
-            <button class="btnEnableDisable">Enable or Disable</button>
+            <button class="btnEnableDisable" v-on:click="flipStatus(id)">Enable or Disable</button>
           </td>
         </tr>
       </tbody>
@@ -66,7 +66,7 @@
 
     <button>Add New User</button>
 
-    <form id="frmAddNewUser">
+    <form id="frmAddNewUser" v-on:click.prevent="showForm = !showForm" v-show="showForm">
       <div class="field">
         <label for="firstName">First Name:</label>
         <input type="text" name="firstName" />
@@ -93,6 +93,7 @@ export default {
   name: "user-list",
   data() {
     return {
+      showForm: false,
       filter: {
         firstName: "",
         lastName: "",
@@ -160,7 +161,22 @@ export default {
       ]
     };
   },
-  methods: {},
+  methods: {
+    flipStatus(id) {
+      this.user[id].status = !this.user[id].status
+    },
+    resetForm() {
+      this.showForm = false;
+      this.newUser = {
+        id: null,
+        firstName: "",
+        lastName: "",
+        username: "",
+        emailAddress: "",
+        status: "Active"
+      }
+    }
+  },
   computed: {
     filteredList() {
       let filteredUsers = this.users;
