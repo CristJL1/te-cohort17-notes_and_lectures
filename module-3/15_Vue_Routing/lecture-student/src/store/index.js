@@ -1,3 +1,5 @@
+// Vuex Data Store
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -5,7 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    activeProduct: 0,
+    activeProduct: 0, // hold the id for the currently displayed product so any component can find out the active product
     filter: 0,
     products: [
       {

@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    <router-view /> <!-- include the Vue router code for the page -->
+  </div>
 </template>
 
 <script>
