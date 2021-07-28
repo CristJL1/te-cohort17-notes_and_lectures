@@ -1,4 +1,5 @@
 <template>
+<!-- uses the CardDetail.vue component -->
   <card-detail />
 </template>
 

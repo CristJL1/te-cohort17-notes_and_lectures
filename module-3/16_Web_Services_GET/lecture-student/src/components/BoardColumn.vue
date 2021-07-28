@@ -2,6 +2,8 @@
   <div class="board">
     <h2>{{ title }}</h2>
     <div class="cards">
+      <!-- generated for each card in the cards array 
+      and adds a click event handler to call viewCardDetails() with the card.id -->
       <div
         class="card"
         v-for="card in cards"
@@ -26,9 +28,15 @@
 <script>
 export default {
   name: 'board-column',
+  // props are attributes that come from outside this component
+  // usually provided by whatever component uses this one
   props: ['title', 'cards', 'boardID'],
+  // methods are called when needed 
   methods: {
     viewCardDetails(cardID) {
+      // tell the Vue Router to go to the path '/board/:boardID/card/:cardID'
+      // boardID is defined in this component
+      // cardID is passed into method as a parameter
       this.$router.push(`/board/${this.boardID}/card/${cardID}`);
     },
     getTagClass(tag) {

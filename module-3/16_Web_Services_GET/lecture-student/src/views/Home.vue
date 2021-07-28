@@ -1,12 +1,12 @@
 <template>
-  <boards-list />
+  <boards-list /> <!-- using the BoardsList.vue component-->
 </template>
 
 <script>
-import BoardsList from '@/components/BoardsList';
+import BoardsList from '@/components/BoardsList'; // access the BoardsList.vue component
 
 export default {
-  components: {
+  components: { // tells Vue which components we are using
     BoardsList
   }
 };

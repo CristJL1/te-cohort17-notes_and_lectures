@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <router-view />
+    <router-view /> <!-- Vue Router controlls the pages that are displayed -->
   </div>
 </template>
 
