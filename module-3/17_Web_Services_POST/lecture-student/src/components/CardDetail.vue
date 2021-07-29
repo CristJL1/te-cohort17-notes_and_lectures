@@ -55,17 +55,17 @@ export default {
         });
     },
     deleteCard() {
-      if (
+      if ( // display a confirmation box
         confirm(
           "Are you sure you want to delete this card? This action cannot be undone."
         )
-      ) {
-        boardsService
-          .deleteCard(this.card.id)
+      ) { // if the user clicked OK in the confirmation box
+        boardsService // call the boardsService
+          .deleteCard(this.card.id) // to delete it
           .then(response => {
-            if (response.status === 200) {
-              alert("Card successfully deleted");
-              this.$router.push(`/board/${this.card.boardId}`);
+            if (response.status === 200) { // if the API call to delete was successful
+              alert("Card successfully deleted"); // display an alert box to say so
+              this.$router.push(`/board/${this.card.boardId}`); // go back to the board's page
             }
           })
           .catch(error => {

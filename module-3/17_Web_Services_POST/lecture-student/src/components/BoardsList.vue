@@ -58,7 +58,8 @@ export default {
         }
       });
     },
-    saveNewBoard() {
+    // this method is called when the submit button is clicked
+    saveNewBoard() { // take the newBoard object and send it to the service to get it added to the API server
 
     },
     randomBackgroundColor() {
