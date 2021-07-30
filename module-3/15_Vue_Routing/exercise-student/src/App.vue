@@ -1,10 +1,19 @@
+
+
 <template>
   <div id="app">
     <router-view />
+    <nav>
+      <a href="/">Home </a>
+
+      <a href="/mybooks">| My Books</a>
+    </nav>
   </div>
 </template>
 
 <script>
+
+
 
 export default {
   name: 'app'
