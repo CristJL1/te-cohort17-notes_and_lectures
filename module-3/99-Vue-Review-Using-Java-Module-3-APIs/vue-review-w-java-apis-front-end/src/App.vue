@@ -1,7 +1,12 @@
 <template>
-  <div class="container">
-    <Home />
-    <router-view :key="$route.fullPath" class="routerView" />
+  <div class="container"> <!-- main and ONLY <div> for the Vue application -->
+    <Home /> <!-- use a Vue component called home (should be kebob-case) it's not because it's one word-->
+    <router-view :key="$route.fullPath" class="routerView" /> <!-- using the Vue router -->
+    <!-- :key="route.fullpath" force Vue to reload the component instead of reusing on each reference
+                  to be sure Vue goes through it's lifecycle so any lifecycle hook executes
+                      if you have a created() hook, it will only be run once if this is not coded
+                        so to be sure the created() hook runs everytime the page is referenced
+                        code :key="$route.fullpath" -->
   </div>
 </template>
 

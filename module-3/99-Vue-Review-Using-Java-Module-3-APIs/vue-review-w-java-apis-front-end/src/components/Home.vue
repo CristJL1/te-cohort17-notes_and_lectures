@@ -7,10 +7,14 @@
         <img src="../assets/animated-squirrel.gif" />
       </div>
       <div>
-        <router-link :to="{ name: 'HotelDetail', params: { id: hotel.hotelID } }"
+        <!-- define a click-able link to a router path named "HotelDetail" 
+                with a parameter called id with the value of the current hotel's hotelID 
+            one of these divs will be generated for each hotel in the hotels array in the data store 
+            tag="div" tells Vue to generate the link as a <div> rather than an anchor (<a>) tag-->
+        <router-link :to="{ name: 'HotelDetail', params: { id: hotel.id } }"
             class="hotel"
             v-for="hotel in this.$store.state.hotels"
-            v-bind:key="hotel.hotelID"
+            v-bind:key="hotel.id"
             tag="div"
       >
         {{ hotel.name }}
@@ -46,23 +50,23 @@ export default {
     this.isLoading = false;
   },
   methods: {
-    retrieveBoards() {
-      HotelService.getHotels()
-      .then(response => {
-                         this.$store.commit("SET_HOTELS", response.data);
-                         this.isLoading = false;
+    retrieveBoards() { // get the hotels from an API server
+      HotelService.getHotels() // use the getHotels() method in the HotelService
+      .then(response => { // wait for API call to finish (so we have data)
+                         this.$store.commit("SET_HOTELS", response.data); // store the data in the data store
+                         this.isLoading = false; // indicate we are done loading the page
                         })
-      .catch (error => {
-        if (error.response) {
+      .catch (error => { // if there was an error in the API call
+        if (error.response) { // if it was a response error - request completed, but with an error
           this.errorMsg = "Error submitting new board. Response received was '" + error.response.statusText + "'.";
 
-        } else if (error.request) {
+        } else if (error.request) { // if it was a request error - request did not complete, may not have even gotten to the server
           this.errorMsg = "Error submitting new board. Server could not be reached.";
 
-        } else {
+        } else { // if any other type of error occured (which it shouldn't)
           this.errorMsg = "Error submitting new board. Request could not be created.";
         }
-        this.isLoading = false;
+        this.isLoading = false; // indicate we have not laoded the data for the page
       });
     }
   }

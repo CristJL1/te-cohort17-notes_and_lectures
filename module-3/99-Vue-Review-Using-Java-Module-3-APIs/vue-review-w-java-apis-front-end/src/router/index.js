@@ -12,9 +12,9 @@ const routes = [
     component: Home
   },
   {
-    path: "/hotels/:id",
-    name: "HotelDetail",
-    component: HotelDetail
+    path: "/hotels/:id", // path to associate with router view
+    name: "HotelDetail", // name of this association 
+    component: HotelDetail // router view to associate with path - in the views folder of the app
   }
 ];
 
